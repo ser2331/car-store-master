@@ -15,24 +15,42 @@ const AddCarItem = ({onAddedToTable, car, editCar, onRedoProperty}) => {
         price: '',
         file: '',
         description: '',
+
+        addProperty: false,
         year: '',
-        color: ''
+        color: '',
+        fuel: ''
     }
     const carInitialValues = {
         title: car.title,
         price: car.price,
-        file: car.file,
+        file: '',
         description: car.description,
+
+        addProperty: false,
         year: car.year,
-        color: car.color
+        color: car.color,
+        fuel: ''
     }
     const validationsSchemaLog = yup.object().shape({
         title: yup.string().typeError('string').required('*'),
         price: yup.number().typeError('number').required('*'),
-        description: yup.string().typeError('string'),
         file: yup.string().typeError('string'),
-        year: yup.string().typeError('string'),
-        color: yup.string().typeError('string'),
+        description: yup.string().typeError('string'),
+
+        addProperty: yup.bool(),
+        year: yup.string().when('addProperty', {
+            is: false,
+            then: yup.string()
+        }),
+        color: yup.string().when('addProperty', {
+            is: false,
+            then: yup.string()
+        }),
+        fuel: yup.string().when('addProperty', {
+            is: false,
+            then: yup.string()
+        }),
     })
 
     return (
@@ -93,13 +111,7 @@ const AddCarItem = ({onAddedToTable, car, editCar, onRedoProperty}) => {
                                onChange={handleChange}
                                onBlur={handleBlur}
                                value={values.price}/>
-                        <p>Год производства</p>
-                        <Field placeholder='2008'
-                               type='number'
-                               name='year'
-                               onChange={handleChange}
-                               onBlur={handleBlur}
-                               value={values.year}/>
+
                         <p>Изображение</p>
                         <Field placeholder='image'
                                type='text'
@@ -118,6 +130,40 @@ const AddCarItem = ({onAddedToTable, car, editCar, onRedoProperty}) => {
         и уточнения существенных финансовых и административных условий.
         Разнообразный и богатый опыт консультация с широким активом
         способствует подготовки и реализации'/>
+
+                        <p>Добавление элементу свойств
+                            <input
+                                type='checkbox'
+                                name='addProperty'
+                                onChange={handleChange}
+                                onBlur={handleBlur}
+                                checked={values.addProperty}/>
+                        </p>
+                        {!values.addProperty &&
+                            <div>
+                                <p>Год выпуска</p>
+                                <Field placeholder='2008'
+                                       type='number'
+                                       name='year'
+                                       onChange={handleChange}
+                                       onBlur={handleBlur}
+                                       value={values.year}/>
+                                <p>Цвет авто</p>
+                                <Field placeholder='синий'
+                                       type='text'
+                                       name='color'
+                                       onChange={handleChange}
+                                       onBlur={handleBlur}
+                                       value={values.color}/>
+                                <p>Вид топлива</p>
+                                <Field placeholder='бензин'
+                                       type='text'
+                                       name='fuel'
+                                       onChange={handleChange}
+                                       onBlur={handleBlur}
+                                       value={values.fuel}/>
+                            </div>
+                        }
                     </Form>
                 )
                 }
@@ -135,7 +181,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         onAddedToTable: (value) => dispatch(carAddedToTable(value)),
-        onRedoProperty:(value) => dispatch(onRedoProperty(value))
+        onRedoProperty: (value) => dispatch(onRedoProperty(value))
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(AddCarItem)

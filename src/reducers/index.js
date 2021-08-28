@@ -137,9 +137,11 @@ const reducer = (state = initialState, action) => {
                 price: action.payload.price,
                 description: action.payload.description,
                 year: action.payload.year,
-                color: action.payload.color
+                color: action.payload.color,
+                fuel:action.payload.fuel
             }
             alert('Автомобиль Добавлен')
+            console.log(newItem)
             return {
                 ...state,
                 cars: [
@@ -159,7 +161,8 @@ const reducer = (state = initialState, action) => {
                 price: action.payload.price,
                 description: action.payload.description,
                 year: action.payload.year,
-                color: action.payload.color
+                color: action.payload.color,
+                fuel:action.payload.fuel
             }
             const newReArr = [
                 ...state.cars.slice(0, idx),

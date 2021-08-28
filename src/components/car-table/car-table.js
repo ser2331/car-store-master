@@ -19,7 +19,7 @@ const CarTable = ({
         pages.push(i)
     }
     let carsPage = cars.slice((currentPage - 1) * pageSize, currentPage * pageSize)
-
+    console.log(carsPage)
     const renderRow = (car) => {
         const {id, title, changeData, price,} = car
         const idx = Math.random()
@@ -35,51 +35,48 @@ const CarTable = ({
                 <td>{changeData}</td>
                 <td>
                     <Link to={`/add-item`} onClick={() => onEditCart(id)}>
-                        <span >Ред.</span>
+                        <span>Ред.</span>
                     </Link>
                     <span onClick={() => onDelete(id)}>Удалить</span>
                 </td>
             </tr>
         )
     }
-
-    return (
-        <div className='car-table'>
-            <Link className='btn-add'
-                  to='/add-item'>
-                <UseButton
-                    nameBut='Добавить товар'
-                    onClickButton={() => {
-                        console.log('Добавить')
-                    }}/>
-            </Link>
-            <table className='table'>
-                <thead>
-                <tr>
-                    <th>Перечень товаров</th>
-                    <th>Стоимость</th>
-                    <th>Дата изменения</th>
-                    <th>Управление</th>
-                </tr>
-                </thead>
-                <tbody>
-                {carsPage.map(renderRow)}
-                </tbody>
-            </table>
-            <div className='pages'>
-                {pages.map(p => {
-                    return <span onClick={() => setCurrentPage(p)}
-                                 key={p}
-                                 className={`one-page${currentPage === p && ' selected'}`}>
+        return (
+            <div className='car-table'>
+                <Link className='btn-add'
+                      to='/add-item'>
+                    <UseButton
+                        nameBut='Добавить товар'
+                        onClickButton={() => {
+                            console.log('Добавить')
+                        }}/>
+                </Link>
+                <table className='table'>
+                    <thead>
+                    <tr>
+                        <th>Перечень товаров</th>
+                        <th>Стоимость</th>
+                        <th>Дата изменения</th>
+                        <th>Управление</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {carsPage.map(renderRow)}
+                    </tbody>
+                </table>
+                <div className='pages'>
+                    {pages.map(p => {
+                        return <span onClick={() => setCurrentPage(p)}
+                                     key={p}
+                                     className={`one-page${currentPage === p && ' selected'}`}>
                         {p}</span>
-                })}
+                    })}
 
+                </div>
             </div>
-        </div>
-    )
+        )
 }
-
-
 const mapStateToProps = ({cars, pageSize, currentPage}) => {
     return {
         cars,
