@@ -1,17 +1,19 @@
-.add-car-item{
+.add-car-item {
   width: 100%;
   margin: 0% 8.22% 0% 8.22%;
   background: #FFFFFF;
   box-shadow: 0px 20px 20px rgba(40, 40, 40, 0.05);
   border-radius: 10px;
   padding: 8% 103px 8%;
-  .btn-choice{
+
+  .btn-choice {
     display: flex;
     flex-direction: row;
     margin: 0% 0% 0% 69%;
+
     .btn-back {
-      width:160px;
-      height:32px;
+      width: 160px;
+      height: 32px;
       background: #FF0000;
       box-shadow: 5px 10px 10px rgba(0, 0, 0, 0.05);
       border-radius: 4px;
@@ -19,9 +21,10 @@
       color: #FFFFFF;
       margin-right: 10px;
     }
-    .btn-save{
-      width:160px;
-      height:32px;
+
+    .btn-save {
+      width: 160px;
+      height: 32px;
       background: #34C15C;
       box-shadow: 5px 10px 10px rgba(0, 0, 0, 0.05);
       border-radius: 4px;
@@ -29,14 +32,17 @@
       color: #FFFFFF;
     }
   }
-  h3{
+
+  h3 {
     font-weight: bold;
     font-size: 16px;
     line-height: 19px;
     background: #FEFEFE;
   }
+
   input {
-    width: 200px;
+    width: 255px;
+    height: 32px;
     background: #FFFFFF;
     box-sizing: border-box;
     border-radius: 4px;
@@ -45,7 +51,8 @@
     transition: 0.5s;
     outline: none;
   }
-  textarea{
+
+  textarea {
     width: 532px;
     height: 94px;
     border: 1px solid #E0E0E0;

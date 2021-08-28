@@ -8,6 +8,7 @@ import './add-car-item.scss'
 import {carAddedToTable, onRedoProperty} from "../../actions";
 import * as yup from "yup";
 import Condition from "../condition";
+import AddProperty from "../add-property";
 
 const AddCarItem = ({onAddedToTable, car, editCar, onRedoProperty}) => {
     const initialValues = {
@@ -37,20 +38,6 @@ const AddCarItem = ({onAddedToTable, car, editCar, onRedoProperty}) => {
         price: yup.number().typeError('number').required('*'),
         file: yup.string().typeError('string'),
         description: yup.string().typeError('string'),
-
-        addProperty: yup.bool(),
-        year: yup.string().when('addProperty', {
-            is: false,
-            then: yup.string()
-        }),
-        color: yup.string().when('addProperty', {
-            is: false,
-            then: yup.string()
-        }),
-        fuel: yup.string().when('addProperty', {
-            is: false,
-            then: yup.string()
-        }),
     })
 
     return (
@@ -131,39 +118,7 @@ const AddCarItem = ({onAddedToTable, car, editCar, onRedoProperty}) => {
         Разнообразный и богатый опыт консультация с широким активом
         способствует подготовки и реализации'/>
 
-                        <p>Добавление элементу свойств
-                            <input
-                                type='checkbox'
-                                name='addProperty'
-                                onChange={handleChange}
-                                onBlur={handleBlur}
-                                checked={values.addProperty}/>
-                        </p>
-                        {!values.addProperty &&
-                            <div>
-                                <p>Год выпуска</p>
-                                <Field placeholder='2008'
-                                       type='number'
-                                       name='year'
-                                       onChange={handleChange}
-                                       onBlur={handleBlur}
-                                       value={values.year}/>
-                                <p>Цвет авто</p>
-                                <Field placeholder='синий'
-                                       type='text'
-                                       name='color'
-                                       onChange={handleChange}
-                                       onBlur={handleBlur}
-                                       value={values.color}/>
-                                <p>Вид топлива</p>
-                                <Field placeholder='бензин'
-                                       type='text'
-                                       name='fuel'
-                                       onChange={handleChange}
-                                       onBlur={handleBlur}
-                                       value={values.fuel}/>
-                            </div>
-                        }
+                       <AddProperty/>
                     </Form>
                 )
                 }
