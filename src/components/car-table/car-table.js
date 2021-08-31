@@ -6,20 +6,14 @@ import './car-table.scss'
 
 import UseButton from "../use-button";
 import {carRemovedFromTable, oneCarLoaded, onEditCar, setCurrentPage} from "../../actions";
+import Pagination from "../pagination";
 
 const CarTable = ({
                       cars, pageSize,
                       currentPage, onCarSelected, onDelete,
-                      setCurrentPage, onEditCart
+                      setCurrentPage, onEditCart,
                   }) => {
-    let totalCount = cars.length
-    let pagesCount = Math.ceil(totalCount / pageSize)
-    let pages = []
-    for (let i = 1; i <= pagesCount; i++) {
-        pages.push(i)
-    }
     let carsPage = cars.slice((currentPage - 1) * pageSize, currentPage * pageSize)
-    console.log(carsPage)
     const renderRow = (car) => {
         const {id, title, changeData, price,} = car
         const idx = Math.random()
@@ -42,46 +36,41 @@ const CarTable = ({
             </tr>
         )
     }
-        return (
-            <div className='car-table'>
-                <Link className='btn-add'
-                      to='/add-item'>
-                    <UseButton
-                        nameBut='Добавить товар'
-                        onClickButton={() => {
-                            console.log('Добавить')
-                        }}/>
-                </Link>
-                <table className='table'>
-                    <thead>
-                    <tr>
-                        <th>Перечень товаров</th>
-                        <th>Стоимость</th>
-                        <th>Дата изменения</th>
-                        <th>Управление</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {carsPage.map(renderRow)}
-                    </tbody>
-                </table>
-                <div className='pages'>
-                    {pages.map(p => {
-                        return <span onClick={() => setCurrentPage(p)}
-                                     key={p}
-                                     className={`one-page${currentPage === p && ' selected'}`}>
-                        {p}</span>
-                    })}
-
-                </div>
-            </div>
-        )
+    return (
+        <div className='car-table'>
+            <Link className='btn-add'
+                  to='/add-item'>
+                <UseButton
+                    nameBut='Добавить товар'
+                    onClickButton={() => {
+                        console.log('Добавить')
+                    }}/>
+            </Link>
+            <table className='table'>
+                <thead>
+                <tr>
+                    <th>Перечень товаров</th>
+                    <th>Стоимость</th>
+                    <th>Дата изменения</th>
+                    <th>Управление</th>
+                </tr>
+                </thead>
+                <tbody>
+                {carsPage.map(renderRow)}
+                </tbody>
+            </table>
+            <Pagination cars={cars}
+                        pageSize={pageSize}
+                        setCurrentPage={setCurrentPage}
+                        currentPage={currentPage}/>
+        </div>
+    )
 }
-const mapStateToProps = ({cars, pageSize, currentPage}) => {
+const mapStateToProps = ({cars, pageSize, currentPage,oneCar}) => {
     return {
         cars,
         pageSize,
-        currentPage
+        currentPage,
     }
 }
 const mapDispatchToProps = (dispatch) => {
@@ -94,4 +83,3 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(CarTable)
-

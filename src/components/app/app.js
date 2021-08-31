@@ -10,7 +10,6 @@ import CarItem from "../car-item";
 import AddCarItem from "../add-car-item";
 
 export default class App extends Component {
-
     render() {
         return (
             <div className='app'>

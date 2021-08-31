@@ -1,39 +1,43 @@
 .registration {
-  text-align: center;
   margin-top: 30px;
   padding: 1%;
+  display: flex;
+  text-align: center;
   background: #FFFFFF;
   box-shadow: 0px 20px 20px rgba(40, 40, 40, 0.05);
   border-radius: 10px;
 
-   h3 {
-    font-weight: 300;
-    font-size: 22px;
-    line-height: 26px;
-  }
-
-  p {
-    text-align: left;
+  label {
     font-weight: bold;
     font-size: 12px;
     line-height: 14px;
     color: #828282;
   }
 
+  .form-control {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    margin-left: 16px;
+    margin-right: 16px;
+  }
+
+  h3 {
+    font-weight: 300;
+    font-size: 22px;
+    line-height: 26px;
+  }
+
   input {
     width: 318px;
-    height: 25px;
+    height: 32px;
+    margin: 5px 0px 5px;
     background: #FFFFFF;
     box-sizing: border-box;
     border-radius: 4px;
     border: 0.7px solid #E0E0E0;
-    -webkit-transition: 0.5s;
     transition: 0.5s;
     outline: none;
-  }
-
-  input:focus {
-    border: 3px solid #E0E0E0;
   }
 
   ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
@@ -41,6 +45,10 @@
   }
 
   .return {
+    margin: 20px 20px;
+  }
+
+  .btn-reg {
     margin: 20px 20px;
   }
 

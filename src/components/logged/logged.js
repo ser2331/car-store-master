@@ -1,14 +1,14 @@
 import React from "react";
 import {Link, Redirect} from "react-router-dom";
 import * as yup from "yup";
-import {Field, Form, Formik} from "formik";
+import {Form, Formik} from "formik";
 import {connect} from "react-redux";
 
 import './logged.scss'
 
 import UseButton from "../use-button";
 import {onLogSelected} from "../../actions";
-import Condition from "../condition";
+import FormikControl from "../form-components/FormikControl";
 
 
 const Logged = (props) => {
@@ -27,14 +27,11 @@ const Logged = (props) => {
             }
             }
             validateOnBlur
-            onSubmit={(values)=>props.onSubmit(values)}
+            onSubmit={(values) => props.onSubmit(values)}
             validationSchema={validationsSchemaLog}>
             {({
-                  values,
                   touched,
                   errors,
-                  handleChange,
-                  handleBlur,
                   isValid,
                   handleSubmit,
                   dirty
@@ -43,32 +40,20 @@ const Logged = (props) => {
                     <Form onSubmit={handleSubmit}>
                         <h3>Вход</h3>
                         <div>
-                            <p>
-                                <label htmlFor='email'>Логин</label>
-                                <Condition
-                                    errors={errors.email}
-                                    touched={touched.email}/>
-                                <br/>
-                                <Field placeholder='Введите E-mail'
-                                       type='email'
-                                       name='email'
-                                       onChange={handleChange}
-                                       onBlur={handleBlur}
-                                       value={values.login}/>
-                            </p>
-                            <p>
-                                <label htmlFor='password'>Пароль</label>
-                                <Condition
-                                    errors={errors.password}
-                                    touched={touched.password}/>
-                                <br/>
-                                <Field placeholder='Введите пароль'
-                                       type='text'
-                                       name='password'
-                                       onChange={handleChange}
-                                       onBlur={handleBlur}
-                                       value={values.password}/>
-                            </p>
+                            <FormikControl
+                                placeholder='Введите E-mail'
+                                control='input'
+                                name='email'
+                                label='Логин'
+                                touched={touched.email}
+                                errors={errors.email}/>
+                            <FormikControl
+                                control='input'
+                                name='password'
+                                placeholder='Введите пароль'
+                                label='Пароль'
+                                touched={touched.password}
+                                errors={errors.password}/>
                         </div>
                         <div className='btn-login'>
                             <UseButton
@@ -77,7 +62,7 @@ const Logged = (props) => {
                                 nameBut={'Войти'}
                                 type='submit'/>
                         </div>
-                        <div className='registration'>
+                        <div className='go-to-reg'>
                             <Link to='/registration'>Зарегистрироваться</Link>
                         </div>
                     </Form>

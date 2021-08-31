@@ -6,16 +6,30 @@ import './car-item.scss'
 
 import UseButton from "../use-button";
 import image from '../layers/unnamed.jpg'
+import {onReturn} from "../../actions";
 
-const CarItem = ({car}) => {
-    const {title, year, fuel, price, coverImage, description} = car
+const CarItem = ({car, onReturn}) => {
+    const OneProp = ({prop, label}) => {
+        if (prop) {
+            return (
+                <div>
+                    <p>{label}</p>
+                    <span>{prop}</span>
+                </div>
+            )
+        } else
+            return null
+    }
+    const {title, year, fuel, price, file, description, color} = car
     return (
         <div className='car-item'>
-            <NavLink to='/cars'>Вернуться</NavLink>
+            <NavLink to='/cars'>
+                <span onClick={() => onReturn()}>Вернуться</span>
+            </NavLink>
             <div className='property'>
                 <hr/>
                 <div className='property-car'>
-                    <img src={coverImage ? coverImage : image} alt='car' className='car-img'/>
+                    <img src={file ? file : image} alt='car' className='car-img'/>
                     <div className='property-info'>
                         <h2>{title}</h2>
                         <div className='description'>{description}</div>
@@ -24,22 +38,10 @@ const CarItem = ({car}) => {
             </div>
 
             <div className='property-form'>
-                <div>
-                    <p>Цвет авто</p>
-
-                </div>
-                <div>
-                    <p>Год выпуска</p>
-                    <span>{year}</span>
-                </div>
-                <div>
-                    <p>Вид топлива</p>
-                    <span>{fuel}</span>
-                </div>
-                <div>
-                    <p>Стоимость</p>
-                    <p>{price}$</p>
-                </div>
+                <OneProp prop={color} label={'Цвет авто'}/>
+                <OneProp prop={year} label={'Год выпуска'}/>
+                <OneProp prop={fuel} label={'Вид топлива'}/>
+                <OneProp prop={price} label={'Стоимость'}/>
                 <div className='btn-buy'>
                     <UseButton
                         nameBut='Беру!!!!'
@@ -55,8 +57,10 @@ const CarItem = ({car}) => {
 const mapStateToProps = (state) => {
     return {car: state.oneCar}
 }
-const mapDispatchToProps = () => {
-    return {}
+const mapDispatchToProps = (dispatch) => {
+    return {
+        onReturn: () => dispatch(onReturn()),
+    }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(CarItem)

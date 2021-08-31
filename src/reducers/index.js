@@ -14,6 +14,7 @@ const LOG_SELECTED = 'LOG_SELECTED'
 const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE'
 const ON_EDIT_CAR = 'ON_EDIT_CAR'
 const ON_REDO_PROPERTY = 'ON_REDO_PROPERTY'
+const RETURN = 'RETURN'
 
 const initialState = {
     cars: [
@@ -22,7 +23,7 @@ const initialState = {
             title: 'CASHES VALLEY LANE',
             changeData: '03.07.21',
             price: 180000,
-            coverImage: chevrol,
+            file: chevrol,
             description: 'Cashes Valley Road is a 11.1 kilometer out and back trail located near Cherry Log,' +
                 'Georgia that features a river and is rated as moderate.' +
                 'The trail is primarily used for hiking and ohv/off road driving.',
@@ -34,7 +35,7 @@ const initialState = {
             title: 'Chevrolet Camaro',
             changeData: '05.03.21',
             price: 385000,
-            coverImage: chevrolet,
+            file: chevrolet,
             fuel: 'бензин',
             description: 'Chevrolet, — марка автомобилей, производимых и реализуемых' +
                 ' одноимённым экономически ' +
@@ -48,7 +49,7 @@ const initialState = {
             title: 'Mitsubishi  Lancer',
             changeData: '04.03.20',
             price: 155555,
-            coverImage: mitsubishi,
+            file: mitsubishi,
             fuel: 'бензин',
             description: 'Mitsubishi Lancer (яп. 三菱・ランサー) — семейство автомобилей, ' +
                 'выпускаемых Mitsubishi Motors ' +
@@ -63,7 +64,7 @@ const initialState = {
             title: 'Mercedes-Benz A-класс',
             changeData: '03.04.21',
             price: 155555,
-            coverImage: mers,
+            file: mers,
             fuel: 'бензин',
             description: 'Mercedes-Benz A-класс — серия компактных (до 2012 года — субкомпактных) ' +
                 'легковых автомобилей немецкой марки Mercedes-Benz. ' +
@@ -77,7 +78,7 @@ const initialState = {
             title: 'Toyota Corolla',
             changeData: '03.07.20',
             price: 155555,
-            coverImage: toyota,
+            file: toyota,
             fuel: 'бензин',
             description: 'Toyota Corolla (яп. トヨタ・カローラ, Тойота Королла) —' +
                 ' компактный автомобиль, выпускаемый компанией Toyota. ' +
@@ -95,7 +96,7 @@ const initialState = {
             title: 'Volkswagen Jetta',
             changeData: '01.05.20',
             price: 155555,
-            coverImage: volkswagen,
+            file: volkswagen,
             fuel: 'бензин',
             description: 'Volkswagen Jetta (ˈd͡ʒɛtɑ) — компактный автомобиль, ' +
                 'разработанный и выпускаемый компанией Volkswagen Group. ' +
@@ -117,7 +118,6 @@ const initialState = {
     pageSize: 5,
     currentPage: 1,
 }
-
 const reducer = (state = initialState, action) => {
     switch (action.type) {
         case ONE_CAR_LOADED:
@@ -133,12 +133,12 @@ const reducer = (state = initialState, action) => {
                 id: state.cars.length + 1,
                 title: action.payload.title,
                 changeData: today,
-                coverImage: action.payload.file,
+                file: action.payload.file,
                 price: action.payload.price,
                 description: action.payload.description,
                 year: action.payload.year,
                 color: action.payload.color,
-                fuel:action.payload.fuel
+                fuel: action.payload.fuel
             }
             alert('Автомобиль Добавлен')
             console.log(newItem)
@@ -157,12 +157,12 @@ const reducer = (state = initialState, action) => {
                 id: state.oneCar.id,
                 title: action.payload.title,
                 changeData: reToday,
-                coverImage: action.payload.file,
+                file: action.payload.file,
                 price: action.payload.price,
                 description: action.payload.description,
                 year: action.payload.year,
                 color: action.payload.color,
-                fuel:action.payload.fuel
+                fuel: action.payload.fuel
             }
             const newReArr = [
                 ...state.cars.slice(0, idx),
@@ -212,12 +212,18 @@ const reducer = (state = initialState, action) => {
             }
         }
         case ON_EDIT_CAR:
-            const editCar = state.cars.find((el) => el.id === action.payload)
+            const onEditCar = state.cars.find((el) => el.id === action.payload)
             return {
                 ...state,
-                oneCar: editCar,
+                oneCar: onEditCar,
                 editCar: true
             }
+        case RETURN: {
+            return {
+                ...state,
+                oneCar: {}
+            }
+        }
         default:
             return state
     }

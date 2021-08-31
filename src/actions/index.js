@@ -46,6 +46,11 @@ const onRedoProperty=(value)=>{
         payload: value
     }
 }
+const onReturn=()=>{
+    return{
+        type:'RETURN'
+    }
+}
 
 export {
     onLogSelected,
@@ -55,5 +60,6 @@ export {
     carRemovedFromTable,
     setCurrentPage,
     onEditCar,
-    onRedoProperty
+    onRedoProperty,
+    onReturn
 }
