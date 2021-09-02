@@ -7,7 +7,7 @@ import * as yup from 'yup'
 import './registration.scss'
 
 import UseButton from "../use-button";
-import {onRegSelected} from "../../actions";
+import {onRegSelected} from "../../actions/cars-actions";
 import FormikControl from "../form-components/FormikControl";
 
 const Registration = (props) => {
@@ -18,12 +18,9 @@ const Registration = (props) => {
         confirmPassword: yup.string().oneOf([yup.ref('password')], 'Пороли не совпадают').required('*'),
         email: yup.string().email('Введите верный email').required('Введите верный email')
     })
-
     const submit = (values) => {
         props.onSubmit(values)
     }
-
-
     return (
         <Formik
             initialValues={{
@@ -38,11 +35,8 @@ const Registration = (props) => {
             onSubmit={submit}
             validationSchema={validationsSchema}>
             {({
-                  values,
                   touched,
                   errors,
-                  handleChange,
-                  handleBlur,
                   isValid,
                   handleSubmit,
                   dirty
@@ -114,4 +108,3 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Registration)
-

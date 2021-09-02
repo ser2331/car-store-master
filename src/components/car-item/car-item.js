@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {connect} from "react-redux";
 import {NavLink} from "react-router-dom";
 
@@ -6,25 +6,19 @@ import './car-item.scss'
 
 import UseButton from "../use-button";
 import image from '../layers/unnamed.jpg'
-import {onReturn} from "../../actions";
+import {onReturn} from "../../actions/cars-actions";
 
 const CarItem = ({car, onReturn}) => {
-    const OneProp = ({prop, label}) => {
-        if (prop) {
-            return (
-                <div>
-                    <p>{label}</p>
-                    <span>{prop}</span>
-                </div>
-            )
-        } else
-            return null
-    }
-    const {title, year, fuel, price, file, description, color} = car
+    useEffect(() => {
+        return () => {
+            onReturn()
+        }
+    }, [onReturn])
+    const {title, price, file, description, moreDetails} = car
     return (
         <div className='car-item'>
             <NavLink to='/cars'>
-                <span onClick={() => onReturn()}>Вернуться</span>
+                <span>Вернуться</span>
             </NavLink>
             <div className='property'>
                 <hr/>
@@ -36,33 +30,38 @@ const CarItem = ({car, onReturn}) => {
                     </div>
                 </div>
             </div>
-
             <div className='property-form'>
-                <OneProp prop={color} label={'Цвет авто'}/>
-                <OneProp prop={year} label={'Год выпуска'}/>
-                <OneProp prop={fuel} label={'Вид топлива'}/>
-                <OneProp prop={price} label={'Стоимость'}/>
+                {moreDetails.length > 0 ? moreDetails.map((proper, index) => {
+                    return (
+                        <div key={index}>
+                            <p>{proper.name}</p>
+                            <span>{proper.value}</span>
+                        </div>)
+                }) : null}
+
+                <div>
+                    <p>Цена</p>
+                    <span>{price}</span>
+                </div>
                 <div className='btn-buy'>
                     <UseButton
                         nameBut='Беру!!!!'
                         onClickButton={() => {
-                            console.log('Беру')
+                            alert('Добавлено в карзину')
                         }}/>
                 </div>
             </div>
         </div>
     )
 }
-
-const mapStateToProps = (state) => {
-    return {car: state.oneCar}
+const mapStateToProps = ({carsPage}) => {
+    return {
+        car: carsPage.oneCar
+    }
 }
 const mapDispatchToProps = (dispatch) => {
     return {
         onReturn: () => dispatch(onReturn()),
     }
 }
-
 export default connect(mapStateToProps, mapDispatchToProps)(CarItem)
-
-

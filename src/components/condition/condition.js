@@ -1,7 +1,6 @@
 import React from "react";
 
 import './condition.scss'
-
 const Condition = ({touched, errors}) => {
     let classNames = 'star'
     if (touched && errors) {

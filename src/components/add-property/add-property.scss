@@ -1,0 +1,99 @@
+.add-car-item {
+  width: 100%;
+  margin: 0 8.22%;
+  background: #FFFFFF;
+  box-shadow: 0 20px 20px rgba(40, 40, 40, 0.05);
+  border-radius: 10px;
+  padding: 3% 103px 3%;
+
+  .form-control {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+  }
+
+  label {
+    font-size: 14px;
+    line-height: 16px;
+    opacity: 0.8;
+    color: #000000;
+  }
+
+  .btn-choice {
+    display: flex;
+    flex-direction: row;
+    margin-left: 69%;
+
+    .btn-back {
+      width: 160px;
+      height: 32px;
+      background: #FF0000;
+      box-shadow: 5px 10px 10px rgba(0, 0, 0, 0.05);
+      border-radius: 4px;
+      border: none;
+      color: #FFFFFF;
+      margin-right: 10px;
+    }
+
+    .btn-save {
+      width: 160px;
+      height: 32px;
+      background: #34C15C;
+      box-shadow: 5px 10px 10px rgba(0, 0, 0, 0.05);
+      border-radius: 4px;
+      border: none;
+      color: #FFFFFF;
+    }
+  }
+
+  h3 {
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 19px;
+    background: #FEFEFE;
+  }
+
+  input,select {
+    width: 255px;
+    height: 32px;
+    background: #FFFFFF;
+    box-sizing: border-box;
+    margin: 5px 0 10px;
+    border-radius: 4px;
+    border: 0.7px solid #E0E0E0;
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+    outline: none;
+  }
+
+  textarea {
+    width: 532px;
+    height: 94px;
+    border: 1px solid #E0E0E0;
+    border-radius: 4px;
+    outline: none;
+    resize: none
+  }
+  .add-prop{
+    select{
+      margin-right: 50px;
+    }
+    button{
+      font-size: 24px;
+      color: #0258FF;
+      background: #FFFFFF;
+      border: 1px solid #0258FF;
+      border-radius: 50%;
+      box-sizing: border-box;
+      margin: 0 20px;
+      width: 33px;
+    }
+    .added-prop{
+      display: flex;
+      flex-direction: row;
+      text-align: start;
+      line-height: 5rem;
+      margin-left: -72px;
+    }
+  }
+}

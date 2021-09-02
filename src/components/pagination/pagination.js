@@ -2,8 +2,8 @@ import React from "react";
 
 import './pagination.scss'
 
-const Pagination = ({cars, pageSize, currentPage, setCurrentPage}) => {
-    let totalCount = cars.length
+const Pagination = ({items, pageSize, currentPage, setCurrentPage}) => {
+    let totalCount = items.length
     let pagesCount = Math.ceil(totalCount / pageSize)
     let pages = []
     for (let i = 1; i <= pagesCount; i++) {
@@ -20,5 +20,4 @@ const Pagination = ({cars, pageSize, currentPage, setCurrentPage}) => {
         </div>
     )
 }
-
 export default Pagination

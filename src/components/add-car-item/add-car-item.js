@@ -1,41 +1,20 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {NavLink} from "react-router-dom";
 import {connect} from "react-redux";
-import {FieldArray, Form, Formik, useFormikContext} from "formik";
+import {FieldArray, Form, Formik} from "formik";
 import * as yup from "yup";
 
 import './add-car-item.scss'
 
-import {carAddedToTable, onRedoProperty} from "../../actions";
+import {carAddedToTable, onRedoProperty, onReturn} from "../../actions/cars-actions";
 import FormikControl from "../form-components/FormikControl";
 
-const AutoUseProperty = ({use}) => {
-    const {values} = useFormikContext();
-    switch (use) {
-        case 'color':
-            return <FormikControl control='input'
-                                  label='Значение'
-                                  name='color'
-                                  placeholder='red'
-                                  value={values.color}/>
-        case 'fuel' :
-            return <FormikControl control='input'
-                                  label='Значение'
-                                  name='fuel'
-                                  placeholder='бензин'
-                                  value={values.fuel}/>
-        case 'year' :
-            return <FormikControl control='input'
-                                  label='Значение'
-                                  name='year'
-                                  placeholder='Год выпуска'
-                                  value={values.year}/>
-        default:
-            return null;
-    }
-}
-
-const AddCarItem = ({onAddedToTable, car, editCar, onRedoProperty}) => {
+const AddCarItem = ({onAddedToTable, car, editCar, onRedoProperty, onReturn}) => {
+    useEffect(() => {
+        return () => {
+            onReturn()
+        }
+    }, [onReturn])
     const dropdownOptions = [
         {key: 'Выберете свойство', value: ''},
         {key: 'Цвет', value: 'color'},
@@ -47,38 +26,29 @@ const AddCarItem = ({onAddedToTable, car, editCar, onRedoProperty}) => {
         price: car.price || '',
         file: car.file || '',
         description: car.description || '',
-        arrProperty: car.arrProperty || [{
-            property: car.property || '',
-        }],
-        color: car.color || '',
-        year: car.year || '',
-        fuel: car.fuel || ''
+        moreDetails: car.moreDetails || [],
     }
-
     const validationsSchemaLog = yup.object().shape({
         title: yup.string().typeError('string').required('*'),
         price: yup.number().typeError('number').required('*'),
         file: yup.string().typeError('string'),
         description: yup.string().typeError('string'),
-        arrProperty: yup.array()
-            .of(
-                yup.object().shape({
-                        property: yup.string().typeError('string'),
-                    }
-                )
-            ),
-        color: yup.string().typeError('string'),
-        year: yup.string().typeError('string'),
-        fuel: yup.string().typeError('string'),
+        moreDetails: yup.array()
     })
-
+    const onSubmit = (values) => {
+        if (editCar) {
+            console.log(editCar)
+            return onRedoProperty({...values, id: car.id})
+        } else {
+            return onAddedToTable(values)
+        }
+    }
     return (
         <div className='add-car-item'>
             <Formik
                 initialValues={initialValues}
                 validateOnBlur
-                onSubmit={editCar ? (values) => onRedoProperty(values) :
-                    (values) => onAddedToTable(values)}
+                onSubmit={onSubmit}
                 validationSchema={validationsSchemaLog}>
                 {({
                       values,
@@ -138,16 +108,16 @@ const AddCarItem = ({onAddedToTable, car, editCar, onRedoProperty}) => {
         Разнообразный и богатый опыт консультация с широким активом
         способствует подготовки и реализации'/>
                         <FieldArray
-                            name='arrProperty'
+                            name='moreDetails'
                             render={arrayHelpers => (
                                 <div className='add-prop'>
                                     <span>Дбавить свойство
-                                        <button type="button" onClick={() => arrayHelpers.push({property: ''})}>
+                                        <button type="button" onClick={() => arrayHelpers.push({name: '', value: ''})}>
                                         +
                                         </button>
                                     </span>
                                     {(
-                                        values.arrProperty.map((prop, index) => (
+                                        values.moreDetails.map((prop, index) => (
                                             <div key={index} className='added-prop'>
                                                 <div>
                                                     <button type="button" onClick={() => arrayHelpers.remove(index)}>
@@ -157,12 +127,13 @@ const AddCarItem = ({onAddedToTable, car, editCar, onRedoProperty}) => {
                                                 <FormikControl
                                                     control='select'
                                                     label={`Свойство ${index + 1}`}
-                                                    // name={`property.${index}`}
-                                                    name={'property'}
+                                                    name={`moreDetails.${index}.name`}
                                                     options={dropdownOptions}
                                                 />
-                                                <AutoUseProperty use={values.property}/>
-                                                {console.log(values)}
+                                                {values.moreDetails[index].name ?
+                                                    <FormikControl control='input'
+                                                                   label='Значение'
+                                                                   name={`moreDetails.${index}.value`}/> : null}
                                             </div>
                                         ))
                                     )}
@@ -175,17 +146,17 @@ const AddCarItem = ({onAddedToTable, car, editCar, onRedoProperty}) => {
         </div>
     )
 }
-
-const mapStateToProps = (state) => {
+const mapStateToProps = ({carsPage}) => {
     return {
-        car: state.oneCar,
-        editCar: state.editCar
+        car: carsPage.oneCar,
+        editCar: carsPage.editCar
     }
 }
 const mapDispatchToProps = (dispatch) => {
     return {
         onAddedToTable: (value) => dispatch(carAddedToTable(value)),
-        onRedoProperty: (value) => dispatch(onRedoProperty(value))
+        onRedoProperty: (value) => dispatch(onRedoProperty(value)),
+        onReturn: () => dispatch(onReturn()),
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(AddCarItem)

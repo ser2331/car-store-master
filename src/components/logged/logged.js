@@ -7,9 +7,8 @@ import {connect} from "react-redux";
 import './logged.scss'
 
 import UseButton from "../use-button";
-import {onLogSelected} from "../../actions";
+import {onLogSelected} from "../../actions/cars-actions";
 import FormikControl from "../form-components/FormikControl";
-
 
 const Logged = (props) => {
     const validationsSchemaLog = yup.object().shape({
@@ -72,10 +71,9 @@ const Logged = (props) => {
         </Formik>
     )
 }
-
-const mapStateToProps = ({logged}) => {
+const mapStateToProps = ({carsPage}) => {
     return {
-        logged
+        logged:carsPage.logged
     }
 }
 const mapDispatchToProps = (dispatch) => {
