@@ -5,10 +5,11 @@ import {carRemovedFromTable, oneCarLoaded, onEditCar, setCurrentPage} from "../.
 import Table from "../table";
 
 const CarsContainer = ({
-                               cars, pageSize,
-                               currentPage, onCarSelected, onDelete,
-                               setCurrentPage, onEditCart,
-                           }) => {
+                           cars, pageSize,
+                           currentPage, onCarSelected, onDelete,
+                           setCurrentPage, onEditCart,
+
+                       }) => {
     console.log(cars)
     return (
         <Table items={cars}
@@ -24,11 +25,11 @@ const CarsContainer = ({
         />
     )
 }
-const mapStateToProps = ({carsPage}) => {
+const mapStateToProps = ({carsPage, detailPage}) => {
     return {
-        cars:carsPage.cars,
-        pageSize:carsPage.pageSize,
-        currentPage:carsPage.currentPage,
+        cars: carsPage.cars,
+        pageSize: carsPage.pageSize,
+        currentPage: carsPage.currentPage,
     }
 }
 const mapDispatchToProps = (dispatch) => {

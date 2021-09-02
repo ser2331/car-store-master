@@ -11,7 +11,8 @@ const setCurrentPageDet = (p) => {
     }
 }
 
+
 export {
     detailRemovedFromTable,
-    setCurrentPageDet
+    setCurrentPageDet,
 }

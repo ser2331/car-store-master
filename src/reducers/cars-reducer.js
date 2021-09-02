@@ -165,6 +165,7 @@ const CarsReducer = (state = initialState, action) => {
                 cars: newArr
             }
         case REG_SELECTED:
+            alert('Регистрация успешна')
             const newUser = {
                 email: action.payload.email,
                 password: action.payload.password

@@ -8,7 +8,7 @@ import FormikControl from "../form-components/FormikControl";
 
 const AddProperty = () => {
     return (
-        <div className='add-car-item'>
+        <div className='add-prop-item'>
             <Formik
                 validateOnBlur
                 onSubmit={()=>{}}>
