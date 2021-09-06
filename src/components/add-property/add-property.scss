@@ -24,7 +24,7 @@
     margin-left: 69%;
 
     .btn-back {
-      width: 160px;
+      width: 100px;
       height: 32px;
       background: #FF0000;
       box-shadow: 5px 10px 10px rgba(0, 0, 0, 0.05);
@@ -35,7 +35,7 @@
     }
 
     .btn-save {
-      width: 160px;
+      width: 100px;
       height: 32px;
       background: #34C15C;
       box-shadow: 5px 10px 10px rgba(0, 0, 0, 0.05);
@@ -51,7 +51,7 @@
     line-height: 19px;
     background: #FEFEFE;
   }
-
+.name-prop{
   input,select {
     width: 255px;
     height: 32px;
@@ -64,35 +64,5 @@
     transition: 0.5s;
     outline: none;
   }
-
-  textarea {
-    width: 532px;
-    height: 94px;
-    border: 1px solid #E0E0E0;
-    border-radius: 4px;
-    outline: none;
-    resize: none
-  }
-  .add-prop{
-    select{
-      margin-right: 50px;
-    }
-    button{
-      font-size: 24px;
-      color: #0258FF;
-      background: #FFFFFF;
-      border: 1px solid #0258FF;
-      border-radius: 50%;
-      box-sizing: border-box;
-      margin: 0 20px;
-      width: 33px;
-    }
-    .added-prop{
-      display: flex;
-      flex-direction: row;
-      text-align: start;
-      line-height: 5rem;
-      margin-left: -72px;
-    }
-  }
+}
 }

@@ -5,42 +5,48 @@ import './table.scss'
 
 import UseButton from "../use-button";
 import Pagination from "../pagination";
-
+import v_1 from '../layers/vector1.png'
+import v_2 from '../layers/vector2.png'
+import {useAlert} from "react-alert";
 
 const Table = ({
                    items, pageSize, currentPage,
                    setCurrentPage, onCarSelected,
                    onEditCart, onDelete, tableName,
-                   tablePrice, tableData,
+                   tablePrice, tableData, onSort, sort
                }) => {
     let itemsPage = items.slice((currentPage - 1) * pageSize, currentPage * pageSize)
-
+    const alert = useAlert();
     const Navbar = () => {
         let classNames = 'noPressed pressed'
         return (
             <div className='nav'>
                 <Link className={classNames} to='/cars'>
-                    <span onClick={()=>{}}>Листинг Товаров</span>
+                    <span onClick={() => {
+                    }}>Листинг Товаров</span>
                 </Link>
                 <Link className={classNames} to='/details'>
-                    <span onClick={()=>{}}>Листинг Проперти</span>
+                    <span onClick={() => {
+                    }}>Листинг Проперти</span>
                 </Link>
             </div>
         )
     }
     const renderRow = (item) => {
-        const {id, title, changeData, price, type} = item
+        const {id, title, changeData, price, value, key} = item
         const idx = Math.random()
         return (
             <tr key={idx}>
-
-                <td onClick={() => onCarSelected(id)}>
-                    <Link to={`/cars/item${id}`}>
-                        {title}
-                    </Link>
-                </td>
+                {title ?
+                    <td onClick={() => onCarSelected(id)}>
+                        <Link to={`/cars/item${id}`}>
+                            {title}
+                        </Link>
+                    </td> :
+                    <td>{key}</td>
+                }
                 {price ?
-                    <td>{price}$</td> : <td>{type}</td>
+                    <td>{price}$</td> : <td>{value}</td>
                 }
                 <td>{changeData}</td>
                 <td>
@@ -49,7 +55,7 @@ const Table = ({
                             <span>Ред.</span>
                         </Link> : null
                     }
-                    <span onClick={() => onDelete(id)}>Удалить</span>
+                    <span onClick={() => onDelete(id) && alert.error('Автомобиль удален')}>Удалить</span>
                 </td>
             </tr>
         )
@@ -77,8 +83,11 @@ const Table = ({
                 <table className='table'>
                     <thead>
                     <tr>
-                        {}
-                        <th>{tableName}</th>
+                        <th>
+                            <img alt='v'
+                                 className='vector'
+                                 onClick={onSort()} src={sort ? v_2 : v_1}/>
+                            {tableName}</th>
                         <th>{tablePrice}</th>
                         <th>{tableData}</th>
                         <th>Управление</th>

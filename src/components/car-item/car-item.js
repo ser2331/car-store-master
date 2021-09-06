@@ -7,8 +7,10 @@ import './car-item.scss'
 import UseButton from "../use-button";
 import image from '../layers/unnamed.jpg'
 import {onReturn} from "../../actions/cars-actions";
+import {useAlert} from "react-alert";
 
 const CarItem = ({car, onReturn}) => {
+    const alert=useAlert()
     useEffect(() => {
         return () => {
             onReturn()
@@ -47,7 +49,7 @@ const CarItem = ({car, onReturn}) => {
                     <UseButton
                         nameBut='Беру!!!!'
                         onClickButton={() => {
-                            alert('Добавлено в карзину')
+                            alert.success('Добавлено в карзину')
                         }}/>
                 </div>
             </div>

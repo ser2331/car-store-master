@@ -9,7 +9,8 @@
     font-size: 22px;
     padding: 18px;
   }
-  .pressed{
+
+  .pressed {
     background: linear-gradient(180deg, #0258FF 0%, rgba(2, 88, 255, 0) 100%);
   }
 }
@@ -30,6 +31,13 @@
     width: 100%;
     margin-top: 20px;
     padding-bottom: 2rem;
+
+    .vector {
+      cursor: pointer;
+      width: 14px;
+      height: 14px;
+      opacity: 0.5;
+    }
 
     span {
       margin-right: 40px;

@@ -10,9 +10,15 @@ const setCurrentPageDet = (p) => {
         currentPage: p
     }
 }
-
+const onAddedPropToTable = (value) => {
+    return {
+        type: 'ADD_PROP',
+        payload: value
+    }
+}
 
 export {
     detailRemovedFromTable,
     setCurrentPageDet,
+    onAddedPropToTable
 }

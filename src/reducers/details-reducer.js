@@ -1,15 +1,16 @@
 const DETAIL_REMOVED_FROM_TABLE = 'DETAIL_REMOVED_FROM_TABLE'
-const SET_CURRENT_PAGE_DET='SET_CURRENT_PAGE_DET'
+const SET_CURRENT_PAGE_DET = 'SET_CURRENT_PAGE_DET'
+const ADD_PROP = 'ADD_PROP'
 
 const initialState = {
     details: [
-        {id: 1, title: 'Цвет', type:'dropdown', value:'color'},
-        {id: 2, title: 'Тип топлива', type:'input', value:'fuel'},
-        {id: 3, title: 'Год выпуска', type:'input', value:'year'},
+        {id: 1, key: 'Цвет', value: 'dropdown'},
+        {id: 2, key: 'Тип топлива', value: 'string'},
+        {id: 3, key: 'Год выпуска', value: 'number'},
     ],
     pageSize: 5,
     currentPage: 1,
-    pressed:false
+    pressed: false
 }
 const DetailsReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -25,8 +26,21 @@ const DetailsReducer = (state = initialState, action) => {
                 currentPage: action.currentPage
             }
         }
-
-
+        case ADD_PROP: {
+            const newItem = {
+                id: state.details.length+1,
+                key: action.payload.key,
+                value: action.payload.value
+            }
+            console.log(newItem)
+            return {
+                ...state,
+                details: [
+                    ...state.details,
+                    newItem
+                ]
+            }
+        }
 
 
         default:

@@ -18,6 +18,23 @@ const RETURN = 'RETURN'
 const initialState = {
     cars: [
         {
+            id: 5,
+            title: 'Toyota Corolla',
+            changeData: '03.07.20',
+            price: 155555,
+            file: toyota,
+            description: 'Toyota Corolla (яп. トヨタ・カローラ, Тойота Королла) —' +
+                ' компактный автомобиль, выпускаемый компанией Toyota. ' +
+                'Появившись в 1966 году, он в 1997 году возглавил список самых' +
+                ' продаваемых автомобилей в истории[1]. По данным «Книги рекордов ' +
+                'Гиннесса», к 2005 году во всём мире было продано свыше 30 миллионов ' +
+                'автомобилей Corolla[2]. В 2006 году названию Corolla исполнилось 40 лет,' +
+                ' в течение которых сменилось десять поколений Toyota Corolla, а общий объём выпуска ' +
+                'достиг отметки в 35 миллионов[3]. К июлю 2013 года было продано' +
+                ' более 40 миллионов автомобилей модели Corolla[4][5]',
+            moreDetails: []
+        },
+        {
             id: 1,
             title: 'CASHES VALLEY LANE',
             changeData: '03.07.21',
@@ -69,23 +86,6 @@ const initialState = {
             moreDetails: []
         },
         {
-            id: 5,
-            title: 'Toyota Corolla',
-            changeData: '03.07.20',
-            price: 155555,
-            file: toyota,
-            description: 'Toyota Corolla (яп. トヨタ・カローラ, Тойота Королла) —' +
-                ' компактный автомобиль, выпускаемый компанией Toyota. ' +
-                'Появившись в 1966 году, он в 1997 году возглавил список самых' +
-                ' продаваемых автомобилей в истории[1]. По данным «Книги рекордов ' +
-                'Гиннесса», к 2005 году во всём мире было продано свыше 30 миллионов ' +
-                'автомобилей Corolla[2]. В 2006 году названию Corolla исполнилось 40 лет,' +
-                ' в течение которых сменилось десять поколений Toyota Corolla, а общий объём выпуска ' +
-                'достиг отметки в 35 миллионов[3]. К июлю 2013 года было продано' +
-                ' более 40 миллионов автомобилей модели Corolla[4][5]',
-            moreDetails: []
-        },
-        {
             id: 6,
             title: 'Volkswagen Jetta',
             changeData: '01.05.20',
@@ -131,7 +131,6 @@ const CarsReducer = (state = initialState, action) => {
                 description: action.payload.description,
                 moreDetails:action.payload.moreDetails
             }
-            alert('Автомобиль Добавлен')
             return {
                 ...state,
                 cars: [
@@ -151,9 +150,7 @@ const CarsReducer = (state = initialState, action) => {
                 description: action.payload.description,
                 moreDetails: action.payload.moreDetails
             }
-            console.log(action.payload)
             const newArrayCars=state.cars.filter((el)=>el.id!==action.payload.id)
-            alert('Автомобиль Изменен')
             return {
                 ...state,
                 cars:[...newArrayCars,redoItem]
@@ -165,7 +162,6 @@ const CarsReducer = (state = initialState, action) => {
                 cars: newArr
             }
         case REG_SELECTED:
-            alert('Регистрация успешна')
             const newUser = {
                 email: action.payload.email,
                 password: action.payload.password

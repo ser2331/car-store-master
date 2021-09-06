@@ -24,7 +24,7 @@
     margin-left: 69%;
 
     .btn-back {
-      width: 160px;
+      width: 100px;
       height: 32px;
       background: #FF0000;
       box-shadow: 5px 10px 10px rgba(0, 0, 0, 0.05);
@@ -35,7 +35,7 @@
     }
 
     .btn-save {
-      width: 160px;
+      width: 100px;
       height: 32px;
       background: #34C15C;
       box-shadow: 5px 10px 10px rgba(0, 0, 0, 0.05);
@@ -74,6 +74,12 @@
     resize: none
   }
   .add-prop{
+    margin-top: 10px;
+    span{
+      font-weight: bold;
+      font-size: 14px;
+      line-height: 16px;
+    }
     select{
       margin-right: 50px;
     }
@@ -89,10 +95,9 @@
     }
     .added-prop{
       display: flex;
-      flex-direction: row;
-      text-align: start;
-      line-height: 5rem;
+      line-height: 3rem;
       margin-left: -72px;
+      align-items: flex-end;
     }
   }
 }

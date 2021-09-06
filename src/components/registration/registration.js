@@ -9,8 +9,10 @@ import './registration.scss'
 import UseButton from "../use-button";
 import {onRegSelected} from "../../actions/cars-actions";
 import FormikControl from "../form-components/FormikControl";
+import {useAlert} from "react-alert";
 
 const Registration = (props) => {
+    const alert=useAlert()
     const validationsSchema = yup.object().shape({
         name: yup.string().typeError('Значение должно быть строкой').required('*'),
         secondName: yup.string().typeError('string').required('*'),
@@ -19,7 +21,7 @@ const Registration = (props) => {
         email: yup.string().email('Введите верный email').required('Введите верный email')
     })
     const submit = (values) => {
-        props.onSubmit(values)
+        props.onSubmit(values) && alert.success('Регистрация успешна')
     }
     return (
         <Formik
@@ -93,9 +95,7 @@ const Registration = (props) => {
                         </div>
                     </Form>
                 </div>
-
-            )
-            }
+            )}
         </Formik>
     )
 }

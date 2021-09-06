@@ -1,26 +1,24 @@
 import React, {useEffect} from "react";
 import {NavLink} from "react-router-dom";
 import {connect} from "react-redux";
-import {FieldArray, Form, Formik} from "formik";
+import {Field, FieldArray, Form, Formik} from "formik";
 import * as yup from "yup";
 
 import './add-car-item.scss'
 
 import {carAddedToTable, onRedoProperty, onReturn} from "../../actions/cars-actions";
 import FormikControl from "../form-components/FormikControl";
+import CaseInput from "../case-input/case-input";
+import {useAlert} from "react-alert";
 
-const AddCarItem = ({onAddedToTable, car, editCar, onRedoProperty, onReturn}) => {
+const AddCarItem = ({onAddedToTable, car, editCar, onRedoProperty, onReturn, details}) => {
+    const alert = useAlert();
     useEffect(() => {
         return () => {
             onReturn()
         }
     }, [onReturn])
-    const dropdownOptions = [
-        {key: 'Выберете свойство', value: ''},
-        {key: 'Цвет', value: 'color'},
-        {key: 'Тип топлива', value: 'fuel'},
-        {key: 'Год выпуска', value: 'year'}
-    ]
+
     const initialValues = {
         title: car.title || '',
         price: car.price || '',
@@ -37,12 +35,12 @@ const AddCarItem = ({onAddedToTable, car, editCar, onRedoProperty, onReturn}) =>
     })
     const onSubmit = (values) => {
         if (editCar) {
-            console.log(editCar)
-            return onRedoProperty({...values, id: car.id})
+            return onRedoProperty({...values, id: car.id}) && alert.success("Свойства отредоктированны")
         } else {
-            return onAddedToTable(values)
+            return onAddedToTable(values) && alert.success("Автомобиль добавлен")
         }
     }
+
     return (
         <div className='add-car-item'>
             <Formik
@@ -111,7 +109,7 @@ const AddCarItem = ({onAddedToTable, car, editCar, onRedoProperty, onReturn}) =>
                             name='moreDetails'
                             render={arrayHelpers => (
                                 <div className='add-prop'>
-                                    <span>Дбавить свойство
+                                    <span>Дбавление товару свойств
                                         <button type="button" onClick={() => arrayHelpers.push({name: '', value: ''})}>
                                         +
                                         </button>
@@ -124,16 +122,27 @@ const AddCarItem = ({onAddedToTable, car, editCar, onRedoProperty, onReturn}) =>
                                                         -
                                                     </button>
                                                 </div>
-                                                <FormikControl
-                                                    control='select'
-                                                    label={`Свойство ${index + 1}`}
-                                                    name={`moreDetails.${index}.name`}
-                                                    options={dropdownOptions}
-                                                />
-                                                {values.moreDetails[index].name ?
-                                                    <FormikControl control='input'
-                                                                   label='Значение'
-                                                                   name={`moreDetails.${index}.value`}/> : null}
+                                                <Field as='select'
+                                                       name={`moreDetails.${index}.name`}>
+                                                    {values.moreDetails[index].name ?
+                                                        (<option label={values.moreDetails[index].name}/>) :
+                                                        (<option hidden value='0'>Выберете свойство</option>)}
+                                                    {details.map(detail =>
+                                                        (values.moreDetails.find((item) => item.name === detail.key) ?
+                                                                null :
+                                                                <option key={detail.id}
+                                                                        value={detail.key}>
+                                                                    {detail.key}
+                                                                </option>
+                                                        ))}
+                                                </Field>
+                                                {
+                                                    values.moreDetails[index].name ?
+                                                        <CaseInput
+                                                            use={details.find((el) => el.key === values.moreDetails[index].name)?.value}
+                                                            value={`moreDetails.${index}.value`}/>
+                                                        : null
+                                                }
                                             </div>
                                         ))
                                     )}
@@ -146,8 +155,9 @@ const AddCarItem = ({onAddedToTable, car, editCar, onRedoProperty, onReturn}) =>
         </div>
     )
 }
-const mapStateToProps = ({carsPage}) => {
+const mapStateToProps = ({carsPage, detailPage}) => {
     return {
+        details: detailPage.details,
         car: carsPage.oneCar,
         editCar: carsPage.editCar
     }
