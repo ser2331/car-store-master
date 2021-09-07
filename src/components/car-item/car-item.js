@@ -33,7 +33,7 @@ const CarItem = ({car, onReturn}) => {
                 </div>
             </div>
             <div className='property-form'>
-                {moreDetails.length > 0 ? moreDetails.map((proper, index) => {
+                {moreDetails? moreDetails.map((proper, index) => {
                     return (
                         <div key={index}>
                             <p>{proper.name}</p>

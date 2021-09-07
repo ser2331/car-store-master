@@ -60,7 +60,7 @@ const mapDispatchToProps = (dispatch) => {
         onDelete: (id) => dispatch(carRemovedFromTable(id)),
         onCarSelected: (id) => dispatch(oneCarLoaded(id)),
         setCurrentPage: (p) => dispatch(setCurrentPage(p)),
-        onEditCart: (id) => dispatch(onEditCar(id))
+        onEditCart: (id) => dispatch(onEditCar(id)),
     }
 }
 

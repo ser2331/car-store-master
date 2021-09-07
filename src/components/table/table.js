@@ -8,30 +8,17 @@ import Pagination from "../pagination";
 import v_1 from '../layers/vector1.png'
 import v_2 from '../layers/vector2.png'
 import {useAlert} from "react-alert";
+import Navbar from "../navbar";
 
 const Table = ({
                    items, pageSize, currentPage,
                    setCurrentPage, onCarSelected,
                    onEditCart, onDelete, tableName,
-                   tablePrice, tableData, onSort, sort
+                   tablePrice, tableData, onSort, sort,
                }) => {
     let itemsPage = items.slice((currentPage - 1) * pageSize, currentPage * pageSize)
     const alert = useAlert();
-    const Navbar = () => {
-        let classNames = 'noPressed pressed'
-        return (
-            <div className='nav'>
-                <Link className={classNames} to='/cars'>
-                    <span onClick={() => {
-                    }}>Листинг Товаров</span>
-                </Link>
-                <Link className={classNames} to='/details'>
-                    <span onClick={() => {
-                    }}>Листинг Проперти</span>
-                </Link>
-            </div>
-        )
-    }
+
     const renderRow = (item) => {
         const {id, title, changeData, price, value, key} = item
         const idx = Math.random()

@@ -20,5 +20,5 @@ const onAddedPropToTable = (value) => {
 export {
     detailRemovedFromTable,
     setCurrentPageDet,
-    onAddedPropToTable
+    onAddedPropToTable,
 }

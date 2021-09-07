@@ -10,7 +10,6 @@ const initialState = {
     ],
     pageSize: 5,
     currentPage: 1,
-    pressed: false
 }
 const DetailsReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -41,8 +40,6 @@ const DetailsReducer = (state = initialState, action) => {
                 ]
             }
         }
-
-
         default:
             return state
     }

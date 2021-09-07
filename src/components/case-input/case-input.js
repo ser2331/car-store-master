@@ -14,11 +14,13 @@ const CaseInput = (props) => {
             return <FormikControl control='select'
                                   label='Значение'
                                   name={value}
-                                  options={dropOptions}/>
+                                  options={dropOptions}
+                                  />
         case 'number':
             return <FormikControl control='input'
                                   label='Значение'
-                                  name={value}/>
+                                  name={value}
+                                  type='number'/>
         case 'string':
             return <FormikControl control='input'
                                   label='Значение'

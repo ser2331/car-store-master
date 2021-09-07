@@ -20,7 +20,7 @@ class PropertyContainer extends Component {
         const {
             details, pageSize,
             currentPage, onDelete,
-            setCurrentPage, onPress, pressed
+            setCurrentPage,
         } = this.props
         let sortArr = [...details.sort((a, b) => {
             return a.key.toLowerCase().localeCompare(b.key.toLowerCase());
@@ -31,12 +31,10 @@ class PropertyContainer extends Component {
 
         return (
             <Table items={this.state.sort ? sortArr : newArr}
-                   pressed={pressed}
                    pageSize={pageSize}
                    setCurrentPage={setCurrentPage}
                    currentPage={currentPage}
                    onDelete={onDelete}
-                   onPress={onPress}
                    tableName={'Перечень проперти'}
                    tablePrice={'Тип'}
                    onSort={() => this.onSortArrRevers}
@@ -51,7 +49,6 @@ const mapStateToProps = ({detailPage}) => {
         details: detailPage.details,
         pageSize: detailPage.pageSize,
         currentPage: detailPage.currentPage,
-        pressed: detailPage.pressed
     }
 }
 const mapDispatchToProps = (dispatch) => {

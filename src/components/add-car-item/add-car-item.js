@@ -136,13 +136,11 @@ const AddCarItem = ({onAddedToTable, car, editCar, onRedoProperty, onReturn, det
                                                                 </option>
                                                         ))}
                                                 </Field>
-                                                {
-                                                    values.moreDetails[index].name ?
+                                                {values.moreDetails[index].name ?
                                                         <CaseInput
                                                             use={details.find((el) => el.key === values.moreDetails[index].name)?.value}
                                                             value={`moreDetails.${index}.value`}/>
-                                                        : null
-                                                }
+                                                        : null}
                                             </div>
                                         ))
                                     )}
