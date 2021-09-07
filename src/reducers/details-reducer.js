@@ -1,3 +1,4 @@
+
 const DETAIL_REMOVED_FROM_TABLE = 'DETAIL_REMOVED_FROM_TABLE'
 const SET_CURRENT_PAGE_DET = 'SET_CURRENT_PAGE_DET'
 const ADD_PROP = 'ADD_PROP'
@@ -11,6 +12,7 @@ const initialState = {
     pageSize: 5,
     currentPage: 1,
 }
+
 const DetailsReducer = (state = initialState, action) => {
     switch (action.type) {
         case DETAIL_REMOVED_FROM_TABLE:
@@ -27,11 +29,12 @@ const DetailsReducer = (state = initialState, action) => {
         }
         case ADD_PROP: {
             const newItem = {
-                id: state.details.length+1,
+                id: state.details.length + 1,
                 key: action.payload.key,
                 value: action.payload.value
             }
             console.log(newItem)
+
             return {
                 ...state,
                 details: [
@@ -40,6 +43,7 @@ const DetailsReducer = (state = initialState, action) => {
                 ]
             }
         }
+
         default:
             return state
     }

@@ -10,7 +10,7 @@ import './add-property.scss'
 import FormikControl from "../form-components/FormikControl";
 import {onAddedPropToTable} from "../../actions/property-actions";
 
-const AddProperty = ({onAddedPropToTable}) => {
+const AddProperty = ({onAddedPropToTable,details}) => {
     const alert = useAlert();
     const radioOptions = [
         {key: 'Dropdown', value: 'dropdown'},
@@ -27,7 +27,11 @@ const AddProperty = ({onAddedPropToTable}) => {
     })
     const onSubmit = (values) => {
         if(values){
-            return onAddedPropToTable(values) && alert.success("Свойство добавлено")
+            if (details.find(({key})=>key.toLowerCase()===values.key.toLowerCase())){
+                return alert.error('Такое свойство уже добавлено')
+            } else{
+                return onAddedPropToTable(values) && alert.success("Свойство добавлено")
+            }
         }
     }
 
@@ -41,9 +45,7 @@ const AddProperty = ({onAddedPropToTable}) => {
                 {({
                       touched,
                       errors,
-                      isValid,
                       handleSubmit,
-                      dirty
                   }) => (
                     <Form>
                         <div className='btn-choice'>
@@ -89,8 +91,10 @@ const AddProperty = ({onAddedPropToTable}) => {
         </div>
     )
 }
-const mapStateToProps = () => {
-    return {}
+const mapStateToProps = ({detailPage}) => {
+    return {
+        details:detailPage.details
+    }
 }
 const mapDispatchToProps = (dispatch) => {
     return {
