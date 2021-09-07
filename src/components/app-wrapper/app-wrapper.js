@@ -1,7 +1,7 @@
 import React from 'react'
 import {Redirect, Route} from "react-router-dom";
 
-import './app.scss'
+import './app-wrapper.scss'
 
 import CarItem from "../car-item";
 import AddCarItem from "../add-car-item";
@@ -10,7 +10,7 @@ import AddProperty from "../add-property/add-property";
 import {connect} from "react-redux";
 
 const AppWrapper = ({logged}) => {
-    if(logged){
+    if (logged) {
         return (
             <div>
                 <Route
@@ -33,17 +33,16 @@ const AppWrapper = ({logged}) => {
                     component={AddCarItem}/>
             </div>
         )
-    }else{
-        return (<Redirect to='/'/>)
+    } else {
+        return <Redirect to='/' />
     }
 }
 const mapStateToProps = ({carsPage}) => {
     return {
-        logged:carsPage.logged
+        logged: carsPage.logged
     }
 }
 const mapDispatchToProps = () => {
-    return {
-    }
+    return {}
 }
-export default connect(mapStateToProps, mapDispatchToProps) (AppWrapper)
+export default connect(mapStateToProps, mapDispatchToProps)(AppWrapper)

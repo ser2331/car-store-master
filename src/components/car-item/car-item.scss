@@ -29,8 +29,6 @@
         align-items: flex-start;
         margin-left: 40px;
         margin-right: 95px;
-      .description{
-      }
 
         h2 {
           font-size: 24px;
@@ -48,6 +46,12 @@
 
   .property-form {
     padding-bottom: 60px;
+
+    .price {
+      font-size: 22px;
+      line-height: 26px;
+      color: #000000;
+    }
 
     div {
       margin-top: 30px;

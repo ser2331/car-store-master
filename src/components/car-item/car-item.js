@@ -43,7 +43,7 @@ const CarItem = ({car, onReturn}) => {
 
                 <div>
                     <p>Цена</p>
-                    <span>{price}</span>
+                    <span className='price'>{price}$</span>
                 </div>
                 <div className='btn-buy'>
                     <UseButton

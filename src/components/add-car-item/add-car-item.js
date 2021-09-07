@@ -122,20 +122,22 @@ const AddCarItem = ({onAddedToTable, car, editCar, onRedoProperty, onReturn, det
                                                         -
                                                     </button>
                                                 </div>
-                                                <Field as='select'
-                                                       name={`moreDetails.${index}.name`}>
-                                                    {values.moreDetails[index].name ?
-                                                        (<option label={values.moreDetails[index].name}/>) :
-                                                        (<option hidden value='0'>Выберете свойство</option>)}
-                                                    {details.map(detail =>
-                                                        (values.moreDetails.find((item) => item.name === detail.key) ?
-                                                                null :
-                                                                <option key={detail.id}
-                                                                        value={detail.key}>
-                                                                    {detail.key}
-                                                                </option>
-                                                        ))}
-                                                </Field>
+                                                <div>
+                                                    <Field as='select'
+                                                           name={`moreDetails.${index}.name`}>
+                                                        {values.moreDetails[index].name ?
+                                                            (<option label={values.moreDetails[index].name}/>) :
+                                                            (<option hidden value='0'>Выберете свойство</option>)}
+                                                        {details.map(detail =>
+                                                            (values.moreDetails.find((item) => item.name === detail.key) ?
+                                                                    null :
+                                                                    <option key={detail.id}
+                                                                            value={detail.key}>
+                                                                        {detail.key}
+                                                                    </option>
+                                                            ))}
+                                                    </Field>
+                                                </div>
                                                 {values.moreDetails[index].name ?
                                                         <CaseInput
                                                             use={details.find((el) => el.key === values.moreDetails[index].name)?.value}
