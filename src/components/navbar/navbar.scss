@@ -1,16 +1,21 @@
-.nav {
-    padding: 15px;
+.nav{
     margin: -5px 8.22% 0 7.22%;
+    display: flex;
+    justify-content: space-between;
 
-    .noPressed {
-        text-decoration: none;
-        color: #000000;
-        opacity: 0.6;
-        font-size: 22px;
-        padding: 18px;
-    }
+    .nav-left {
+        padding: 15px;
 
-    .pressed {
-        background: linear-gradient(180deg, #0258FF 0%, rgba(2, 88, 255, 0) 100%);
+        .noPressed {
+            text-decoration: none;
+            color: #000000;
+            opacity: 0.6;
+            font-size: 22px;
+            padding: 18px;
+        }
+
+        .pressed {
+            background: linear-gradient(180deg, #0258FF 0%, rgba(2, 88, 255, 0) 100%);
+        }
     }
 }

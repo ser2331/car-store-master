@@ -1,14 +1,36 @@
 import React from "react";
 import './button-to-login.scss'
+import {Link} from "react-router-dom";
+import {onAnLogged} from "../../actions/cars-actions";
+import {connect} from "react-redux";
 
 const ButtonToLogin = ({logged, onAnLogged, logName}) => {
-    return logged ?
+    return (
         <div className='button-to-login'>
-            <div>
-                <div>{logName}</div>
-                <button onClick={() => onAnLogged()}>Выйти</button>
+                {logged ? (
+                        <div>
+                            <div>{logName}</div>
+                            <button onClick={() => onAnLogged()}>Выйти</button>
+                        </div>
+                    ) :
+                    (
+                        <Link to={'/logged'}>
+                            <button>Login please</button>
+                        </Link>
+                    )
+                }
             </div>
-        </div> :
-        <div className='button-to-login'>Login please</div>
+    )
 }
-export default ButtonToLogin
+const mapStateToProps = ({carsPage}) => {
+    return {
+        logged: carsPage.logged,
+        logName: carsPage.nameUser
+    }
+}
+const mapDispatchToProps = (dispatch) => {
+    return {
+        onAnLogged: () => dispatch(onAnLogged()),
+    }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(ButtonToLogin)

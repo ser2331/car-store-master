@@ -11,15 +11,11 @@ import {connect} from "react-redux";
 import AddProperty from "../add-property/add-property";
 import CarItem from "../car-item";
 import AddCarItem from "../add-car-item";
-import ButtonToLogin from "../button-to-login";
 import {onAnLogged} from "../../actions/cars-actions";
 
-const App = ({logged,onAnLogged,logName}) => {
+const App = ({logged}) => {
     return (
         <div className='app'>
-            <ButtonToLogin logged={logged}
-                           onAnLogged={onAnLogged}
-                           logName={logName}/>
             <Switch>
                 <AuthRouter logged={logged}
                             path={'/add-property/'}
@@ -54,7 +50,7 @@ const App = ({logged,onAnLogged,logName}) => {
 const mapStateToProps = ({carsPage}) => {
     return {
         logged: carsPage.logged,
-        logName:carsPage.nameUser
+        logName: carsPage.nameUser
     }
 }
 const mapDispatchToProps = (dispatch) => {
