@@ -15,6 +15,8 @@ const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE'
 const ON_EDIT_CAR = 'ON_EDIT_CAR'
 const ON_REDO_PROPERTY = 'ON_REDO_PROPERTY'
 const RETURN = 'RETURN'
+const ON_AN_LOGGED = 'ON_AN_LOGGED'
+
 const initialState = {
     cars: [
         {
@@ -106,6 +108,7 @@ const initialState = {
             password: 'admin'
         }
     ],
+    nameUser: {},
     logged: false,
     editCar: false,
     pageSize: 5,
@@ -129,7 +132,7 @@ const CarsReducer = (state = initialState, action) => {
                 file: action.payload.file,
                 price: action.payload.price,
                 description: action.payload.description,
-                moreDetails:action.payload.moreDetails
+                moreDetails: action.payload.moreDetails
             }
             return {
                 ...state,
@@ -142,7 +145,7 @@ const CarsReducer = (state = initialState, action) => {
             let reNow = moment();
             const reToday = reNow.format('DD.MM.YY')
             const redoItem = {
-                id:action.payload.id,
+                id: action.payload.id,
                 title: action.payload.title,
                 changeData: reToday,
                 file: action.payload.file,
@@ -150,10 +153,10 @@ const CarsReducer = (state = initialState, action) => {
                 description: action.payload.description,
                 moreDetails: action.payload.moreDetails
             }
-            const newArrayCars=state.cars.filter((el)=>el.id!==action.payload.id)
+            const newArrayCars = state.cars.filter((el) => el.id !== action.payload.id)
             return {
                 ...state,
-                cars:[...newArrayCars,redoItem],
+                cars: [...newArrayCars, redoItem],
                 editCar: false
             }
         case CAR_REMOVED_FROM_TABLE:
@@ -181,6 +184,7 @@ const CarsReducer = (state = initialState, action) => {
                 element.password === action.payload.password) {
                 return {
                     ...state,
+                    nameUser: element.email,
                     logged: true
                 }
             }
@@ -206,6 +210,12 @@ const CarsReducer = (state = initialState, action) => {
                 oneCar: {}
             }
         }
+        case ON_AN_LOGGED:
+            return {
+                ...state,
+                logged: false
+            }
+
         default:
             return state
     }

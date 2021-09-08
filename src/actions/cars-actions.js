@@ -51,6 +51,12 @@ const onReturn=()=>{
         type:'RETURN'
     }
 }
+const onAnLogged=()=>{
+    return{
+        type:'ON_AN_LOGGED'
+    }
+}
+
 
 export {
     onLogSelected,
@@ -61,5 +67,6 @@ export {
     setCurrentPage,
     onEditCar,
     onRedoProperty,
-    onReturn
+    onReturn,
+    onAnLogged
 }
