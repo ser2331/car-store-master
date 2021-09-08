@@ -97,7 +97,10 @@
       display: flex;
       line-height: 3rem;
       margin-left: -72px;
-      align-items: flex-end;
+      .left-field{
+        display: flex;
+        margin-top: 13px;
+      }
     }
   }
 }

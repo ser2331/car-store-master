@@ -8,15 +8,16 @@ import UseButton from "../use-button";
 import image from '../layers/unnamed.jpg'
 import {onReturn} from "../../actions/cars-actions";
 import {useAlert} from "react-alert";
+import FormikControl from "../form-components/FormikControl";
 
 const CarItem = ({car, onReturn}) => {
-    const alert=useAlert()
+    const {title, price, file, description, moreDetails} = car
+    const alert = useAlert()
     useEffect(() => {
         return () => {
             onReturn()
         }
     }, [onReturn])
-    const {title, price, file, description, moreDetails} = car
     return (
         <div className='car-item'>
             <NavLink to='/cars'>
@@ -33,14 +34,24 @@ const CarItem = ({car, onReturn}) => {
                 </div>
             </div>
             <div className='property-form'>
-                {moreDetails? moreDetails.map((proper, index) => {
+                {moreDetails ? moreDetails.map((proper, index) => {
                     return (
                         <div key={index}>
                             <p>{proper.name}</p>
                             <span>{proper.value}</span>
-                        </div>)
-                }) : null}
+                            <span>
+                                {proper.dropValue ? proper.dropValue.map((el, index) => {
+                                    return (
+                                        <div key={index}>
+                                            <span>{el.meaning}</span>
+                                        </div>
+                                    )
+                                }) : null}
+                            </span>
 
+                        </div>
+                    )
+                }) : null}
                 <div>
                     <p>Цена</p>
                     <span className='price'>{price}$</span>

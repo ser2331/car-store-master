@@ -1,21 +1,46 @@
 import React from 'react'
 import FormikControl from "../form-components/FormikControl";
+import {FieldArray} from "formik";
 
+import './case-input.scss'
 
-const dropOptions = [
-    {key: 'op1', value: 'po1'},
-    {key: 'op2', value: 'po2'},
-    {key: 'op3', value: 'po3'},
-]
 const CaseInput = (props) => {
-    const {use, value} = props
+    const {use, value, values, dropValue} = props
     switch (use) {
         case 'dropdown':
-            return <FormikControl control='select'
-                                  label='Значение'
-                                  name={value}
-                                  options={dropOptions}
-                                  />
+            return (
+                <div className='case-input-arr'>
+                    <label>Значение</label>
+                    <div className='field-arr'>
+                        <FieldArray
+                            name={dropValue}
+                            render={arrayHelpers => (
+                                <div>
+                                    {(
+                                        values.map((prop, index) => (
+                                            <div key={index} className=' add-prop-field'>
+                                                <div>
+                                                    <FormikControl control='input'
+                                                                   name={`${dropValue}.${index}.meaning`}/>
+                                                </div>
+                                                <div>
+                                                    <button type="button" onClick={() => arrayHelpers.remove(index)}>
+                                                        -
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        ))
+                                    )}
+                                    <span>
+                                   <button type="button" onClick={() => arrayHelpers.push({meaning: ''})}>
+                                     +
+                                   </button>
+                                </span>
+                                </div>
+                            )}/>
+                    </div>
+                </div>
+            )
         case 'number':
             return <FormikControl control='input'
                                   label='Значение'

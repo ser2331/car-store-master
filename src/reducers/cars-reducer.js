@@ -153,7 +153,8 @@ const CarsReducer = (state = initialState, action) => {
             const newArrayCars=state.cars.filter((el)=>el.id!==action.payload.id)
             return {
                 ...state,
-                cars:[...newArrayCars,redoItem]
+                cars:[...newArrayCars,redoItem],
+                editCar: false
             }
         case CAR_REMOVED_FROM_TABLE:
             const newArr = state.cars.filter(({id}) => id !== action.payload)
