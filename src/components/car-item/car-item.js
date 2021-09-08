@@ -8,7 +8,6 @@ import UseButton from "../use-button";
 import image from '../layers/unnamed.jpg'
 import {onReturn} from "../../actions/cars-actions";
 import {useAlert} from "react-alert";
-import FormikControl from "../form-components/FormikControl";
 
 const CarItem = ({car, onReturn}) => {
     const {title, price, file, description, moreDetails} = car
@@ -40,13 +39,17 @@ const CarItem = ({car, onReturn}) => {
                             <p>{proper.name}</p>
                             <span>{proper.value}</span>
                             <span>
-                                {proper.dropValue ? proper.dropValue.map((el, index) => {
-                                    return (
-                                        <div key={index}>
-                                            <span>{el.meaning}</span>
-                                        </div>
-                                    )
-                                }) : null}
+                                {proper.dropValue ?(
+                                    <select >
+                                        {proper.dropValue.map(option => {
+                                            return (
+                                                <option key={option.meaning} >
+                                                    {option.meaning}
+                                                </option>
+                                            )
+                                        })}
+                                    </select>
+                                ) : null}
                             </span>
 
                         </div>
