@@ -13,14 +13,7 @@ const AppWrapper = ({logged}) => {
     if (logged) {
         return (
             <div>
-                <Route
-                    path='/cars/'
-                    exact
-                    component={CarTableContainer}/>
-                <Route
-                    path='/details/'
-                    exact
-                    component={PropertyContainer}/>
+
                 <Route
                     path='/add-property/'
                     exact

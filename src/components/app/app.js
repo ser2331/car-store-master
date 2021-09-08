@@ -30,7 +30,6 @@ const App = () => {
                     path='/details/'
                     exact
                     component={PropertyContainer}/>
-
             </Switch>
         </div>
     )
