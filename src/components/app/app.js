@@ -6,6 +6,7 @@ import './app.scss'
 import Logged from "../logged";
 import Registration from "../registration";
 import AppWrapper from "../app-wrapper";
+import {CarTableContainer, PropertyContainer} from "../containers";
 
 const App = () => {
     return (
@@ -21,6 +22,14 @@ const App = () => {
                 <Route
                     path='/'
                     component={AppWrapper}/>
+                <Route
+                    path='/cars/'
+                    exact
+                    component={CarTableContainer}/>
+                <Route
+                    path='/details/'
+                    exact
+                    component={PropertyContainer}/>
 
             </Switch>
         </div>
