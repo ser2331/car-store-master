@@ -16,7 +16,7 @@ const Logged = (props) => {
         email: yup.string().email('Введите верный email').required('*')
     })
     if (props.logged) {
-        return <Redirect to='/cars/'/>
+        return <Redirect to='/'/>
     }
     return (
         <Formik
