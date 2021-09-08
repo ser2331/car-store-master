@@ -91,7 +91,7 @@ const Registration = (props) => {
                                 type='submit'/>
                         </div>
                         <div className='return'>
-                            <Link to='/'>Вернуться</Link>
+                            <Link to='/logged'>Вернуться</Link>
                         </div>
                     </Form>
                 </div>

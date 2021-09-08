@@ -5,25 +5,50 @@ import './app.scss'
 
 import Logged from "../logged";
 import Registration from "../registration";
-import AppWrapper from "../app-wrapper";
+import {CarTableContainer, PropertyContainer} from "../containers";
+import AuthRouter from "../auth-router";
+import {connect} from "react-redux";
+import AddProperty from "../add-property/add-property";
+import CarItem from "../car-item";
+import AddCarItem from "../add-car-item";
 
-const App = () => {
+const App = ({logged}) => {
     return (
         <div className='app'>
             <Switch>
+                <AuthRouter logged={logged}
+                            path={'/add-property/'}
+                            component={AddProperty}/>
+                <AuthRouter logged={logged}
+                            path={'/cars/:id'}
+                            component={CarItem}/>
+                <AuthRouter logged={logged}
+                            path={'/add-item'}
+                            component={AddCarItem}/>
+                <AuthRouter logged={logged}
+                            path={'/add-property/'}
+                            component={AddProperty}/>
                 <Route
-                    path='/'
-                    exact
+                    path='/logged'
                     component={Logged}/>
                 <Route
                     path='/registration'
                     component={Registration}/>
                 <Route
                     path='/'
-                    component={AppWrapper}/>
-
+                    exact
+                    component={CarTableContainer}/>
+                <Route
+                    path='/details/'
+                    exact
+                    component={PropertyContainer}/>
             </Switch>
         </div>
     )
 }
-export default App
+const mapStateToProps = ({carsPage}) => {
+    return {
+        logged: carsPage.logged
+    }
+}
+export default connect(mapStateToProps) (App)

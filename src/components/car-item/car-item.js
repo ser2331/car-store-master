@@ -19,7 +19,7 @@ const CarItem = ({car, onReturn}) => {
     }, [onReturn])
     return (
         <div className='car-item'>
-            <NavLink to='/cars'>
+            <NavLink to='/'>
                 <span>Вернуться</span>
             </NavLink>
             <div className='property'>

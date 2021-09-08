@@ -8,8 +8,8 @@ const Navbar = () => {
     let classNames = 'noPressed'
     return (
         <div className='nav'>
-            <Link className={url.pathname === '/cars' ? classNames + ' pressed' : classNames}
-                  to='/cars'>
+            <Link className={url.pathname === '/' ? classNames + ' pressed' : classNames}
+                  to='/'>
                 <span>Листинг Товаров</span>
             </Link>
             <Link className={url.pathname === '/details' ? classNames + ' pressed' : classNames}

@@ -58,7 +58,7 @@ const AddCarItem = ({onAddedToTable, car, editCar, onRedoProperty, onReturn, det
                   }) => (
                     <Form>
                         <div className='btn-choice'>
-                            <NavLink to='/cars'>
+                            <NavLink to='/'>
                                 <button
                                     className='btn-back'
                                     type='button'>
