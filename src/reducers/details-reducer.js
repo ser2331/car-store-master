@@ -1,4 +1,3 @@
-
 const DETAIL_REMOVED_FROM_TABLE = 'DETAIL_REMOVED_FROM_TABLE'
 const SET_CURRENT_PAGE_DET = 'SET_CURRENT_PAGE_DET'
 const ADD_PROP = 'ADD_PROP'
@@ -33,7 +32,6 @@ const DetailsReducer = (state = initialState, action) => {
                 key: action.payload.key,
                 value: action.payload.value
             }
-            console.log(newItem)
 
             return {
                 ...state,

@@ -20,7 +20,7 @@ class PropertyContainer extends Component {
         const {
             details, pageSize,
             currentPage, onDelete,
-            setCurrentPage,
+            setCurrentPage,logged
         } = this.props
         let sortArr = [...details.sort((a, b) => {
             return a.key.toLowerCase().localeCompare(b.key.toLowerCase());
@@ -39,16 +39,18 @@ class PropertyContainer extends Component {
                    tablePrice={'Тип'}
                    onSort={() => this.onSortArrRevers}
                    sort={this.state.sort}
+                   logged={logged}
             />
         )
     }
 }
 
-const mapStateToProps = ({detailPage}) => {
+const mapStateToProps = ({detailPage, carsPage}) => {
     return {
         details: detailPage.details,
         pageSize: detailPage.pageSize,
         currentPage: detailPage.currentPage,
+        logged: carsPage.logged,
     }
 }
 const mapDispatchToProps = (dispatch) => {

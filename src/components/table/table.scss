@@ -1,10 +1,29 @@
-
 .car-table {
   margin: 0 8.22% 0 8.22%;
   background: #FFFFFF;
   box-shadow: 0 20px 20px rgba(40, 40, 40, 0.05);
   border-radius: 10px;
   padding: 3% 50px 3%;
+
+  .cars-run {
+
+    .cars-run-out {
+      display: flex;
+      justify-content: center;
+      margin: 5px;
+
+      img {
+        min-width: 150px;
+        max-width: 500px;
+      }
+
+      h5 {
+        font-size: 25px;
+        color: #FF0000;
+      }
+    }
+
+  }
 
   .btn-add {
     margin: 0 0 2% 75%; //верхнего, правого, нижнего и левого края.
@@ -16,11 +35,14 @@
     margin-top: 20px;
     padding-bottom: 2rem;
 
-    .vector {
+    .vector-cont {
       cursor: pointer;
-      width: 14px;
-      height: 14px;
-      opacity: 0.5;
+
+      .vector {
+        width: 14px;
+        height: 14px;
+        opacity: 0.5;
+      }
     }
 
     span {

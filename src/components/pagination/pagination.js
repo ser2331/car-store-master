@@ -11,27 +11,45 @@ const Pagination = ({items, pageSize, currentPage, setCurrentPage}) => {
     }
     return (
         <div className="demo">
-                <nav className="pagination-outer" aria-label="Page navigation">
-                    <ul className="pagination">
-                        <li className="page-item">
-                            <span className="page-link" aria-label="Previous">
-                                <span aria-hidden="true">«</span>
-                            </span>
-                        </li>
-                        {pages.map(p => {
-                            return <li onClick={() => setCurrentPage(p)}
-                                       key={p}
-                                       className={`page-item${currentPage === p && ' active'}`}>
-                                <span className="page-link" >{p}</span>
-                            </li>
-                        })}
-                        <li className="page-item">
-                            <span  className="page-link" aria-label="Next">
-                                <span aria-hidden="true">»</span>
-                            </span>
-                        </li>
-                    </ul>
-                </nav>
+            <nav className="pagination-outer" aria-label="Page navigation">
+                <ul className="pagination">
+                    {
+                        currentPage <= 1 ? null :
+                            (
+                                <li className="page-item"
+                                    onClick={() => setCurrentPage(currentPage - 1)}>
+                                    <span className="page-link" aria-label="Previous">
+                                        <span aria-hidden="true">«</span>
+                                    </span>
+                                </li>
+                            )
+                    }
+
+                    {
+                        pages.map(p => {
+                                return (
+                                    <li onClick={() => setCurrentPage(p)}
+                                        key={p}
+                                        className={`page-item${currentPage === p && ' active'}`}>
+                                        <span className="page-link">{p}</span>
+                                    </li>
+                                )
+                            }
+                        )
+                    }
+                    {
+                        currentPage >= pages.length ? null :
+                            (
+                                <li className="page-item"
+                                    onClick={() => setCurrentPage(currentPage + 1)}>
+                                    <span className="page-link" aria-label="Next">
+                                        <span aria-hidden="true">»</span>
+                                    </span>
+                                </li>
+                            )
+                    }
+                </ul>
+            </nav>
         </div>
     )
 }

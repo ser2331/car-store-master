@@ -19,7 +19,7 @@ class CarsContainer extends Component {
         const {
             cars, pageSize,
             currentPage, onCarSelected, onDelete,
-            setCurrentPage, onEditCart,
+            setCurrentPage, onEditCart,logged
         } = this.props
         let sortArr = [...cars.sort((a, b) => {
             return a.title.toLowerCase().localeCompare(b.title.toLowerCase());
@@ -41,6 +41,7 @@ class CarsContainer extends Component {
                    tableData={'Дата изменения'}
                    onSort={() => this.onSortArrRevers}
                    sort={this.state.sort}
+                   logged={logged}
             />
         )
     }
@@ -48,11 +49,12 @@ class CarsContainer extends Component {
 
 }
 
-const mapStateToProps = ({carsPage, detailPage}) => {
+const mapStateToProps = ({carsPage}) => {
     return {
         cars: carsPage.cars,
         pageSize: carsPage.pageSize,
         currentPage: carsPage.currentPage,
+        logged: carsPage.logged,
     }
 }
 const mapDispatchToProps = (dispatch) => {
