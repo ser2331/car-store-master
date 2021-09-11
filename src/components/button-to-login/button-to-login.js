@@ -1,25 +1,28 @@
 import React from "react";
-import './button-to-login.scss'
-import {Link} from "react-router-dom";
-import {onAnLogged} from "../../actions/cars-actions";
 import {connect} from "react-redux";
+import {Link} from "react-router-dom";
 
-const ButtonToLogin = ({logged, onAnLogged, logName}) => {
+import './button-to-login.scss'
+
+import {onOutput} from "../../actions/cars-actions";
+
+
+const ButtonToLogin = ({logged, onOutput, logName}) => {
     return (
         <div className='button-to-login'>
-                {logged ? (
-                        <div>
-                            <div>{logName}</div>
-                            <button onClick={() => onAnLogged()}>Выйти</button>
-                        </div>
-                    ) :
-                    (
-                        <Link to={'/logged'}>
-                            <button>Login please</button>
-                        </Link>
-                    )
-                }
-            </div>
+            {logged ? (
+                    <div>
+                        <div>{logName}</div>
+                        <button onClick={() => onOutput()}>Выйти</button>
+                    </div>
+                ) :
+                (
+                    <Link to={'/logged'}>
+                        <button>Login please</button>
+                    </Link>
+                )
+            }
+        </div>
     )
 }
 const mapStateToProps = ({carsPage}) => {
@@ -30,7 +33,7 @@ const mapStateToProps = ({carsPage}) => {
 }
 const mapDispatchToProps = (dispatch) => {
     return {
-        onAnLogged: () => dispatch(onAnLogged()),
+        onOutput: () => dispatch(onOutput()),
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(ButtonToLogin)

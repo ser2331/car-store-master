@@ -6,30 +6,48 @@ import Table from "../table";
 
 class CarsContainer extends Component {
     state = {
-        sort: true
+        sortName: false,
+        sortPrice: false,
     }
-    onSortArrRevers = () => {
-        this.setState(({sort})=>{
-            return{
-                sort:!sort
+    onSortName = () => {
+        this.setState(({sortName}) => {
+            return {
+                sortName: !sortName,
+                Name: true
             }
         })
     }
+    onSortPrice = () => {
+        this.setState(({sortPrice}) => {
+            return {
+                sortPrice: !sortPrice,
+                Name: true
+            }
+        })
+    }
+
     render() {
         const {
             cars, pageSize,
             currentPage, onCarSelected, onDelete,
-            setCurrentPage, onEditCart,logged
+            setCurrentPage, onEditCart, logged
         } = this.props
-        let sortArr = [...cars.sort((a, b) => {
+        let sortingName = [...cars.sort((a, b) => {
             return a.title.toLowerCase().localeCompare(b.title.toLowerCase());
         })]
-        let newArr = [...cars.sort((a, b) => {
+        let sortingNameReverse = [...cars.sort((a, b) => {
             return a.title.toLowerCase().localeCompare(b.title.toLowerCase());
         }).reverse()]
+        let sortingPrice = [...cars.sort((a, b) => {
+            return a.price - b.price;
+        })]
+        let sortingPriceReverse = [...cars.sort((a, b) => {
+            return a.price - b.price;
+        }).reverse()]
+
 
         return (
-            <Table items={this.state.sort? sortArr:newArr}
+            <Table items={this.state.sortName ? sortingName : sortingNameReverse}
                    pageSize={pageSize}
                    setCurrentPage={setCurrentPage}
                    currentPage={currentPage}
@@ -39,8 +57,10 @@ class CarsContainer extends Component {
                    tableName={'Перечень товаров'}
                    tablePrice={'Стоимость'}
                    tableData={'Дата изменения'}
-                   onSort={() => this.onSortArrRevers}
-                   sort={this.state.sort}
+                   onSortName={() => this.onSortName}
+                   onSortPrice={() => this.onSortPrice}
+                   sortName={this.state.sortName}
+                   sortPrice={this.state.sortPrice}
                    logged={logged}
             />
         )

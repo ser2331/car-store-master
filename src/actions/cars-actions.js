@@ -51,10 +51,21 @@ const onReturn=()=>{
         type:'RETURN'
     }
 }
-const onAnLogged=()=>{
+const onOutput=()=>{
     return{
-        type:'ON_AN_LOGGED'
+        type:'ON_OUTPUT'
     }
+}
+const onSortName=()=>{
+    return{
+        type:'ON_SORT_NAME'
+    }
+}
+const onSortNameReverse = () => {
+    return{
+        type:'ON_SORT_NAME_REVERSE'
+    }
+
 }
 
 
@@ -68,5 +79,7 @@ export {
     onEditCar,
     onRedoProperty,
     onReturn,
-    onAnLogged
+    onOutput,
+    onSortName,
+    onSortNameReverse
 }

@@ -39,7 +39,7 @@ const CarItem = ({car, onReturn}) => {
                             <p>{proper.name}</p>
                             <span>{proper.value}</span>
                             <span>
-                                {proper.dropValue ?(
+                                {proper.dropValue.length ?(
                                     <select >
                                         {proper.dropValue.map(option => {
                                             return (

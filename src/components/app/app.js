@@ -11,7 +11,6 @@ import {connect} from "react-redux";
 import AddProperty from "../add-property/add-property";
 import CarItem from "../car-item";
 import AddCarItem from "../add-car-item";
-import {onAnLogged} from "../../actions/cars-actions";
 
 const App = ({logged}) => {
     return (
@@ -26,9 +25,6 @@ const App = ({logged}) => {
                 <AuthRouter logged={logged}
                             path={'/add-item'}
                             component={AddCarItem}/>
-                <AuthRouter logged={logged}
-                            path={'/add-property/'}
-                            component={AddProperty}/>
                 <Route
                     path='/logged'
                     component={Logged}/>
@@ -53,9 +49,7 @@ const mapStateToProps = ({carsPage}) => {
         logName: carsPage.nameUser
     }
 }
-const mapDispatchToProps = (dispatch) => {
-    return {
-        onAnLogged: () => dispatch(onAnLogged()),
-    }
+const mapDispatchToProps = () => {
+    return {}
 }
 export default connect(mapStateToProps, mapDispatchToProps)(App)

@@ -6,12 +6,12 @@ import {detailRemovedFromTable, setCurrentPageDet} from "../../actions/property-
 
 class PropertyContainer extends Component {
     state = {
-        sort: true
+        sortName: false,
     }
-    onSortArrRevers = () => {
-        this.setState(({sort}) => {
+    onSortName = () => {
+        this.setState(({sortName}) => {
             return {
-                sort: !sort
+                sortName: !sortName,
             }
         })
     }
@@ -22,23 +22,23 @@ class PropertyContainer extends Component {
             currentPage, onDelete,
             setCurrentPage,logged
         } = this.props
-        let sortArr = [...details.sort((a, b) => {
+        let sortName = [...details.sort((a, b) => {
             return a.key.toLowerCase().localeCompare(b.key.toLowerCase());
         })]
-        let newArr = [...details.sort((a, b) => {
+        let sortNameReverse = [...details.sort((a, b) => {
             return a.key.toLowerCase().localeCompare(b.key.toLowerCase());
         }).reverse()]
 
         return (
-            <Table items={this.state.sort ? sortArr : newArr}
+            <Table items={this.state.sortName ? sortName : sortNameReverse}
                    pageSize={pageSize}
                    setCurrentPage={setCurrentPage}
                    currentPage={currentPage}
                    onDelete={onDelete}
                    tableName={'Перечень проперти'}
                    tablePrice={'Тип'}
-                   onSort={() => this.onSortArrRevers}
-                   sort={this.state.sort}
+                   onSortName={() => this.onSortName}
+                   sortName={this.state.sortName}
                    logged={logged}
             />
         )

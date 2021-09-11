@@ -15,7 +15,7 @@ const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE'
 const ON_EDIT_CAR = 'ON_EDIT_CAR'
 const ON_REDO_PROPERTY = 'ON_REDO_PROPERTY'
 const RETURN = 'RETURN'
-const ON_AN_LOGGED = 'ON_AN_LOGGED'
+const ON_OUTPUT = 'ON_OUTPUT'
 
 const initialState = {
     cars: [
@@ -210,12 +210,11 @@ const CarsReducer = (state = initialState, action) => {
                 oneCar: {}
             }
         }
-        case ON_AN_LOGGED:
+        case ON_OUTPUT:
             return {
                 ...state,
                 logged: false
             }
-
         default:
             return state
     }

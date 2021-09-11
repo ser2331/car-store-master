@@ -16,7 +16,7 @@ const Table = ({
                    items, pageSize, currentPage,
                    setCurrentPage, onCarSelected,
                    onEditCart, onDelete, tableName,
-                   tablePrice, tableData, onSort, sort, logged
+                   tablePrice, tableData, onSortName, sortName, logged
                }) => {
     const alert = useAlert()
     let itemsPage = items.slice((currentPage - 1) * pageSize, currentPage * pageSize)
@@ -101,10 +101,10 @@ const Table = ({
                                 <thead>
                                 <tr>
                                     <th className='vector-cont'
-                                        onClick={onSort()}>
+                                        onClick={onSortName()}>
                                         <img alt='v'
                                              className='vector'
-                                              src={sort ? v_2 : v_1}/>
+                                              src={sortName ? v_2 : v_1}/>
                                         {tableName}</th>
                                     <th>{tablePrice}</th>
                                     <th>{tableData}</th>
