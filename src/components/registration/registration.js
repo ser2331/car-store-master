@@ -1,5 +1,5 @@
 import React from "react";
-import {Link} from "react-router-dom";
+import {Link, Redirect} from "react-router-dom";
 import {connect} from "react-redux";
 import {Form, Formik} from "formik";
 import * as yup from 'yup'
@@ -12,7 +12,8 @@ import FormikControl from "../form-components/FormikControl";
 import {useAlert} from "react-alert";
 
 const Registration = (props) => {
-    const alert=useAlert()
+    const {users} = props
+    const alert = useAlert()
     const validationsSchema = yup.object().shape({
         name: yup.string().typeError('Значение должно быть строкой').required('*'),
         secondName: yup.string().typeError('string').required('*'),
@@ -37,6 +38,7 @@ const Registration = (props) => {
             onSubmit={submit}
             validationSchema={validationsSchema}>
             {({
+                  values,
                   touched,
                   errors,
                   isValid,
@@ -44,6 +46,11 @@ const Registration = (props) => {
                   dirty
               }) => (
                 <div className='registration'>
+                    {
+                        users.find((el) => el.email === values.email) ? (
+                            <Redirect to='/logged'/>
+                        ) : null
+                    }
                     <Form onSubmit={handleSubmit}>
                         <h3>Регистрация</h3>
                         <div>
@@ -99,8 +106,10 @@ const Registration = (props) => {
         </Formik>
     )
 }
-const mapStateToProps = () => {
-    return {}
+const mapStateToProps = ({carsPage}) => {
+    return {
+        users: carsPage.users
+    }
 }
 const mapDispatchToProps = (dispatch) => {
     return {
