@@ -35,7 +35,7 @@ const AddCarItem = ({onAddedToTable, car, editCar, onRedoProperty, onReturn, det
     })
     const onSubmit = (values) => {
         if (editCar) {
-            return onRedoProperty({...values, id: car.id}) && alert.success("Свойства отредоктированны")
+            return onRedoProperty({...values, id: car.id}) && alert.success("Свойства отредактированны")
         } else {
             return onAddedToTable(values) && alert.success("Автомобиль добавлен")
         }
@@ -68,9 +68,18 @@ const AddCarItem = ({onAddedToTable, car, editCar, onRedoProperty, onReturn, det
                             <button
                                 className='btn-save'
                                 type='submit'
-                                disabled={!isValid && !dirty}
+                                disabled={editCar ? initialValues === values : !isValid && !dirty}
                                 onClick={handleSubmit}>
-                                Сохранить
+                                {
+                                    initialValues !== values ?
+                                        (
+                                            <NavLink className='active-btn' to='/'>
+                                                <span >Сохранить</span>
+                                            </NavLink>
+                                        ) : (
+                                            <span>Сохранить</span>
+                                        )
+                                }
                             </button>
                         </div>
                         <h3>Добавление товара</h3>
@@ -110,8 +119,14 @@ const AddCarItem = ({onAddedToTable, car, editCar, onRedoProperty, onReturn, det
                             render={arrayHelpers => (
                                 <div className='add-prop'>
                                     <span>Дбавление товару свойств
-                                        <button type="button" onClick={() => arrayHelpers.push({name: '', value: '', dropValue:[]})}>
-                                        +
+                                        <button type="button"
+                                                disabled={values.moreDetails.length === details.length}
+                                                onClick={() => arrayHelpers.push({
+                                                    name: '',
+                                                    value: '',
+                                                    dropValue: [{meaning: ''},]
+                                                })}>
+                                            +
                                         </button>
                                     </span>
                                     {(
@@ -119,7 +134,8 @@ const AddCarItem = ({onAddedToTable, car, editCar, onRedoProperty, onReturn, det
                                             <div key={index} className='added-prop'>
                                                 <div className='left-field'>
                                                     <div>
-                                                        <button type="button" onClick={() => arrayHelpers.remove(index)}>
+                                                        <button type="button"
+                                                                onClick={() => arrayHelpers.remove(index)}>
                                                             -
                                                         </button>
                                                     </div>
@@ -129,14 +145,16 @@ const AddCarItem = ({onAddedToTable, car, editCar, onRedoProperty, onReturn, det
                                                             {values.moreDetails[index].name ?
                                                                 (<option label={values.moreDetails[index].name}/>) :
                                                                 (<option hidden value='0'>Выберете свойство</option>)}
-                                                            {details.map(detail =>
-                                                                (values.moreDetails.find((item) => item.name === detail.key) ?
-                                                                        null :
-                                                                        <option key={detail.id}
-                                                                                value={detail.key}>
-                                                                            {detail.key}
-                                                                        </option>
-                                                                ))}
+                                                            {
+                                                                details.map(detail =>
+                                                                    (values.moreDetails.find((item) => item.name === detail.key) ?
+                                                                            null :
+                                                                            <option key={detail.id}
+                                                                                    value={detail.key}>
+                                                                                {detail.key}
+                                                                            </option>
+                                                                    ))
+                                                            }
                                                         </Field>
                                                     </div>
                                                 </div>
