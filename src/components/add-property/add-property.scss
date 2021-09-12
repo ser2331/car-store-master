@@ -3,24 +3,20 @@
   background: #FFFFFF;
   box-shadow: 0 20px 20px rgba(40, 40, 40, 0.05);
   border-radius: 10px;
-  padding: 3% 103px 3%;
+  padding: 3% 103px;
 
   .form-control {
     display: flex;
     flex-direction: column;
-    text-align: left;
   }
 
   label {
     font-size: 14px;
     line-height: 16px;
     opacity: 0.8;
-    color: #000000;
   }
 
   .btn-choice {
-    display: flex;
-    flex-direction: row;
     margin-left: 69%;
 
     .btn-back {
@@ -43,13 +39,15 @@
       border: none;
       color: #FFFFFF;
     }
+    .active-btn{
+      color: #FFFFFF;
+      text-decoration: none;
+    }
   }
 
   h3 {
-    font-weight: bold;
     font-size: 16px;
     line-height: 19px;
-    background: #FEFEFE;
   }
 .name-prop{
   input,select {

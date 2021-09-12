@@ -43,6 +43,7 @@ const AddProperty = ({onAddedPropToTable,details}) => {
                 validateOnBlur
                 onSubmit={onSubmit}>
                 {({
+                      values,
                       touched,
                       errors,
                       handleSubmit,
@@ -60,7 +61,16 @@ const AddProperty = ({onAddedPropToTable,details}) => {
                                 className='btn-save'
                                 type='submit'
                                 onClick={handleSubmit}>
-                                Сохранить
+                                {
+                                    initialValues !== values ?
+                                        (
+                                            <NavLink className='active-btn' to='/details/'>
+                                                <span >Сохранить</span>
+                                            </NavLink>
+                                        ) : (
+                                            <span>Сохранить</span>
+                                        )
+                                }
                             </button>
                         </div>
                         <h3>Добавление свойств</h3>
