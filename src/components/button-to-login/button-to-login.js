@@ -11,14 +11,14 @@ const ButtonToLogin = ({logged, onOutput, logName}) => {
     return (
         <div className='button-to-login'>
             {logged ? (
-                    <div>
+                    <div className='btn-container' >
                         <div>{logName}</div>
-                        <button onClick={() => onOutput()}>Выйти</button>
+                        <button className='btn-to-log' onClick={() => onOutput()}>Выйти</button>
                     </div>
                 ) :
                 (
                     <Link to={'/logged'}>
-                        <button>Login please</button>
+                        <button className='btn-to-log'>Login please</button>
                     </Link>
                 )
             }
