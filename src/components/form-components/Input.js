@@ -9,7 +9,7 @@ const Input = (props) => {
             <label htmlFor={name}>
                 {label}
                 {touched && errors ? <Condition touched={touched}
-                                                errors={errors}/> : null}
+                                                errors={errors}/> : <sup>  </sup>}
             </label>
             <Field id={name} name={name} {...rest} />
         </div>

@@ -34,7 +34,7 @@ const Table = ({
                     <td>{key}</td>
                 }
                 {price ?
-                    <td>{price}$</td> : <td>{value}</td>
+                    <td>{price.toLocaleString()+' $'}</td> : <td>{value}</td>
                 }
                 <td>{changeData}</td>
                 <td>

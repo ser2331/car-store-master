@@ -33,6 +33,7 @@
   .table {
     width: 100%;
     margin-top: 20px;
+    margin-left: 50px;
     padding-bottom: 2rem;
 
     .vector-cont {
@@ -52,7 +53,6 @@
 
     td {
       height: 48px;
-      padding-left: 5%;
       font-size: 14px;
       line-height: 16px;
       border-bottom: 1px solid #F7F9FA;
@@ -60,10 +60,7 @@
 
     th {
       height: 48px;
-      padding-left: 5%;
-      padding-bottom: 12px;
       text-align: left;
-      background: rgba(254, 254, 254, 1);
       border-bottom: 1px solid #F7F9FA;
       color: #828282;
       opacity: 0.8;
