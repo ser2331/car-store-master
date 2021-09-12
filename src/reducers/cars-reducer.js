@@ -23,7 +23,7 @@ const initialState = {
             id: 5,
             title: 'Toyota Corolla',
             changeData: '03.07.20',
-            price: 155555,
+            price: 1555,
             file: toyota,
             description: 'Toyota Corolla (яп. トヨタ・カローラ, Тойота Королла) —' +
                 ' компактный автомобиль, выпускаемый компанией Toyota. ' +
@@ -40,7 +40,7 @@ const initialState = {
             id: 1,
             title: 'CASHES VALLEY LANE',
             changeData: '03.07.21',
-            price: 180000,
+            price: 18000,
             file: chevrol,
             description: 'Cashes Valley Road is a 11.1 kilometer out and back trail located near Cherry Log,' +
                 'Georgia that features a river and is rated as moderate.' +
@@ -51,7 +51,7 @@ const initialState = {
             id: 2,
             title: 'Chevrolet Camaro',
             changeData: '05.03.21',
-            price: 385000,
+            price: 38500450,
             file: chevrolet,
             description: 'Chevrolet, — марка автомобилей, производимых и реализуемых' +
                 ' одноимённым экономически ' +
@@ -64,7 +64,7 @@ const initialState = {
             id: 3,
             title: 'Mitsubishi  Lancer',
             changeData: '04.03.20',
-            price: 155555,
+            price: 15442555,
             file: mitsubishi,
             description: 'Mitsubishi Lancer (яп. 三菱・ランサー) — семейство автомобилей, ' +
                 'выпускаемых Mitsubishi Motors ' +
@@ -78,7 +78,7 @@ const initialState = {
             id: 4,
             title: 'Mercedes-Benz A-класс',
             changeData: '03.04.21',
-            price: 155555,
+            price: 325,
             file: mers,
             description: 'Mercedes-Benz A-класс — серия компактных (до 2012 года — субкомпактных) ' +
                 'легковых автомобилей немецкой марки Mercedes-Benz. ' +
@@ -91,7 +91,7 @@ const initialState = {
             id: 6,
             title: 'Volkswagen Jetta',
             changeData: '01.05.20',
-            price: 155555,
+            price: 101101,
             file: volkswagen,
             description: 'Volkswagen Jetta (ˈd͡ʒɛtɑ) — компактный автомобиль, ' +
                 'разработанный и выпускаемый компанией Volkswagen Group. ' +
@@ -125,12 +125,13 @@ const CarsReducer = (state = initialState, action) => {
         case CAR_ADDED_TO_TABLE:
             let now = moment();
             const today = now.format('DD.MM.YY')
+            let numPrice=Number(action.payload.price)
             const newItem = {
                 id: state.cars.length + 1,
                 title: action.payload.title,
                 changeData: today,
                 file: action.payload.file,
-                price: action.payload.price,
+                price: numPrice,
                 description: action.payload.description,
                 moreDetails: action.payload.moreDetails
             }
@@ -144,12 +145,13 @@ const CarsReducer = (state = initialState, action) => {
         case ON_REDO_PROPERTY:
             let reNow = moment();
             const reToday = reNow.format('DD.MM.YY')
+            let redNumPrice=Number(action.payload.price)
             const redoItem = {
                 id: action.payload.id,
                 title: action.payload.title,
                 changeData: reToday,
                 file: action.payload.file,
-                price: action.payload.price,
+                price: redNumPrice,
                 description: action.payload.description,
                 moreDetails: action.payload.moreDetails
             }
