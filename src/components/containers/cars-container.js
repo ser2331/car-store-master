@@ -13,7 +13,6 @@ class CarsContainer extends Component {
         this.setState(({sortName}) => {
             return {
                 sortName: !sortName,
-                Name: true
             }
         })
     }
@@ -21,7 +20,6 @@ class CarsContainer extends Component {
         this.setState(({sortPrice}) => {
             return {
                 sortPrice: !sortPrice,
-                Name: true
             }
         })
     }
