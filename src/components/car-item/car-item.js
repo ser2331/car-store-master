@@ -19,54 +19,62 @@ const CarItem = ({car, onReturn}) => {
     }, [onReturn])
     return (
         <div className='car-item'>
-            <NavLink to='/'>
-                <span>Вернуться</span>
-            </NavLink>
-            <div className='property'>
-                <hr/>
-                <div className='property-car'>
-                    <img src={file ? file : image} alt='car' className='car-img'/>
-                    <div className='property-info'>
-                        <h2>{title}</h2>
-                        <div className='description'>{description}</div>
+            <div className='exit'>
+                <NavLink to='/'>
+                    <span>Вернуться</span>
+                </NavLink>
+            </div>
+            <hr/>
+                <div className='property'>
+
+                    <div className='property-car'>
+                        <img src={file ? file : image} alt='car' className='car-img'/>
+                        <div className='property-info'>
+                            <h2>{title}</h2>
+                            <div className='description'>{description}</div>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div className='property-form'>
-                {moreDetails ? moreDetails.map((proper, index) => {
-                    return (
-                        <div key={index}>
-                            <p>{proper.name}</p>
-                            <span>{proper.value}</span>
-                            <span>
-                                {proper.dropValue.length ?(
-                                    <select >
-                                        {proper.dropValue.map(option => {
-                                            return (
-                                                <option key={option.meaning} >
-                                                    {option.meaning}
-                                                </option>
-                                            )
-                                        })}
-                                    </select>
-                                ) : null}
-                            </span>
+                <div className='property-form'>
+                    {moreDetails ? moreDetails.map((proper, index) => {
+                        return (
+                            <div key={index}>
+                                <p>{proper.name}</p>
+                                {
+                                    proper.value ? (
+                                        <span>{proper.value}</span>
+                                    ) : (
 
-                        </div>
-                    )
-                }) : null}
-                <div>
-                    <p>Цена</p>
-                    <span className='price'>{price}$</span>
+                                        <span>
+                                        <select>
+                                            {proper.dropValue.map(option => {
+                                                return (
+                                                    <option key={option.meaning}>
+                                                        {option.meaning}
+                                                    </option>
+                                                )
+                                            })}
+                                        </select>
+                                    </span>
+                                    )
+                                }
+                            </div>
+                        )
+                    }) : null}
+                    <div>
+                        <p>Цена</p>
+                        <span className='price'>
+                                {price.toLocaleString() + ' $'}
+                            </span>
+                    </div>
+                    <div className='btn-buy'>
+                        <UseButton
+                            nameBut='Беру!!!!'
+                            onClickButton={() => {
+                                alert.success('Добавлено в карзину')
+                            }}/>
+                    </div>
                 </div>
-                <div className='btn-buy'>
-                    <UseButton
-                        nameBut='Беру!!!!'
-                        onClickButton={() => {
-                            alert.success('Добавлено в карзину')
-                        }}/>
-                </div>
-            </div>
         </div>
     )
 }
