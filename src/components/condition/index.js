@@ -1,3 +1,3 @@
-import Condition from "./condition";
+import Condition from './condition';
 
-export default Condition
+export default Condition;

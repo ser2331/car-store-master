@@ -1,57 +1,75 @@
-import React from "react";
+import React from 'react';
+import * as PropTypes from 'prop-types';
+import './pagination.scss';
 
-import './pagination.scss'
-
-const Pagination = ({items, pageSize, currentPage, setCurrentPage}) => {
-    let totalCount = items.length
-    let pagesCount = Math.ceil(totalCount / pageSize)
-    let pages = []
-    for (let i = 1; i <= pagesCount; i++) {
-        pages.push(i)
+const Pagination = ({
+    items, pageSize, currentPage, setPage,
+}) => {
+    const totalCount = items.length;
+    const pagesCount = Math.ceil(totalCount / pageSize);
+    const pages = [];
+    for (let i = 1; i <= pagesCount; i += 1) {
+        pages.push(i);
     }
     return (
         <div className="demo">
             <nav className="pagination-outer" aria-label="Page navigation">
                 <ul className="pagination">
                     {
-                        currentPage <= 1 ? null :
-                            (
-                                <li className="page-item"
-                                    onClick={() => setCurrentPage(currentPage - 1)}>
+                        currentPage <= 1 ? null
+                            : (
+                                <button
+                                    type="button"
+                                    className="page-item"
+                                    onClick={() => setPage(currentPage - 1)}
+                                >
                                     <span className="page-link" aria-label="Previous">
                                         <span aria-hidden="true">«</span>
                                     </span>
-                                </li>
+                                </button>
                             )
                     }
 
                     {
-                        pages.map(p => {
-                                return (
-                                    <li onClick={() => setCurrentPage(p)}
-                                        key={p}
-                                        className={`page-item${currentPage === p && ' active'}`}>
-                                        <span className="page-link">{p}</span>
-                                    </li>
-                                )
-                            }
-                        )
+                        pages.map((page) => (
+                            <button
+                                type="button"
+                                onClick={() => setPage(page)}
+                                key={page}
+                                className={`page-item${currentPage === page && ' active'}`}
+                            >
+                                <span className="page-link">{page}</span>
+                            </button>
+                        ))
                     }
                     {
-                        currentPage >= pages.length ? null :
-                            (
-                                <li className="page-item"
-                                    onClick={() => setCurrentPage(currentPage + 1)}>
+                        currentPage >= pages.length ? null
+                            : (
+                                <button
+                                    type="button"
+                                    className="page-item"
+                                    onClick={() => setPage(currentPage + 1)}
+                                >
                                     <span className="page-link" aria-label="Next">
                                         <span aria-hidden="true">»</span>
                                     </span>
-                                </li>
+                                </button>
                             )
                     }
                 </ul>
             </nav>
         </div>
-    )
-}
-export default Pagination
-
+    );
+};
+Pagination.propTypes = {
+    items: [],
+    pageSize: 0,
+    currentPage: 0,
+    setPage: () => {},
+};
+Pagination.defaultProps = {
+    items: PropTypes.array,
+    pageSize: PropTypes.number,
+    currentPage: PropTypes.number,
+    setPage: PropTypes.func,
+}; export default Pagination;

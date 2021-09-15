@@ -1,15 +1,27 @@
-import React from "react";
-import './use-button.scss'
+import React from 'react';
+import './use-button.scss';
+import * as PropTypes from 'prop-types';
 
-const UseButton = ({nameBut, onClickButton, disabled, type}) => {
-    return (
-        <button className='btn'
-                type={type}
-                disabled={disabled}
-                onClick={onClickButton}>
-            {nameBut}
-        </button>
-    )
-}
-
-export default UseButton
+const UseButton = ({
+    nameBut, onClickButton, disabled,
+}) => (
+    <button
+        className="btn"
+        type="button"
+        disabled={disabled}
+        onClick={onClickButton}
+    >
+        {nameBut}
+    </button>
+);
+UseButton.propTypes = {
+    nameBut: '',
+    onClickButton: () => {},
+    disabled: false,
+};
+UseButton.defaultProps = {
+    nameBut: PropTypes.string,
+    onClickButton: PropTypes.func,
+    disabled: PropTypes.bool,
+};
+export default UseButton;

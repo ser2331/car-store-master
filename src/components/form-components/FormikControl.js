@@ -1,22 +1,29 @@
-import React from 'react'
-import Input from './Input'
-import Textarea from './Textarea'
-import Select from './Select'
-import RadioButtons from "./RadioButtons";
+import React from 'react';
+import * as PropTypes from 'prop-types';
+import Input from './Input';
+import Textarea from './Textarea';
+import Select from './Select';
+import RadioButtons from './RadioButtons';
 
 const FormikControl = (props) => {
-    const {control, ...rest} = props
+    const { control, ...rest } = props;
     switch (control) {
-        case 'input':
-            return <Input {...rest} />
-        case 'textarea':
-            return <Textarea {...rest} />
-        case 'select':
-            return <Select {...rest} />
-        case 'radio':
-            return <RadioButtons {...rest} />
-        default:
-            return null
+    case 'input':
+        return <Input {...rest} />;
+    case 'textarea':
+        return <Textarea {...rest} />;
+    case 'select':
+        return <Select {...rest} />;
+    case 'radio':
+        return <RadioButtons {...rest} />;
+    default:
+        return null;
     }
-}
-export default FormikControl
+};
+FormikControl.propTypes = {
+    control: '',
+};
+FormikControl.defaultProps = {
+    control: PropTypes.string,
+};
+export default FormikControl;

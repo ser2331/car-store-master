@@ -1,7 +1,7 @@
-import CarsReducer from "./cars-reducer";
-import DetailsReducer from "./details-reducer";
+import CarsReducer from './cars-reducer';
+import DetailsReducer from './details-reducer';
 
 export {
     CarsReducer,
-    DetailsReducer
+    DetailsReducer,
 };

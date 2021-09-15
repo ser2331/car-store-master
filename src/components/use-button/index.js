@@ -1,3 +1,3 @@
-import UseButton from "./use-button";
+import UseButton from './use-button';
 
-export default UseButton
+export default UseButton;

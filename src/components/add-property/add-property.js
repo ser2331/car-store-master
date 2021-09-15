@@ -1,71 +1,72 @@
-import React from "react";
-import {connect} from "react-redux";
-import * as yup from "yup";
-import {NavLink} from "react-router-dom";
-import {Form, Formik} from "formik";
-import {useAlert} from "react-alert";
+import React from 'react';
+import { connect } from 'react-redux';
+import * as yup from 'yup';
+import { NavLink } from 'react-router-dom';
+import { Form, Formik } from 'formik';
+import { useAlert } from 'react-alert';
 
-import './add-property.scss'
+import './add-property.scss';
 
-import FormikControl from "../form-components/FormikControl";
-import {onAddedPropToTable} from "../../actions/property-actions";
+import * as PropTypes from 'prop-types';
+import FormikControl from '../form-components/FormikControl';
+import { onAddedPropToTable } from '../../actions/property-actions';
 
-const AddProperty = ({onAddedPropToTable,details}) => {
+const AddProperty = ({ onAddedProp, details }) => {
     const alert = useAlert();
     const radioOptions = [
-        {key: 'Dropdown', value: 'dropdown'},
-        {key: 'Number', value: 'number'},
-        {key: 'String', value: 'string'}
-    ]
+        { key: 'Dropdown', value: 'dropdown' },
+        { key: 'Number', value: 'number' },
+        { key: 'String', value: 'string' },
+    ];
     const initialValues = {
         key: '',
-        value: ''
-    }
+        value: '',
+    };
     const validationsSchemaLog = yup.object().shape({
         key: yup.string().typeError('string').required('*'),
         value: yup.string().typeError('string').required('*'),
-    })
+    });
     const onSubmit = (values) => {
-        if(values){
-            if (details.find(({key})=>key.toLowerCase()===values.key.toLowerCase())){
-                return alert.error('Такое свойство уже добавлено')
-            } else{
-                return onAddedPropToTable(values) && alert.success("Свойство добавлено")
-            }
+        if (details.find(({ key }) => key.toLowerCase() === values.key.toLowerCase())) {
+            return alert.error('Такое свойство уже добавлено');
         }
-    }
+        return onAddedProp(values) && alert.success('Свойство добавлено');
+    };
 
     return (
-        <div className='add-prop-item'>
+        <div className="add-prop-item">
             <Formik
                 initialValues={initialValues}
                 validationSchema={validationsSchemaLog}
                 validateOnBlur
-                onSubmit={onSubmit}>
+                onSubmit={onSubmit}
+            >
                 {({
-                      values,
-                      touched,
-                      errors,
-                      handleSubmit,
-                  }) => (
+                    values,
+                    touched,
+                    errors,
+                    handleSubmit,
+                }) => (
                     <Form>
-                        <div className='btn-choice'>
-                            <NavLink to='/details'>
+                        <div className="btn-choice">
+                            <NavLink to="/details">
                                 <button
-                                    className='btn-back'
-                                    type='button'>
+                                    className="btn-back"
+                                    type="button"
+                                >
                                     Вернуться
                                 </button>
                             </NavLink>
                             <button
-                                className='btn-save'
-                                type='submit'
-                                onClick={handleSubmit}>
+                                className="btn-save"
+                                type="submit"
+                                onClick={handleSubmit}
+                            >
                                 {
-                                    initialValues !== values ?
-                                        (
-                                            <NavLink className='active-btn' to='/details/'>
-                                                <span >Сохранить</span>
+                                    initialValues !== values
+                                        ? (
+                                            <NavLink className="active-btn" to="/details/">
+                                                <span>Сохранить</span>
                                             </NavLink>
                                         ) : (
                                             <span>Сохранить</span>
@@ -74,41 +75,44 @@ const AddProperty = ({onAddedPropToTable,details}) => {
                             </button>
                         </div>
                         <h3>Добавление свойств</h3>
-                        <div className='name-prop'>
+                        <div className="name-prop">
                             <FormikControl
-                                control='input'
-                                name='key'
-                                placeholder='Цвет авто'
-                                label='Название свойства'
+                                control="input"
+                                name="key"
+                                placeholder="Цвет авто"
+                                label="Название свойства"
                                 errors={errors.key}
                                 touched={touched.key}
                             />
                         </div>
-                        <div className='radio-btn'>
+                        <div className="radio-btn">
                             <FormikControl
-                                control='radio'
-                                name='value'
-                                label='Укажите тип свойства'
+                                control="radio"
+                                name="value"
+                                label="Укажите тип свойства"
                                 errors={errors.value}
                                 touched={touched.value}
                                 options={radioOptions}
                             />
                         </div>
                     </Form>
-                )
-                }
+                )}
             </Formik>
         </div>
-    )
-}
-const mapStateToProps = ({detailPage}) => {
-    return {
-        details:detailPage.details
-    }
-}
-const mapDispatchToProps = (dispatch) => {
-    return {
-        onAddedPropToTable: (value) => dispatch(onAddedPropToTable(value))
-    }
-}
-export default connect(mapStateToProps, mapDispatchToProps)(AddProperty)
+    );
+};
+const mapStateToProps = ({ detailPage }) => ({
+    details: detailPage.details,
+});
+const mapDispatchToProps = (dispatch) => ({
+    onAddedProp: (value) => dispatch(onAddedPropToTable(value)),
+});
+AddProperty.propTypes = {
+    details: [],
+    onAddedProp: () => {},
+};
+AddProperty.defaultProps = {
+    details: PropTypes.array,
+    onAddedProp: PropTypes.func,
+};
+export default connect(mapStateToProps, mapDispatchToProps)(AddProperty);

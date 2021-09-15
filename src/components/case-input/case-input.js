@@ -1,57 +1,82 @@
-import React from 'react'
-import FormikControl from "../form-components/FormikControl";
-import {FieldArray} from "formik";
-
-import './case-input.scss'
+import React from 'react';
+import * as PropTypes from 'prop-types';
+import { FieldArray } from 'formik';
+import FormikControl from '../form-components/FormikControl';
+import './case-input.scss';
 
 const CaseInput = (props) => {
-    const {use, value, values, dropValue} = props
+    const {
+        use, value, values, dropValue,
+    } = props;
     switch (use) {
-        case 'dropdown':
-            return (
-                <div className='case-input-arr'>
-                    <label>Значение</label>
-                    <div className='field-arr'>
-                        <FieldArray
-                            name={dropValue}
-                            render={arrayHelpers => (
-                                <div>
-                                    {(
-                                        values.map((prop, index) => (
-                                            <div key={index} className=' add-prop-field'>
-                                                <div>
-                                                    <FormikControl control='input'
-                                                                   name={`${dropValue}.${index}.meaning`}/>
-                                                </div>
-                                                <div>
-                                                    <button type="button" onClick={() => arrayHelpers.remove(index)}>
-                                                        -
-                                                    </button>
-                                                </div>
+    case 'dropdown':
+        return (
+            <div className="case-input-arr">
+                <p>Значение</p>
+                <div className="field-arr">
+                    <FieldArray
+                        name={dropValue}
+                        render={(arrayHelpers) => (
+                            <div>
+                                {(
+                                    values.map((prop, index) => (
+                                        <div key={prop} className=" add-prop-field">
+                                            <div>
+                                                <FormikControl
+                                                    control="input"
+                                                    name={`${dropValue}.${index}.meaning`}
+                                                />
                                             </div>
-                                        ))
-                                    )}
-                                    <span>
-                                   <button type="button" onClick={() => arrayHelpers.push({meaning: ''})}>
-                                     +
-                                   </button>
+                                            <div>
+                                                <button type="button" onClick={() => arrayHelpers.remove(index)}>
+                                                    -
+                                                </button>
+                                            </div>
+                                        </div>
+                                    ))
+                                )}
+                                <span>
+                                    <button type="button" onClick={() => arrayHelpers.push({ meaning: '' })}>
+                                        +
+                                    </button>
                                 </span>
-                                </div>
-                            )}/>
-                    </div>
+                            </div>
+                        )}
+                    />
                 </div>
-            )
-        case 'number':
-            return <FormikControl control='input'
-                                  label='Значение'
-                                  name={value}
-                                  type='number'/>
-        case 'string':
-            return <FormikControl control='input'
-                                  label='Значение'
-                                  name={value}/>
-        default:
-            return null
+            </div>
+        );
+    case 'number':
+        return (
+            <FormikControl
+                control="input"
+                label="Значение"
+                name={value}
+                type="number"
+            />
+        );
+    case 'string':
+        return (
+            <FormikControl
+                control="input"
+                label="Значение"
+                name={value}
+            />
+        );
+    default:
+        return null;
     }
-}
-export default CaseInput
+};
+CaseInput.propTypes = {
+    use: '',
+    value: '',
+    values: '',
+    dropValue: '',
+};
+CaseInput.defaultProps = {
+    use: PropTypes.string,
+    value: PropTypes.string,
+    values: PropTypes.string,
+    dropValue: PropTypes.string,
+};
+export default CaseInput;

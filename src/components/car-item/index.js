@@ -1,3 +1,3 @@
-import CarItem from "./car-item";
+import CarItem from './car-item';
 
-export default CarItem
+export default CarItem;

@@ -1,3 +1,3 @@
-import Logged from './logged'
+import Logged from './logged';
 
-export default Logged
+export default Logged;

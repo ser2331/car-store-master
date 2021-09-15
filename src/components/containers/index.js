@@ -1,7 +1,7 @@
-import CarTableContainer from "./cars-container";
-import PropertyContainer from "./property-container";
+import CarTableContainer from './cars-container';
+import PropertyContainer from './property-container';
 
-export  {
+export {
     CarTableContainer,
-    PropertyContainer
-}
+    PropertyContainer,
+};

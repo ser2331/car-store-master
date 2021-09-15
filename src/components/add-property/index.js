@@ -1,3 +1,3 @@
-import AddProperty from "./add-property";
+import AddProperty from './add-property';
 
-export default AddProperty
+export default AddProperty;

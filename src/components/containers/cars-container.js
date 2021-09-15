@@ -1,87 +1,108 @@
-import React, {Component} from "react";
-import {connect} from "react-redux";
-
-import {carRemovedFromTable, oneCarLoaded, onEditCar, setCurrentPage} from "../../actions/cars-actions";
-import Table from "../table";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import * as PropTypes from 'prop-types';
+import {
+    carRemovedFromTable,
+    oneCarLoaded,
+    onEditCar,
+    setCurrentPage,
+} from '../../actions/cars-actions';
+import Table from '../table';
 
 class CarsContainer extends Component {
-    state = {
-        sortName: false,
-        sortPrice: false,
+    constructor(props) {
+        super(props);
+        this.state = {
+            sortName: false,
+        };
     }
+
     onSortName = () => {
-        this.setState(({sortName}) => {
-            return {
-                sortName: !sortName,
-            }
-        })
+        this.setState(({ sortName }) => ({
+            sortName: !sortName,
+        }));
     }
-    onSortPrice = () => {
-        this.setState(({sortPrice}) => {
-            return {
-                sortPrice: !sortPrice,
-            }
-        })
-    }
+
+    // onSortPrice = () => {
+    //     this.setState(({ sortPrice }) => ({
+    //         sortPrice: !sortPrice,
+    //     }));
+    // }
 
     render() {
         const {
-            cars, pageSize,
-            currentPage, onCarSelected, onDelete,
-            setCurrentPage, onEditCart, logged
-        } = this.props
-        let sortingName = [...cars.sort((a, b) => {
-            return a.title.toLowerCase().localeCompare(b.title.toLowerCase());
-        })]
-        let sortingNameReverse = [...cars.sort((a, b) => {
-            return a.title.toLowerCase().localeCompare(b.title.toLowerCase());
-        }).reverse()]
-        let sortingPrice = [...cars.sort((a, b) => {
-            return a.price - b.price;
-        })]
-        let sortingPriceReverse = [...cars.sort((a, b) => {
-            return a.price - b.price;
-        }).reverse()]
-
+            cars,
+            pageSize,
+            currentPage,
+            onCarSelected,
+            onDelete,
+            setPage,
+            onEditCart,
+            logged,
+            editCar,
+        } = this.props;
+        const { sortName } = this.state;
+        const sortingName = [...cars.sort((a, b) => a.title.toLowerCase().localeCompare(b.title.toLowerCase()))];
+        const sortingNameReverse = [...cars.sort((a, b) => a.title.toLowerCase().localeCompare(b.title.toLowerCase())).reverse()];
+        // const sortingPrice = [...cars.sort((a, b) => a.price - b.price)];
+        // const sortingPriceReverse = [...cars.sort((a, b) => a.price - b.price).reverse()];
 
         return (
-            <Table items={this.state.sortName ? sortingName : sortingNameReverse}
-                   pageSize={pageSize}
-                   setCurrentPage={setCurrentPage}
-                   currentPage={currentPage}
-                   onCarSelected={onCarSelected}
-                   onEditCart={onEditCart}
-                   onDelete={onDelete}
-                   tableName={'Перечень товаров'}
-                   tablePrice={'Стоимость'}
-                   tableData={'Дата изменения'}
-                   onSortName={() => this.onSortName}
-                   onSortPrice={() => this.onSortPrice}
-                   sortName={this.state.sortName}
-                   sortPrice={this.state.sortPrice}
-                   logged={logged}
+            <Table
+                items={sortName ? sortingName : sortingNameReverse}
+                pageSize={pageSize}
+                setCurrentPage={setPage}
+                currentPage={currentPage}
+                onCarSelected={onCarSelected}
+                onEditCart={onEditCart}
+                onDelete={onDelete}
+                tableName="Перечень товаров"
+                tablePrice="Стоимость"
+                tableData="Дата изменения"
+                onSortName={() => this.onSortName}
+                // onSortPrice={() => this.onSortPrice}
+                sortName={sortName}
+                logged={logged}
+                editCar={editCar}
             />
-        )
-    }
-
-
-}
-
-const mapStateToProps = ({carsPage}) => {
-    return {
-        cars: carsPage.cars,
-        pageSize: carsPage.pageSize,
-        currentPage: carsPage.currentPage,
-        logged: carsPage.logged,
-    }
-}
-const mapDispatchToProps = (dispatch) => {
-    return {
-        onDelete: (id) => dispatch(carRemovedFromTable(id)),
-        onCarSelected: (id) => dispatch(oneCarLoaded(id)),
-        setCurrentPage: (p) => dispatch(setCurrentPage(p)),
-        onEditCart: (id) => dispatch(onEditCar(id)),
+        );
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(CarsContainer)
+const mapStateToProps = ({ carsPage }) => ({
+    cars: carsPage.cars,
+    pageSize: carsPage.pageSize,
+    currentPage: carsPage.currentPage,
+    logged: carsPage.logged,
+    editCar: carsPage.editCar,
+});
+const mapDispatchToProps = (dispatch) => ({
+    onDelete: (id) => dispatch(carRemovedFromTable(id)),
+    onCarSelected: (id) => dispatch(oneCarLoaded(id)),
+    setPage: (p) => dispatch(setCurrentPage(p)),
+    onEditCart: (id) => dispatch(onEditCar(id)),
+});
+CarsContainer.propTypes = {
+    cars: [],
+    pageSize: 0,
+    currentPage: 0,
+    onCarSelected: () => {},
+    onDelete: () => {},
+    setPage: () => {},
+    onEditCart: () => {},
+    logged: false,
+    editCar: true,
+};
+CarsContainer.defaultProps = {
+    cars: PropTypes.array,
+    pageSize: PropTypes.number,
+    currentPage: PropTypes.number,
+    onCarSelected: PropTypes.func,
+    onDelete: PropTypes.func,
+    setPage: PropTypes.func,
+    onEditCart: PropTypes.func,
+    logged: PropTypes.bool,
+    editCar: PropTypes.bool,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(CarsContainer);
