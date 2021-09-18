@@ -3,6 +3,7 @@ import { Link, Redirect } from 'react-router-dom';
 import * as yup from 'yup';
 import { Form, Formik } from 'formik';
 import { connect } from 'react-redux';
+import { useAlert } from 'react-alert';
 import * as PropTypes from 'prop-types';
 import UseButton from '../use-button';
 import { onLogSelected } from '../../actions/cars-actions';
@@ -10,13 +11,18 @@ import FormikControl from '../form-components/FormikControl';
 import './logged.scss';
 
 const Logged = ({ logged, onSubmit }) => {
+    const alert = useAlert();
     const validationsSchemaLog = yup.object().shape({
         password: yup.string().typeError('string').required('*'),
         email: yup.string().email('Введите верный email').required('*'),
     });
+
+    const submit = (values) => onSubmit(values) && alert.success('Авторизация успешна');
+
     if (logged) {
         return <Redirect to="/" />;
     }
+
     return (
         <Formik
             initialValues={{
@@ -24,7 +30,7 @@ const Logged = ({ logged, onSubmit }) => {
                 password: '',
             }}
             validateOnBlur
-            onSubmit={(values) => onSubmit(values)}
+            onSubmit={submit}
             validationSchema={validationsSchemaLog}
         >
             {({
@@ -60,7 +66,7 @@ const Logged = ({ logged, onSubmit }) => {
                                 disabled={!isValid && !dirty}
                                 onClick={handleSubmit}
                                 nameBut="Войти"
-                                type="submit"
+                                isSubmit
                             />
                         </div>
                         <div className="go-to-reg">
@@ -75,15 +81,17 @@ const Logged = ({ logged, onSubmit }) => {
 const mapStateToProps = ({ carsPage }) => ({
     logged: carsPage.logged,
 });
+
 const mapDispatchToProps = (dispatch) => ({
     onSubmit: (value) => dispatch(onLogSelected(value)),
 });
+
 Logged.propTypes = {
-    logged: false,
-    onSubmit: () => {},
-};
-Logged.defaultProps = {
     logged: PropTypes.bool,
     onSubmit: PropTypes.func,
+};
+Logged.defaultProps = {
+    logged: false,
+    onSubmit: () => {},
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Logged);

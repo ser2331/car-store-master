@@ -13,19 +13,18 @@ const Pagination = ({
     }
     return (
         <div className="demo">
-            <nav className="pagination-outer" aria-label="Page navigation">
+            <nav className="pagination-outer">
                 <ul className="pagination">
                     {
-                        currentPage <= 1 ? null
+                        currentPage <= 1
+                            ? null
                             : (
                                 <button
                                     type="button"
-                                    className="page-item"
+                                    className="page-link"
                                     onClick={() => setPage(currentPage - 1)}
                                 >
-                                    <span className="page-link" aria-label="Previous">
-                                        <span aria-hidden="true">«</span>
-                                    </span>
+                                    «
                                 </button>
                             )
                     }
@@ -36,9 +35,9 @@ const Pagination = ({
                                 type="button"
                                 onClick={() => setPage(page)}
                                 key={page}
-                                className={`page-item${currentPage === page && ' active'}`}
+                                className={currentPage === page ? 'page-link active' : 'page-link'}
                             >
-                                <span className="page-link">{page}</span>
+                                {page}
                             </button>
                         ))
                     }
@@ -47,12 +46,10 @@ const Pagination = ({
                             : (
                                 <button
                                     type="button"
-                                    className="page-item"
+                                    className="page-link"
                                     onClick={() => setPage(currentPage + 1)}
                                 >
-                                    <span className="page-link" aria-label="Next">
-                                        <span aria-hidden="true">»</span>
-                                    </span>
+                                    »
                                 </button>
                             )
                     }
@@ -62,14 +59,14 @@ const Pagination = ({
     );
 };
 Pagination.propTypes = {
-    items: [],
-    pageSize: 0,
-    currentPage: 0,
-    setPage: () => {},
-};
-Pagination.defaultProps = {
-    items: PropTypes.array,
+    items: PropTypes.arrayOf(PropTypes.object),
     pageSize: PropTypes.number,
     currentPage: PropTypes.number,
     setPage: PropTypes.func,
+};
+Pagination.defaultProps = {
+    items: [],
+    pageSize: 1,
+    currentPage: 1,
+    setPage: () => {},
 }; export default Pagination;

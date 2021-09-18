@@ -3,43 +3,40 @@ import { connect } from 'react-redux';
 import * as PropTypes from 'prop-types';
 import Table from '../table';
 import { detailRemovedFromTable, setCurrentPageDet } from '../../actions/property-actions';
+import { onSort } from '../../actions/cars-actions';
 
 class PropertyContainer extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            sortName: false,
-        };
-    }
-
-    onSortName = () => {
-        this.setState(({ sortName }) => ({
-            sortName: !sortName,
-        }));
-    }
+    sorting = (details, sortName) => {
+        switch (sortName) {
+        case 'name':
+            return details.sort((a, b) => a.key.toLowerCase().localeCompare(b.key.toLowerCase()));
+        case 'name-reverse':
+            return details.sort((a, b) => a.key.toLowerCase().localeCompare(b.key.toLowerCase())).reverse();
+        default:
+            return details;
+        }
+    };
 
     render() {
         const {
             details, pageSize,
             currentPage, onDelete,
-            setPage, logged,
+            setPage, logged, sortName, onSortElements,
         } = this.props;
-        const { sortName } = this.state;
-        const sortingName = [...details.sort((a, b) => a.key.toLowerCase().localeCompare(b.key.toLowerCase()))];
-        const sortNameReverse = [...details.sort((a, b) => a.key.toLowerCase().localeCompare(b.key.toLowerCase())).reverse()];
+        const visibleItems = this.sorting(details, sortName);
 
         return (
             <Table
-                items={sortName ? sortingName : sortNameReverse}
+                items={visibleItems}
                 pageSize={pageSize}
-                setCurrentPage={setPage}
+                setPage={setPage}
                 currentPage={currentPage}
                 onDelete={onDelete}
                 tableName="Перечень проперти"
                 tablePrice="Тип"
-                onSortName={() => this.onSortName}
                 sortName={sortName}
                 logged={logged}
+                onSortElements={onSortElements}
             />
         );
     }
@@ -50,25 +47,31 @@ const mapStateToProps = ({ detailPage, carsPage }) => ({
     pageSize: detailPage.pageSize,
     currentPage: detailPage.currentPage,
     logged: carsPage.logged,
+    sortName: carsPage.sortName,
 });
 const mapDispatchToProps = (dispatch) => ({
     onDelete: (id) => dispatch(detailRemovedFromTable(id)),
     setPage: (p) => dispatch(setCurrentPageDet(p)),
+    onSortElements: (sortType) => dispatch(onSort(sortType)),
 });
 PropertyContainer.propTypes = {
-    details: [],
-    pageSize: 0,
-    currentPage: 0,
-    onDelete: () => {},
-    setPage: () => {},
-    logged: false,
-};
-PropertyContainer.defaultProps = {
-    details: PropTypes.array,
+    details: PropTypes.arrayOf(PropTypes.object),
     pageSize: PropTypes.number,
     currentPage: PropTypes.number,
     onDelete: PropTypes.func,
     setPage: PropTypes.func,
     logged: PropTypes.bool,
+    onSortElements: PropTypes.func,
+    sortName: PropTypes.string,
+};
+PropertyContainer.defaultProps = {
+    details: [],
+    pageSize: 1,
+    currentPage: 1,
+    onDelete: () => {},
+    setPage: () => {},
+    logged: false,
+    onSortElements: () => {},
+    sortName: '',
 };
 export default connect(mapStateToProps, mapDispatchToProps)(PropertyContainer);

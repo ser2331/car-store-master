@@ -8,11 +8,11 @@ const Textarea = ({ label, name, ...rest }) => (
         <Field as="textarea" id={name} name={name} {...rest} />
     </div>
 );
-Textarea.propTypes = {
+Textarea.defaultProps = {
     label: '',
     name: '',
 };
-Textarea.defaultProps = {
+Textarea.propTypes = {
     label: PropTypes.string,
     name: PropTypes.string,
 };

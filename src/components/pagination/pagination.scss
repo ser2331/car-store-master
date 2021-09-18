@@ -2,29 +2,30 @@
   text-align: center;
 
   .pagination {
-    font-family: 'Libre Franklin', sans-serif;
-    display: inline-flex;
-    list-style-type: none;
+    display: inline-block;
+    padding: 0;
   }
 
-  .pagination button span.page-link {
-    margin: 0 5px;
-    border-radius: 5px;
-    transition: all 0.5s ease 0s;
-    text-decoration: none;
+  .pagination button {
+    color: black;
+    float: left;
+    border-radius: 50px;
+    border: none;
+    margin: 3px;
     cursor: pointer;
   }
 
-  .pagination button span.page-link:hover {
-    color: #0258FF;
+  .pagination button.active {
+    background-color: #FFB900;
+    color: white;
   }
 
-  .pagination button span.page-link:focus,
-  .pagination button.active span.page-link:hover,
-  .pagination button.active span.page-link {
-    padding: 3px;
-    color: #fff;
-    box-shadow: 0 0 15px #0258ff inset;
-    border: 1px solid #0258FF;
+  .pagination button.hover {
+    background-color: #FFB900;
+    color: white;
+  }
+
+  .pagination button:hover:not(.active) {
+    background-color: #ddd;
   }
 }

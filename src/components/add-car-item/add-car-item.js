@@ -1,14 +1,12 @@
 import React, { useEffect } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import {
     Field, FieldArray, Form, Formik,
 } from 'formik';
 import * as yup from 'yup';
 import * as PropTypes from 'prop-types';
-
 import './add-car-item.scss';
-
 import { useAlert } from 'react-alert';
 import {
     carAddedToTable,
@@ -19,7 +17,7 @@ import FormikControl from '../form-components/FormikControl';
 import CaseInput from '../case-input/case-input';
 
 const AddCarItem = ({
-    onAddedToTable, car, editCar, onRedoProp, onBack, details,
+    onAddedToTable, car, onRedoProp, onBack, details, redirect, editCar,
 }) => {
     const alert = useAlert();
     useEffect(() => () => {
@@ -42,10 +40,14 @@ const AddCarItem = ({
     });
     const onSubmit = (values) => {
         if (editCar) {
-            return onRedoProp({ ...values, id: car.id }) && alert.success('Свойства отредактированны');
+            return onRedoProp({ ...values, id: Math.random() }) && alert.success('Свойства отредактированны');
         }
         return onAddedToTable(values) && alert.success('Автомобиль добавлен');
     };
+
+    if (redirect) {
+        return <Redirect to="/" />;
+    }
 
     return (
         <div className="add-car-item">
@@ -73,23 +75,16 @@ const AddCarItem = ({
                                     Вернуться
                                 </button>
                             </NavLink>
-                            <button
-                                className="btn-save"
-                                type="submit"
-                                disabled={editCar ? initialValues === values : !isValid && !dirty}
-                                onClick={handleSubmit}
-                            >
-                                {
-                                    initialValues !== values
-                                        ? (
-                                            <NavLink className="active-btn" to="/">
-                                                <span>Сохранить</span>
-                                            </NavLink>
-                                        ) : (
-                                            <span>Сохранить</span>
-                                        )
-                                }
-                            </button>
+                            <div>
+                                <button
+                                    className="btn-save"
+                                    disabled={!isValid && !dirty}
+                                    onClick={handleSubmit}
+                                    type="button"
+                                >
+                                    Сохранить
+                                </button>
+                            </div>
                         </div>
                         <h3>Добавление товара</h3>
                         <FormikControl
@@ -144,7 +139,7 @@ const AddCarItem = ({
                                     </span>
                                     {(
                                         values.moreDetails.map((prop, index) => (
-                                            <div key={prop} className="added-prop">
+                                            <div key={Math.random()} className="added-prop">
                                                 <div className="left-field">
                                                     <div>
                                                         <button
@@ -203,9 +198,11 @@ const AddCarItem = ({
     );
 };
 const mapStateToProps = ({ carsPage, detailPage }) => ({
+    idCar: carsPage.oneCar.id,
     details: detailPage.details,
     car: carsPage.oneCar,
     editCar: carsPage.editCar,
+    redirect: carsPage.redirect,
 });
 const mapDispatchToProps = (dispatch) => ({
     onAddedToTable: (value) => dispatch(carAddedToTable(value)),
@@ -213,19 +210,21 @@ const mapDispatchToProps = (dispatch) => ({
     onBack: () => dispatch(onReturn()),
 });
 AddCarItem.propTypes = {
-    onAddedToTable: () => {},
-    car: {},
-    editCar: false,
-    onRedoProp: () => {},
-    onBack: () => {},
-    details: [],
-};
-AddCarItem.defaultProps = {
     onAddedToTable: PropTypes.func,
-    car: PropTypes.array,
+    car: PropTypes.objectOf(PropTypes.element),
     editCar: PropTypes.bool,
     onRedoProp: PropTypes.func,
     onBack: PropTypes.func,
-    details: PropTypes.array,
+    details: PropTypes.arrayOf(PropTypes.object),
+    redirect: PropTypes.bool,
+};
+AddCarItem.defaultProps = {
+    onAddedToTable: () => {},
+    car: {},
+    onRedoProp: () => {},
+    onBack: () => {},
+    details: [],
+    redirect: false,
+    editCar: false,
 };
 export default connect(mapStateToProps, mapDispatchToProps)(AddCarItem);

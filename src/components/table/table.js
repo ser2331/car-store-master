@@ -15,7 +15,7 @@ const Table = ({
     items, pageSize, currentPage,
     setPage, onCarSelected,
     onEditCart, onDelete, tableName,
-    tablePrice, tableData, onSortName, sortName, logged, editCar,
+    tablePrice, tableData, onSortElements, sortName, logged,
 }) => {
     const alert = useAlert();
     const itemsPage = items.slice((currentPage - 1) * pageSize, currentPage * pageSize);
@@ -36,58 +36,57 @@ const Table = ({
                     )
                     : <td>{key}</td>}
                 {price
-                    ? <td>{`${price.toLocaleString()} $`}</td> : <td>{value}</td>}
-                <td>{changeData}</td>
+                    ? (<td>{`${price.toLocaleString()} $`}</td>)
+                    : (<td>{value}</td>)}
+                {changeData
+                    ? (<td>{changeData}</td>)
+                    : null}
                 <td>
-                    {!editCar ? (
+                    { tableData ? (
                         <Link to="/add-item" onClick={() => onEditCart(id)}>
-                            <span>Ред.</span>
+                            <span className="edit">Ред.</span>
                         </Link>
                     ) : null}
                     {logged ? (
-                        <span>
-                            <button type="button" onClick={() => onDelete(id) && alert.success('Удалено')}>
-                                Удалить
-                            </button>
-                        </span>
-                    ) : (
-                        <span>
+                        <button className="delete" type="button" onClick={() => onDelete(id) && alert.success('Удалено')}>
                             Удалить
-                        </span>
+                        </button>
+                    ) : (
+                        <button className="delete disable" type="button" onClick={() => alert.error('Авторизуйтесь пожалуйста')}>
+                            Удалить
+                        </button>
                     )}
                 </td>
             </tr>
         );
     };
-
     return (
         <div>
             <Navbar />
             <div className="car-table">
                 {
-                    !editCar
-                        ? (
-                            <Link
-                                className="btn-add"
-                                to="/add-item"
-                            >
-                                <UseButton nameBut="Добавить товар" />
-                            </Link>
-                        ) : (
-                            <Link
-                                className="btn-add"
-                                to="/add-property"
-                            >
-                                <UseButton nameBut="Добавить проперти" />
-                            </Link>
-                        )
+                    tableName === 'Перечень товаров' ? (
+                        <Link
+                            className="btn-add"
+                            to="/add-item"
+                        >
+                            <UseButton nameBut="Добавить товар" />
+                        </Link>
+                    ) : (
+                        <Link
+                            className="btn-add"
+                            to="/add-property"
+                        >
+                            <UseButton nameBut="Добавить проперти" />
+                        </Link>
+                    )
                 }
                 {
                     items.length === 0 ? (
                         <div>
                             <div className="cars-run">
                                 {
-                                    onEditCart ? (
+                                    tableName === 'Перечень товаров' ? (
                                         <div className="cars-run-out">
                                             <h5>Добавьте новый автомобиль</h5>
                                             <img src={backCar} alt="car" />
@@ -105,20 +104,36 @@ const Table = ({
                         <div>
                             <table className="table">
                                 <thead>
-                                    <tr>
-                                        <th
-                                            className="vector-cont"
-                                            onClick={onSortName()}
-                                        >
+                                    <tr className="vector-cont">
+                                        <th onClick={sortName !== 'name' ? () => onSortElements('name') : () => onSortElements('name-reverse')}>
                                             <img
                                                 alt="v"
                                                 className="vector"
-                                                src={sortName ? v2 : v1}
+                                                src={sortName === 'name' ? v2 : v1}
                                             />
                                             {tableName}
                                         </th>
-                                        <th>{tablePrice}</th>
-                                        <th>{tableData}</th>
+                                        <th onClick={sortName !== 'price' ? () => onSortElements('price') : () => onSortElements('price-reverse')}>
+                                            <img
+                                                alt="v"
+                                                className="vector"
+                                                src={sortName === 'price' ? v2 : v1}
+                                            />
+                                            {tablePrice}
+                                        </th>
+                                        {
+                                            tableData
+                                                ? (
+                                                    <th onClick={sortName !== 'data' ? () => onSortElements('data') : () => onSortElements('data-reverse')}>
+                                                        <img
+                                                            alt="v"
+                                                            className="vector"
+                                                            src={sortName === 'data' ? v2 : v1}
+                                                        />
+                                                        {tableData}
+                                                    </th>
+                                                ) : null
+                                        }
                                         <th>Управление</th>
                                     </tr>
                                 </thead>
@@ -130,6 +145,7 @@ const Table = ({
                                 items={items}
                                 pageSize={pageSize}
                                 setPage={setPage}
+                                currentPage={currentPage}
                             />
                         </div>
                     )
@@ -140,27 +156,11 @@ const Table = ({
     );
 };
 Table.propTypes = {
-    tablePrice: 0,
-    tableData: 0,
-    onSortName: () => {},
-    sortName: '',
-    items: [],
-    pageSize: 0,
-    currentPage: 0,
-    onCarSelected: () => {},
-    onDelete: () => {},
-    setPage: () => {},
-    onEditCart: () => {},
-    tableName: '',
-    logged: false,
-    editCar: false,
-};
-Table.defaultProps = {
-    items: PropTypes.array,
-    tablePrice: PropTypes.number,
-    onSortName: PropTypes.func,
+    items: PropTypes.arrayOf(PropTypes.object),
+    tablePrice: PropTypes.string,
+    onSortElements: PropTypes.func,
     sortName: PropTypes.string,
-    tableData: PropTypes.number,
+    tableData: PropTypes.string,
     pageSize: PropTypes.number,
     currentPage: PropTypes.number,
     onCarSelected: PropTypes.func,
@@ -169,6 +169,20 @@ Table.defaultProps = {
     onEditCart: PropTypes.func,
     tableName: PropTypes.string,
     logged: PropTypes.bool,
-    editCar: PropTypes.bool,
+};
+Table.defaultProps = {
+    tablePrice: '',
+    tableData: '',
+    onSortElements: () => {},
+    sortName: '',
+    items: [],
+    pageSize: 1,
+    currentPage: 1,
+    onCarSelected: () => {},
+    onDelete: () => {},
+    setPage: () => {},
+    onEditCart: () => {},
+    tableName: '',
+    logged: false,
 };
 export default Table;

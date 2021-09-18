@@ -54,10 +54,10 @@ const mapStateToProps = ({ carsPage }) => ({
     logged: carsPage.logged,
 });
 App.propTypes = {
-    logged: false,
+    logged: PropTypes.bool,
 };
 App.defaultProps = {
-    logged: PropTypes.bool,
+    logged: false,
 };
 const mapDispatchToProps = () => ({});
 export default connect(mapStateToProps, mapDispatchToProps)(App);

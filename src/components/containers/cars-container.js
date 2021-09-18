@@ -5,29 +5,30 @@ import {
     carRemovedFromTable,
     oneCarLoaded,
     onEditCar,
+    onSort,
     setCurrentPage,
 } from '../../actions/cars-actions';
 import Table from '../table';
 
 class CarsContainer extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            sortName: false,
-        };
-    }
-
-    onSortName = () => {
-        this.setState(({ sortName }) => ({
-            sortName: !sortName,
-        }));
-    }
-
-    // onSortPrice = () => {
-    //     this.setState(({ sortPrice }) => ({
-    //         sortPrice: !sortPrice,
-    //     }));
-    // }
+    sorting = (cars, sortName) => {
+        switch (sortName) {
+        case 'name':
+            return cars.sort((a, b) => a.title.toLowerCase().localeCompare(b.title.toLowerCase()));
+        case 'name-reverse':
+            return cars.sort((a, b) => a.title.toLowerCase().localeCompare(b.title.toLowerCase())).reverse();
+        case 'price':
+            return cars.sort((a, b) => a.price - b.price);
+        case 'price-reverse':
+            return cars.sort((a, b) => a.price - b.price).reverse();
+        case 'data':
+            return cars.sort((a, b) => (a.data) - (b.data));
+        case 'data-reverse':
+            return cars.sort((a, b) => (a.data) - (b.data)).reverse();
+        default:
+            return cars;
+        }
+    };
 
     render() {
         const {
@@ -39,19 +40,15 @@ class CarsContainer extends Component {
             setPage,
             onEditCart,
             logged,
-            editCar,
+            onSortElements,
+            sortName,
         } = this.props;
-        const { sortName } = this.state;
-        const sortingName = [...cars.sort((a, b) => a.title.toLowerCase().localeCompare(b.title.toLowerCase()))];
-        const sortingNameReverse = [...cars.sort((a, b) => a.title.toLowerCase().localeCompare(b.title.toLowerCase())).reverse()];
-        // const sortingPrice = [...cars.sort((a, b) => a.price - b.price)];
-        // const sortingPriceReverse = [...cars.sort((a, b) => a.price - b.price).reverse()];
-
+        const visibleItems = this.sorting(cars, sortName);
         return (
             <Table
-                items={sortName ? sortingName : sortingNameReverse}
+                items={visibleItems}
                 pageSize={pageSize}
-                setCurrentPage={setPage}
+                setPage={setPage}
                 currentPage={currentPage}
                 onCarSelected={onCarSelected}
                 onEditCart={onEditCart}
@@ -59,11 +56,9 @@ class CarsContainer extends Component {
                 tableName="Перечень товаров"
                 tablePrice="Стоимость"
                 tableData="Дата изменения"
-                onSortName={() => this.onSortName}
-                // onSortPrice={() => this.onSortPrice}
-                sortName={sortName}
+                onSortElements={onSortElements}
                 logged={logged}
-                editCar={editCar}
+                sortName={sortName}
             />
         );
     }
@@ -74,27 +69,17 @@ const mapStateToProps = ({ carsPage }) => ({
     pageSize: carsPage.pageSize,
     currentPage: carsPage.currentPage,
     logged: carsPage.logged,
-    editCar: carsPage.editCar,
+    sortName: carsPage.sortName,
 });
 const mapDispatchToProps = (dispatch) => ({
     onDelete: (id) => dispatch(carRemovedFromTable(id)),
     onCarSelected: (id) => dispatch(oneCarLoaded(id)),
     setPage: (p) => dispatch(setCurrentPage(p)),
     onEditCart: (id) => dispatch(onEditCar(id)),
+    onSortElements: (sortType) => dispatch(onSort(sortType)),
 });
 CarsContainer.propTypes = {
-    cars: [],
-    pageSize: 0,
-    currentPage: 0,
-    onCarSelected: () => {},
-    onDelete: () => {},
-    setPage: () => {},
-    onEditCart: () => {},
-    logged: false,
-    editCar: true,
-};
-CarsContainer.defaultProps = {
-    cars: PropTypes.array,
+    cars: PropTypes.arrayOf(PropTypes.object),
     pageSize: PropTypes.number,
     currentPage: PropTypes.number,
     onCarSelected: PropTypes.func,
@@ -102,7 +87,20 @@ CarsContainer.defaultProps = {
     setPage: PropTypes.func,
     onEditCart: PropTypes.func,
     logged: PropTypes.bool,
-    editCar: PropTypes.bool,
+    onSortElements: PropTypes.func,
+    sortName: PropTypes.string,
+};
+CarsContainer.defaultProps = {
+    cars: [],
+    pageSize: 1,
+    currentPage: 1,
+    onCarSelected: () => {},
+    onDelete: () => {},
+    setPage: () => {},
+    onEditCart: () => {},
+    logged: false,
+    onSortElements: () => {},
+    sortName: '',
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(CarsContainer);

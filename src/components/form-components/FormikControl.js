@@ -21,9 +21,9 @@ const FormikControl = (props) => {
     }
 };
 FormikControl.propTypes = {
-    control: '',
+    control: PropTypes.string,
 };
 FormikControl.defaultProps = {
-    control: PropTypes.string,
+    control: '',
 };
 export default FormikControl;

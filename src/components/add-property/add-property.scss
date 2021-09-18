@@ -38,10 +38,11 @@
       border-radius: 4px;
       border: none;
       color: #FFFFFF;
+      cursor: pointer;
     }
-    .active-btn{
-      color: #FFFFFF;
-      text-decoration: none;
+
+    button:disabled {
+      opacity: 70%;
     }
   }
 
@@ -49,18 +50,19 @@
     font-size: 16px;
     line-height: 19px;
   }
-.name-prop{
-  input,select {
-    width: 255px;
-    height: 32px;
-    background: #FFFFFF;
-    box-sizing: border-box;
-    margin: 5px 0 10px;
-    border-radius: 4px;
-    border: 0.7px solid #E0E0E0;
-    -webkit-transition: 0.5s;
-    transition: 0.5s;
-    outline: none;
+
+  .name-prop {
+    input, select {
+      width: 255px;
+      height: 32px;
+      background: #FFFFFF;
+      box-sizing: border-box;
+      margin: 5px 0 10px;
+      border-radius: 4px;
+      border: 0.7px solid #E0E0E0;
+      -webkit-transition: 0.5s;
+      transition: 0.5s;
+      outline: none;
+    }
   }
-}
 }

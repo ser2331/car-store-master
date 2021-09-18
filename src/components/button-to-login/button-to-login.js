@@ -28,13 +28,13 @@ const mapDispatchToProps = (dispatch) => ({
     onExit: () => dispatch(onOutput()),
 });
 ButtonToLogin.propTypes = {
-    logName: '',
-    onExit: () => {},
-    logged: false,
-};
-ButtonToLogin.defaultProps = {
     logName: PropTypes.string,
     onExit: PropTypes.func,
     logged: PropTypes.bool,
+};
+ButtonToLogin.defaultProps = {
+    logName: '',
+    onExit: () => {},
+    logged: false,
 };
 export default connect(mapStateToProps, mapDispatchToProps)(ButtonToLogin);

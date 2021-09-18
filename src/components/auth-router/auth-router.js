@@ -8,14 +8,14 @@ const AuthRouter = ({ component, path, logged }) => (logged ? (
         component={component}
     />
 ) : <Redirect to="/logged" />);
+
 AuthRouter.propTypes = {
-    component: {},
-    path: '',
-    logged: false,
+    path: PropTypes.string,
+    component: PropTypes.elementType.isRequired,
+    logged: PropTypes.bool,
 };
 AuthRouter.defaultProps = {
-    path: PropTypes.string,
-    component: PropTypes.object,
-    logged: PropTypes.bool,
+    path: '',
+    logged: false,
 };
 export default AuthRouter;

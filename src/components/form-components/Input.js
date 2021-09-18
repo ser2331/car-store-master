@@ -20,15 +20,15 @@ const Input = ({
     </div>
 );
 Input.propTypes = {
-    touched: '',
-    errors: '',
-    label: '',
-    name: '',
-};
-Input.defaultProps = {
-    touched: PropTypes.string,
+    touched: PropTypes.bool,
     errors: PropTypes.string,
     label: PropTypes.string,
     name: PropTypes.string,
+};
+Input.defaultProps = {
+    touched: false,
+    errors: '',
+    label: '',
+    name: '',
 };
 export default Input;

@@ -36,11 +36,9 @@ const onReturn = () => ({
 const onOutput = () => ({
     type: 'ON_OUTPUT',
 });
-const onSortName = () => ({
-    type: 'ON_SORT_NAME',
-});
-const onSortNameReverse = () => ({
-    type: 'ON_SORT_NAME_REVERSE',
+const onSort = (sortType) => ({
+    type: 'ON_SORT',
+    payload: sortType,
 });
 
 export {
@@ -54,6 +52,5 @@ export {
     onRedoProperty,
     onReturn,
     onOutput,
-    onSortName,
-    onSortNameReverse,
+    onSort,
 };

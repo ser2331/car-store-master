@@ -10,9 +10,13 @@ const onAddedPropToTable = (value) => ({
     type: 'ADD_PROP',
     payload: value,
 });
+const onReturn = () => ({
+    type: 'RETURN',
+});
 
 export {
     detailRemovedFromTable,
     setCurrentPageDet,
     onAddedPropToTable,
+    onReturn,
 };

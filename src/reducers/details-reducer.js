@@ -1,6 +1,7 @@
 const DETAIL_REMOVED_FROM_TABLE = 'DETAIL_REMOVED_FROM_TABLE';
 const SET_CURRENT_PAGE_DET = 'SET_CURRENT_PAGE_DET';
 const ADD_PROP = 'ADD_PROP';
+const RETURN = 'RETURN';
 
 const initialState = {
     details: [
@@ -10,6 +11,7 @@ const initialState = {
     ],
     pageSize: 5,
     currentPage: 1,
+    redirect: false,
 };
 
 const DetailsReducer = (state = initialState, action) => {
@@ -40,6 +42,13 @@ const DetailsReducer = (state = initialState, action) => {
                 ...state.details,
                 newItem,
             ],
+            redirect: true,
+        };
+    }
+    case RETURN: {
+        return {
+            ...state,
+            redirect: false,
         };
     }
 

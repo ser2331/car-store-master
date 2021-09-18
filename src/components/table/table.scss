@@ -5,6 +5,22 @@
   border-radius: 10px;
   padding: 3% 50px 3%;
 
+  .edit {
+    color: green;
+  }
+
+  .delete {
+    background-color: #FF0000;
+    border: none;
+    border-radius: 30px;
+    color: #FEFEFE;
+    cursor: pointer;
+  }
+
+  .disable {
+    opacity: 20%;
+  }
+
   .cars-run {
 
     .cars-run-out {

@@ -8,11 +8,11 @@ import image from '../layers/unnamed.jpg';
 import { onReturn } from '../../actions/cars-actions';
 import './car-item.scss';
 
-const CarItem = ({ car, onExit }) => {
-    const {
-        title, price, file, description, moreDetails,
-    } = car;
+const CarItem = ({
+    title, price, file, description, moreDetails, onExit,
+}) => {
     const alert = useAlert();
+
     useEffect(() => () => {
         onExit();
     }, [onExit]);
@@ -75,17 +75,28 @@ const CarItem = ({ car, onExit }) => {
     );
 };
 const mapStateToProps = ({ carsPage }) => ({
-    car: carsPage.oneCar,
+    title: carsPage.oneCar.title,
+    price: carsPage.oneCar.price,
+    file: carsPage.oneCar.file,
+    description: carsPage.oneCar.description,
+    moreDetails: carsPage.oneCar.moreDetails,
 });
 const mapDispatchToProps = (dispatch) => ({
     onExit: () => dispatch(onReturn()),
 });
 CarItem.propTypes = {
-    car: {},
-    onExit: () => {},
+    title: PropTypes.string,
+    price: PropTypes.number.isRequired,
+    file: PropTypes.string,
+    description: PropTypes.string,
+    moreDetails: PropTypes.arrayOf(PropTypes.object),
+    onExit: PropTypes.func,
 };
 CarItem.defaultProps = {
-    car: PropTypes.array,
-    onExit: PropTypes.func,
+    title: '',
+    file: '',
+    description: '',
+    moreDetails: [],
+    onExit: () => {},
 };
 export default connect(mapStateToProps, mapDispatchToProps)(CarItem);

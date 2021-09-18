@@ -20,7 +20,7 @@ const CaseInput = (props) => {
                             <div>
                                 {(
                                     values.map((prop, index) => (
-                                        <div key={prop} className=" add-prop-field">
+                                        <div key={Math.random()} className=" add-prop-field">
                                             <div>
                                                 <FormikControl
                                                     control="input"
@@ -68,15 +68,15 @@ const CaseInput = (props) => {
     }
 };
 CaseInput.propTypes = {
-    use: '',
-    value: '',
-    values: '',
-    dropValue: '',
-};
-CaseInput.defaultProps = {
     use: PropTypes.string,
     value: PropTypes.string,
-    values: PropTypes.string,
+    values: PropTypes.arrayOf(PropTypes.object),
     dropValue: PropTypes.string,
+};
+CaseInput.defaultProps = {
+    use: '',
+    value: '',
+    values: [],
+    dropValue: '',
 };
 export default CaseInput;

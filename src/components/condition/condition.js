@@ -10,11 +10,11 @@ const Condition = ({ touched, errors }) => {
     return <sup className={classNames}>* </sup>;
 };
 Condition.propTypes = {
-    touched: '',
-    errors: '',
+    touched: PropTypes.bool,
+    errors: PropTypes.string,
 };
 Condition.defaultProps = {
-    touched: PropTypes.string,
-    errors: PropTypes.string,
+    touched: false,
+    errors: '',
 };
 export default Condition;

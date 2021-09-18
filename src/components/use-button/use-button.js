@@ -3,11 +3,11 @@ import './use-button.scss';
 import * as PropTypes from 'prop-types';
 
 const UseButton = ({
-    nameBut, onClickButton, disabled,
+    nameBut, onClickButton, disabled, isSubmit,
 }) => (
     <button
         className="btn"
-        type="button"
+        type={isSubmit ? 'submit' : 'button'}
         disabled={disabled}
         onClick={onClickButton}
     >
@@ -15,13 +15,15 @@ const UseButton = ({
     </button>
 );
 UseButton.propTypes = {
-    nameBut: '',
-    onClickButton: () => {},
-    disabled: false,
-};
-UseButton.defaultProps = {
     nameBut: PropTypes.string,
     onClickButton: PropTypes.func,
     disabled: PropTypes.bool,
+    isSubmit: PropTypes.bool,
+};
+UseButton.defaultProps = {
+    nameBut: '',
+    onClickButton: () => {},
+    disabled: false,
+    isSubmit: false,
 };
 export default UseButton;

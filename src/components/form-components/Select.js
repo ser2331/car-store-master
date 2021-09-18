@@ -16,18 +16,18 @@ const Select = ({
         </Field>
     </div>
 );
-Select.propTypes = {
+Select.defaultProps = {
     touched: '',
     errors: '',
     label: '',
     name: '',
     options: [],
 };
-Select.defaultProps = {
+Select.propTypes = {
     touched: PropTypes.string,
     errors: PropTypes.string,
     label: PropTypes.string,
     name: PropTypes.string,
-    options: PropTypes.array,
+    options: PropTypes.arrayOf(PropTypes.object),
 };
 export default Select;

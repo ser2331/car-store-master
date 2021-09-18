@@ -16,6 +16,7 @@ const ON_EDIT_CAR = 'ON_EDIT_CAR';
 const ON_REDO_PROPERTY = 'ON_REDO_PROPERTY';
 const RETURN = 'RETURN';
 const ON_OUTPUT = 'ON_OUTPUT';
+const ON_SORT = 'ON_SORT';
 
 const initialState = {
     cars: [
@@ -108,11 +109,13 @@ const initialState = {
             password: 'admin',
         },
     ],
-    nameUser: {},
+    nameUser: '',
     logged: false,
-    editCar: false,
     pageSize: 5,
     currentPage: 1,
+    editCar: false,
+    redirect: false,
+    sortName: '',
 };
 const CarsReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -128,7 +131,7 @@ const CarsReducer = (state = initialState, action) => {
         const today = now.format('DD.MM.YY');
         const numPrice = Number(action.payload.price);
         const newItem = {
-            id: state.cars.length + 1,
+            id: Math.random(),
             title: action.payload.title,
             changeData: today,
             file: action.payload.file,
@@ -142,6 +145,7 @@ const CarsReducer = (state = initialState, action) => {
                 ...state.cars,
                 newItem,
             ],
+            redirect: true,
         };
     }
     case ON_REDO_PROPERTY: {
@@ -161,7 +165,7 @@ const CarsReducer = (state = initialState, action) => {
         return {
             ...state,
             cars: [...newArrayCars, redoItem],
-            editCar: false,
+            redirect: true,
         };
     }
     case CAR_REMOVED_FROM_TABLE: {
@@ -218,6 +222,8 @@ const CarsReducer = (state = initialState, action) => {
         return {
             ...state,
             oneCar: {},
+            editCar: false,
+            redirect: false,
         };
     }
     case ON_OUTPUT:
@@ -225,6 +231,12 @@ const CarsReducer = (state = initialState, action) => {
             ...state,
             logged: false,
         };
+    case ON_SORT:
+        return {
+            ...state,
+            sortName: action.payload,
+        };
+
     default:
         return state;
     }

@@ -36,19 +36,19 @@ function RadioButtons({
         </div>
     );
 }
-RadioButtons.propTypes = {
-    touched: '',
+RadioButtons.defaultProps = {
+    touched: false,
     errors: '',
     label: '',
     name: '',
     options: [],
 };
-RadioButtons.defaultProps = {
-    touched: PropTypes.string,
+RadioButtons.propTypes = {
+    touched: PropTypes.bool,
     errors: PropTypes.string,
     label: PropTypes.string,
     name: PropTypes.string,
-    options: PropTypes.array,
+    options: PropTypes.arrayOf(PropTypes.object),
 };
 
 export default RadioButtons;

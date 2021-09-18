@@ -20,9 +20,7 @@ const Registration = ({ onSubmit, users }) => {
         confirmPassword: yup.string().oneOf([yup.ref('password')], 'Пороли не совпадают').required('*'),
         email: yup.string().email('Введите верный email').required('Введите верный email'),
     });
-    const submit = (values) => {
-        onSubmit(values) && alert.success('Регистрация успешна');
-    };
+    const submit = (values) => onSubmit(values) && alert.success('Регистрация успешна');
     return (
         <Formik
             initialValues={{
@@ -99,7 +97,7 @@ const Registration = ({ onSubmit, users }) => {
                                 disabled={!isValid && !dirty}
                                 onClick={handleSubmit}
                                 nameBut="Зарегистрироваться"
-                                type="submit"
+                                isSubmit
                             />
                         </div>
                         <div className="return">
@@ -118,11 +116,11 @@ const mapDispatchToProps = (dispatch) => ({
     onSubmit: (value) => dispatch(onRegSelected(value)),
 });
 Registration.propTypes = {
-    users: [],
-    onSubmit: () => {},
+    users: PropTypes.arrayOf(PropTypes.object),
+    onSubmit: PropTypes.func,
 };
 Registration.defaultProps = {
-    users: PropTypes.array,
-    onSubmit: PropTypes.func,
+    users: [],
+    onSubmit: () => () => {},
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Registration);
