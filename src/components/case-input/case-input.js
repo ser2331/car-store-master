@@ -20,7 +20,8 @@ const CaseInput = (props) => {
                             <div>
                                 {(
                                     values.map((prop, index) => (
-                                        <div key={Math.random()} className=" add-prop-field">
+                                        // eslint-disable-next-line react/no-array-index-key
+                                        <div key={index} className=" add-prop-field">
                                             <div>
                                                 <FormikControl
                                                     control="input"

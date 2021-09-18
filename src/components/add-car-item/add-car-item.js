@@ -139,7 +139,8 @@ const AddCarItem = ({
                                     </span>
                                     {(
                                         values.moreDetails.map((prop, index) => (
-                                            <div key={Math.random()} className="added-prop">
+                                            // eslint-disable-next-line react/no-array-index-key
+                                            <div key={index} className="added-prop">
                                                 <div className="left-field">
                                                     <div>
                                                         <button
