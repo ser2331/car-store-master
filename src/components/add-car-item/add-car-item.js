@@ -40,7 +40,7 @@ const AddCarItem = ({
     });
     const onSubmit = (values) => {
         if (editCar) {
-            return onRedoProp({ ...values, id: Math.random() }) && alert.success('Свойства отредактированны');
+            return onRedoProp({ ...values, id: car.id }) && alert.success('Свойства отредактированны');
         }
         return onAddedToTable(values) && alert.success('Автомобиль добавлен');
     };
