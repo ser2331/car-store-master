@@ -6,11 +6,28 @@ const Pagination = ({
     items, pageSize, currentPage, setPage,
 }) => {
     const totalCount = items.length;
+
     const pagesCount = Math.ceil(totalCount / pageSize);
-    const pages = [];
-    for (let i = 1; i <= pagesCount; i += 1) {
-        pages.push(i);
+
+    let startPage;
+    let endPage;
+
+    if (pagesCount <= 10) {
+        startPage = 1;
+        endPage = pagesCount;
+    } else if (currentPage <= 6) {
+        startPage = 1;
+        endPage = 10;
+    } else if (currentPage + 4 >= pagesCount) {
+        startPage = pagesCount - 9;
+        endPage = pagesCount;
+    } else {
+        startPage = currentPage - 5;
+        endPage = currentPage + 4;
     }
+
+    const pages = [...Array((endPage + 1) - startPage).keys()].map((i) => startPage + i);
+
     return (
         <div className="demo">
             <nav className="pagination-outer">
@@ -28,7 +45,18 @@ const Pagination = ({
                                 </button>
                             )
                     }
-
+                    {
+                        currentPage >= 10
+                            ? (
+                                <button
+                                    type="button"
+                                    className="page-link"
+                                    onClick={() => setPage(1)}
+                                >
+                                    First
+                                </button>
+                            ) : null
+                    }
                     {
                         pages.map((page) => (
                             <button
@@ -42,7 +70,20 @@ const Pagination = ({
                         ))
                     }
                     {
-                        currentPage >= pages.length ? null
+                        currentPage >= pagesCount - 5
+                            ? null
+                            : (
+                                <button
+                                    type="button"
+                                    className="page-link"
+                                    onClick={() => setPage(pagesCount)}
+                                >
+                                    Last
+                                </button>
+                            )
+                    }
+                    {
+                        currentPage === endPage ? null
                             : (
                                 <button
                                     type="button"
