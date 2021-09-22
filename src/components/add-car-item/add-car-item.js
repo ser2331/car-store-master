@@ -212,7 +212,8 @@ const mapDispatchToProps = (dispatch) => ({
 });
 AddCarItem.propTypes = {
     onAddedToTable: PropTypes.func,
-    car: PropTypes.objectOf(PropTypes.element),
+    // eslint-disable-next-line react/forbid-prop-types
+    car: PropTypes.object,
     editCar: PropTypes.bool,
     onRedoProp: PropTypes.func,
     onBack: PropTypes.func,

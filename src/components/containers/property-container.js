@@ -21,7 +21,9 @@ class PropertyContainer extends Component {
         const {
             details, pageSize,
             currentPage, onDelete,
-            setPage, logged, sortName, onSortElements,
+            setPage, logged, sortName,
+            onSortElements, isFetching,
+            isError,
         } = this.props;
         const visibleItems = this.sorting(details, sortName);
 
@@ -37,6 +39,8 @@ class PropertyContainer extends Component {
                 sortName={sortName}
                 logged={logged}
                 onSortElements={onSortElements}
+                isFetching={isFetching}
+                isError={isError}
             />
         );
     }
@@ -48,6 +52,8 @@ const mapStateToProps = ({ detailPage, carsPage }) => ({
     currentPage: detailPage.currentPage,
     logged: carsPage.logged,
     sortName: carsPage.sortName,
+    isError: carsPage.isError,
+    isFetching: carsPage.isFetching,
 });
 const mapDispatchToProps = (dispatch) => ({
     onDelete: (id) => dispatch(detailRemovedFromTable(id)),
@@ -63,6 +69,8 @@ PropertyContainer.propTypes = {
     logged: PropTypes.bool,
     onSortElements: PropTypes.func,
     sortName: PropTypes.string,
+    isError: PropTypes.bool.isRequired,
+    isFetching: PropTypes.bool.isRequired,
 };
 PropertyContainer.defaultProps = {
     details: [],

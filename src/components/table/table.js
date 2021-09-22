@@ -15,7 +15,7 @@ const Table = ({
     items, pageSize, currentPage,
     setPage, onCarSelected,
     onEditCart, onDelete, tableName,
-    tablePrice, tableData, onSortElements, sortName, logged,
+    tablePrice, tableData, onSortElements, sortName, logged, isError, isFetching,
 }) => {
     const alert = useAlert();
     const itemsPage = items.slice((currentPage - 1) * pageSize, currentPage * pageSize);
@@ -84,21 +84,28 @@ const Table = ({
                 {
                     items.length === 0 ? (
                         <div>
-                            <div className="cars-run">
-                                {
-                                    tableName === 'Перечень товаров' ? (
-                                        <div className="cars-run-out">
-                                            <h5>Добавьте новый автомобиль</h5>
-                                            <img src={backCar} alt="car" />
+                            {
+                                !isFetching && !isError
+                                    ? (
+                                        <div className="cars-run">
+                                            {
+                                                tableName === 'Перечень товаров' ? (
+                                                    <div className="cars-run-out">
+                                                        <h5>Добавьте новый автомобиль</h5>
+                                                        <img src={backCar} alt="car" />
+                                                    </div>
+                                                ) : (
+                                                    <div className="cars-run-out">
+                                                        <h5>Добавьте новое свойство</h5>
+                                                        <img src={backProp} alt="car" />
+                                                    </div>
+                                                )
+                                            }
                                         </div>
-                                    ) : (
-                                        <div className="cars-run-out">
-                                            <h5>Добавьте новое свойство</h5>
-                                            <img src={backProp} alt="car" />
-                                        </div>
-                                    )
-                                }
-                            </div>
+                                    ) : null
+                            }
+                            {isFetching ? (<div>Loading...</div>) : null}
+                            {isError ? (<div>Что-то пошло не так...</div>) : null}
                         </div>
                     ) : (
                         <div>
@@ -169,6 +176,8 @@ Table.propTypes = {
     onEditCart: PropTypes.func,
     tableName: PropTypes.string,
     logged: PropTypes.bool,
+    isError: PropTypes.bool.isRequired,
+    isFetching: PropTypes.bool.isRequired,
 };
 Table.defaultProps = {
     tablePrice: '',

@@ -40,6 +40,18 @@ const onSort = (sortType) => ({
     type: 'ON_SORT',
     payload: sortType,
 });
+const setAllCars = (cars) => ({
+    type: 'SET_ALL_CARS',
+    payload: cars,
+});
+const onError = (error) => ({
+    type: 'ERROR',
+    payload: error,
+});
+const toggleIsFetching = (isFetching) => ({
+    type: 'IS_FETCHING',
+    isFetching,
+});
 
 export {
     onLogSelected,
@@ -53,4 +65,7 @@ export {
     onReturn,
     onOutput,
     onSort,
+    setAllCars,
+    onError,
+    toggleIsFetching,
 };
