@@ -4,41 +4,40 @@ import * as PropTypes from 'prop-types';
 import {
     carRemovedFromTable,
     oneCarLoaded,
-    onEditCar, onError,
-    onSort, setAllCars,
-    setCurrentPage, toggleIsFetching,
+    onEditCar, onSort, setCurrentPage,
+    toggleIsFetching,
 } from '../../actions/cars-actions';
 import Table from '../table';
-import { getAllCars, transformCarsData } from '../../services/services';
+// import { getAllCars, transformCarsData } from '../../services/services';
 
 class CarsContainer extends Component {
-    componentDidMount() {
-        const { dispatch, isFetch, cars } = this.props;
-        if (!cars.length) {
-            isFetch(true);
-            getAllCars()
-                .then((response) => dispatch(setAllCars(transformCarsData(response.data))))
-                .then(() => isFetch(false))
-                .catch((error) => dispatch(onError(error)));
-        }
-    }
+    // componentDidMount() {
+    //     const { dispatch, isFetch, cars } = this.props;
+    //     if (!cars.length) {
+    //         // isFetch(true);
+    //         getAllCars()
+    //             .then((response) => dispatch(setAllCars(transformCarsData(response.data))))
+    //             .then(() => isFetch(false))
+    //             .catch((error) => dispatch(onError(error)));
+    //     }
+    // }
 
     sorting = (cars, sortName) => {
         switch (sortName) {
-        case 'name':
-            return cars.sort((a, b) => a.title.toLowerCase().localeCompare(b.title.toLowerCase()));
-        case 'name-reverse':
-            return cars.sort((a, b) => a.title.toLowerCase().localeCompare(b.title.toLowerCase())).reverse();
-        case 'price':
-            return cars.sort((a, b) => a.price - b.price);
-        case 'price-reverse':
-            return cars.sort((a, b) => a.price - b.price).reverse();
-        case 'data':
-            return cars.sort((a, b) => (a.changeData) - (b.changeData));
-        case 'data-reverse':
-            return cars.sort((a, b) => (a.changeData) - (b.changeData)).reverse();
-        default:
-            return cars;
+            case 'name':
+                return cars.sort((a, b) => a.title.toLowerCase().localeCompare(b.title.toLowerCase()));
+            case 'name-reverse':
+                return cars.sort((a, b) => a.title.toLowerCase().localeCompare(b.title.toLowerCase())).reverse();
+            case 'price':
+                return cars.sort((a, b) => a.price - b.price);
+            case 'price-reverse':
+                return cars.sort((a, b) => a.price - b.price).reverse();
+            case 'data':
+                return cars.sort((a, b) => (a.changeData) - (b.changeData));
+            case 'data-reverse':
+                return cars.sort((a, b) => (a.changeData) - (b.changeData)).reverse();
+            default:
+                return cars;
         }
     };
 
