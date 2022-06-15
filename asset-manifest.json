@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/car-store-master/static/css/main.7aa5aefd.chunk.css",
-    "main.js": "/car-store-master/static/js/main.24e3300b.chunk.js",
-    "main.js.map": "/car-store-master/static/js/main.24e3300b.chunk.js.map",
+    "main.css": "/car-store-master/static/css/main.988eaddf.chunk.css",
+    "main.js": "/car-store-master/static/js/main.1d6459dc.chunk.js",
+    "main.js.map": "/car-store-master/static/js/main.1d6459dc.chunk.js.map",
     "runtime-main.js": "/car-store-master/static/js/runtime-main.a7ba2358.js",
     "runtime-main.js.map": "/car-store-master/static/js/runtime-main.a7ba2358.js.map",
-    "static/js/2.f7db2362.chunk.js": "/car-store-master/static/js/2.f7db2362.chunk.js",
-    "static/js/2.f7db2362.chunk.js.map": "/car-store-master/static/js/2.f7db2362.chunk.js.map",
+    "static/js/2.773619bd.chunk.js": "/car-store-master/static/js/2.773619bd.chunk.js",
+    "static/js/2.773619bd.chunk.js.map": "/car-store-master/static/js/2.773619bd.chunk.js.map",
     "index.html": "/car-store-master/index.html",
-    "static/css/main.7aa5aefd.chunk.css.map": "/car-store-master/static/css/main.7aa5aefd.chunk.css.map",
-    "static/js/2.f7db2362.chunk.js.LICENSE.txt": "/car-store-master/static/js/2.f7db2362.chunk.js.LICENSE.txt",
+    "static/css/main.988eaddf.chunk.css.map": "/car-store-master/static/css/main.988eaddf.chunk.css.map",
+    "static/js/2.773619bd.chunk.js.LICENSE.txt": "/car-store-master/static/js/2.773619bd.chunk.js.LICENSE.txt",
     "static/media/Maserati_GranTurismo.322570eb.jpg": "/car-store-master/static/media/Maserati_GranTurismo.322570eb.jpg",
     "static/media/audi.c4a8c176.jpg": "/car-store-master/static/media/audi.c4a8c176.jpg",
     "static/media/cars-dodge-challenger.28b705f5.jpg": "/car-store-master/static/media/cars-dodge-challenger.28b705f5.jpg",
@@ -20,8 +20,8 @@
   },
   "entrypoints": [
     "static/js/runtime-main.a7ba2358.js",
-    "static/js/2.f7db2362.chunk.js",
-    "static/css/main.7aa5aefd.chunk.css",
-    "static/js/main.24e3300b.chunk.js"
+    "static/js/2.773619bd.chunk.js",
+    "static/css/main.988eaddf.chunk.css",
+    "static/js/main.1d6459dc.chunk.js"
   ]
 }
