@@ -1,23 +1,26 @@
-import { Link } from 'react-router-dom';
+import {
+    Link,
+    useLocation
+} from "react-router-dom";
 import React from 'react';
-
-import './navbar.scss';
 import ButtonToLogin from '../button-to-login';
 
+import './navbar.scss';
+
 const Navbar = () => {
-    const url = window.location;
+    const location = useLocation();
     const classNames = 'noPressed';
     return (
         <div className="nav">
             <div className="nav-left">
                 <Link
-                    className={url.pathname === '/' ? `${classNames} pressed` : classNames}
+                    className={location.pathname === '/' ? `${classNames} pressed` : classNames}
                     to="/"
                 >
                     <span>Листинг Товаров</span>
                 </Link>
                 <Link
-                    className={url.pathname === '/details' ? `${classNames} pressed` : classNames}
+                    className={location.pathname === '/details' ? `${classNames} pressed` : classNames}
                     to="/details"
                 >
                     <span>Листинг Проперти</span>

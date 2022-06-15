@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { HashRouter as Router } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { transitions, positions, Provider as AlertProvider } from 'react-alert';
 import AlertTemplate from 'react-alert-template-basic';
@@ -16,7 +16,7 @@ const options = {
 };
 ReactDOM.render(
     <Provider store={store}>
-        <Router>
+        <Router hashType="slash">
             <AlertProvider template={AlertTemplate} {...options}>
                 <App />
             </AlertProvider>
