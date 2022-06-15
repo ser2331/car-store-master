@@ -18,7 +18,7 @@
       "sizes": "512x512"
     }
   ],
-  "start_url": "https://ser2331.github.io/car-store-master/",
+  "start_url": "/*",
   "display": "standalone",
   "theme_color": "#000000",
   "background_color": "#ffffff"
