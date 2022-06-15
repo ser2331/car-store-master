@@ -1,0 +1,27 @@
+{
+  "files": {
+    "main.css": "/car-store-master/static/css/main.7aa5aefd.chunk.css",
+    "main.js": "/car-store-master/static/js/main.f96cc895.chunk.js",
+    "main.js.map": "/car-store-master/static/js/main.f96cc895.chunk.js.map",
+    "runtime-main.js": "/car-store-master/static/js/runtime-main.a7ba2358.js",
+    "runtime-main.js.map": "/car-store-master/static/js/runtime-main.a7ba2358.js.map",
+    "static/js/2.d701c4e3.chunk.js": "/car-store-master/static/js/2.d701c4e3.chunk.js",
+    "static/js/2.d701c4e3.chunk.js.map": "/car-store-master/static/js/2.d701c4e3.chunk.js.map",
+    "index.html": "/car-store-master/index.html",
+    "static/css/main.7aa5aefd.chunk.css.map": "/car-store-master/static/css/main.7aa5aefd.chunk.css.map",
+    "static/js/2.d701c4e3.chunk.js.LICENSE.txt": "/car-store-master/static/js/2.d701c4e3.chunk.js.LICENSE.txt",
+    "static/media/Maserati_GranTurismo.322570eb.jpg": "/car-store-master/static/media/Maserati_GranTurismo.322570eb.jpg",
+    "static/media/audi.c4a8c176.jpg": "/car-store-master/static/media/audi.c4a8c176.jpg",
+    "static/media/cars-dodge-challenger.28b705f5.jpg": "/car-store-master/static/media/cars-dodge-challenger.28b705f5.jpg",
+    "static/media/propCar.43d99c5a.jpg": "/car-store-master/static/media/propCar.43d99c5a.jpg",
+    "static/media/singer.08c6d87a.jpg": "/car-store-master/static/media/singer.08c6d87a.jpg",
+    "static/media/tachka.f40e4260.jpg": "/car-store-master/static/media/tachka.f40e4260.jpg",
+    "static/media/unnamed.32721558.jpg": "/car-store-master/static/media/unnamed.32721558.jpg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.a7ba2358.js",
+    "static/js/2.d701c4e3.chunk.js",
+    "static/css/main.7aa5aefd.chunk.css",
+    "static/js/main.f96cc895.chunk.js"
+  ]
+}
