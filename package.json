@@ -2,6 +2,7 @@
   "name": "car-store",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://ser2331.github.io/car-store-master/",
   "dependencies": {
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.2.7",
@@ -9,6 +10,7 @@
     "axios": "^0.21.4",
     "formik": "^2.2.9",
     "g": "^2.0.1",
+    "gh-pages": "^4.0.0",
     "moment": "^2.29.1",
     "node-sass": "^6.0",
     "prop-types": "^15.7.2",
@@ -22,7 +24,6 @@
     "redux": "^4.1.0",
     "request": "^2.88.2",
     "web-vitals": "^1.1.2",
-    "yap": "0.0.2",
     "yup": "^0.32.9"
   },
   "scripts": {
@@ -30,7 +31,9 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "lint": "eslint src"
+    "lint": "eslint src",
+    "predeploy":  "react-scripts builf",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
