@@ -1,0 +1,30 @@
+@import "../variables/variables";
+@import "../fonts/fonts";
+
+$mobile: 360px;
+$tablet: 768px;
+$desktop: 1152px;
+$large: 1440px;
+
+@mixin media($size) {
+    @media (min-width: $size) {
+        @content;
+    }
+}
+
+@mixin fontTitle1 {
+    @include media($mobile) {
+        font: 300 18px/26px 'MRoboto Light', sans-serif;
+    }
+    @include media($desktop) {
+        font: 300 22px/26px 'Roboto Light', sans-serif;
+    }
+}
+@mixin inputLabel1 {
+    @include media($mobile) {
+        font: 700 16px/20px 'MRoboto Bold', sans-serif;
+    }
+    @include media($desktop) {
+        font: 700 12px/14px 'Roboto Bold', sans-serif;
+    }
+}

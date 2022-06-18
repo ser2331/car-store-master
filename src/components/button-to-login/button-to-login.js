@@ -3,25 +3,28 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import './button-to-login.scss';
 import * as PropTypes from 'prop-types';
+import Types from "../../services/types";
 import { onOutput } from '../../actions/cars-actions';
 
-const ButtonToLogin = ({ logged, onExit, logName }) => (
+const { routingMap } = Types;
+
+const ButtonToLogin = ({ login, onExit, logName }) => (
     <div className="button-to-login">
-        {logged ? (
+        {login ? (
             <div className="btn-container">
                 <div>{logName}</div>
                 <button type="button" className="btn-to-log" onClick={() => onExit()}>Выйти</button>
             </div>
         )
             : (
-                <Link to="/logged">
+                <Link to={routingMap.get('login').path}>
                     <button type="button" className="btn-to-log">Login please</button>
                 </Link>
             )}
     </div>
 );
 const mapStateToProps = ({ carsPage }) => ({
-    logged: carsPage.logged,
+    login: carsPage.login,
     logName: carsPage.nameUser,
 });
 const mapDispatchToProps = (dispatch) => ({
@@ -30,11 +33,11 @@ const mapDispatchToProps = (dispatch) => ({
 ButtonToLogin.propTypes = {
     logName: PropTypes.string,
     onExit: PropTypes.func,
-    logged: PropTypes.bool,
+    login: PropTypes.bool,
 };
 ButtonToLogin.defaultProps = {
     logName: '',
     onExit: () => {},
-    logged: false,
+    login: false,
 };
 export default connect(mapStateToProps, mapDispatchToProps)(ButtonToLogin);

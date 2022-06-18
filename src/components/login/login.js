@@ -1,17 +1,22 @@
-import React from 'react';
-import { Link, Redirect } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { Link, useHistory } from 'react-router-dom';
 import * as yup from 'yup';
 import { Form, Formik } from 'formik';
 import { connect } from 'react-redux';
 import { useAlert } from 'react-alert';
 import * as PropTypes from 'prop-types';
+import Types from "../../services/types";
 import UseButton from '../use-button';
 import { onLogSelected } from '../../actions/cars-actions';
 import FormikControl from '../form-components/FormikControl';
-import './logged.scss';
 
-const Logged = ({ logged, onSubmit }) => {
+import './login.scss';
+
+const { routingMap } = Types;
+
+const Login = ({ login, onSubmit }) => {
     const alert = useAlert();
+    const history = useHistory();
     const validationsSchemaLog = yup.object().shape({
         password: yup.string().typeError('string').required('*'),
         email: yup.string().email('Введите верный email').required('*'),
@@ -19,9 +24,11 @@ const Logged = ({ logged, onSubmit }) => {
 
     const submit = (values) => onSubmit(values) && alert.success('Авторизация успешна');
 
-    if (logged) {
-        return <Redirect to="/" />;
-    }
+    useEffect(() => {
+        if (login) {
+            history.push(routingMap.get('location').path)
+        }
+    }, [login, history]);
 
     return (
         <Formik
@@ -40,15 +47,17 @@ const Logged = ({ logged, onSubmit }) => {
                 handleSubmit,
                 dirty,
             }) => (
-                <div className="logged">
+                <div className="Login container-registration">
                     <Form onSubmit={handleSubmit}>
-                        <h3>Вход</h3>
+                        <h3 className="Login__title">Вход</h3>
                         <div>
                             <FormikControl
                                 placeholder="Введите E-mail"
                                 control="input"
                                 name="email"
                                 label="Логин"
+                                labelStyle="label"
+                                className="Registration-field"
                                 touched={touched.email}
                                 errors={errors.email}
                             />
@@ -57,11 +66,13 @@ const Logged = ({ logged, onSubmit }) => {
                                 name="password"
                                 placeholder="Введите пароль"
                                 label="Пароль"
+                                labelStyle="label"
+                                className="Registration-field"
                                 touched={touched.password}
                                 errors={errors.password}
                             />
                         </div>
-                        <div className="btn-login">
+                        <div className="Login__btn-login">
                             <UseButton
                                 disabled={!isValid && !dirty}
                                 onClick={handleSubmit}
@@ -69,8 +80,8 @@ const Logged = ({ logged, onSubmit }) => {
                                 isSubmit
                             />
                         </div>
-                        <div className="go-to-reg">
-                            <Link to="/registration">Зарегистрироваться</Link>
+                        <div className="Login__registration-link">
+                            <Link to={routingMap.get('registration').path}>Зарегистрироваться</Link>
                         </div>
                     </Form>
                 </div>
@@ -79,19 +90,19 @@ const Logged = ({ logged, onSubmit }) => {
     );
 };
 const mapStateToProps = ({ carsPage }) => ({
-    logged: carsPage.logged,
+    login: carsPage.login,
 });
 
 const mapDispatchToProps = (dispatch) => ({
     onSubmit: (value) => dispatch(onLogSelected(value)),
 });
 
-Logged.propTypes = {
-    logged: PropTypes.bool,
+Login.propTypes = {
+    login: PropTypes.bool,
     onSubmit: PropTypes.func,
 };
-Logged.defaultProps = {
-    logged: false,
+Login.defaultProps = {
+    login: false,
     onSubmit: () => {},
 };
-export default connect(mapStateToProps, mapDispatchToProps)(Logged);
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

@@ -5,6 +5,8 @@ import Table from '../table';
 import { detailRemovedFromTable, setCurrentPageDet } from '../../actions/property-actions';
 import { onSort } from '../../actions/cars-actions';
 
+import './table-container.scss';
+
 class PropertyContainer extends Component {
     sorting = (details, sortName) => {
         switch (sortName) {
@@ -28,20 +30,22 @@ class PropertyContainer extends Component {
         const visibleItems = this.sorting(details, sortName);
 
         return (
-            <Table
-                items={visibleItems}
-                pageSize={pageSize}
-                setPage={setPage}
-                currentPage={currentPage}
-                onDelete={onDelete}
-                tableName="Перечень проперти"
-                tablePrice="Тип"
-                sortName={sortName}
-                logged={logged}
-                onSortElements={onSortElements}
-                isFetching={isFetching}
-                isError={isError}
-            />
+            <div className="TableContainer">
+                <Table
+                    items={visibleItems}
+                    pageSize={pageSize}
+                    setPage={setPage}
+                    currentPage={currentPage}
+                    onDelete={onDelete}
+                    tableName="Перечень проперти"
+                    tablePrice="Тип"
+                    sortName={sortName}
+                    logged={logged}
+                    onSortElements={onSortElements}
+                    isFetching={isFetching}
+                    isError={isError}
+                />
+            </div>
         );
     }
 }

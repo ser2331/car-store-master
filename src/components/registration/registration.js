@@ -5,11 +5,15 @@ import { Form, Formik } from 'formik';
 import * as yup from 'yup';
 import { useAlert } from 'react-alert';
 import * as PropTypes from 'prop-types';
-import './registration.scss';
-
+import Types from "../../services/types";
 import UseButton from '../use-button';
 import { onRegSelected } from '../../actions/cars-actions';
 import FormikControl from '../form-components/FormikControl';
+
+import './registration.scss';
+
+const { routingMap } = Types;
+
 
 const Registration = ({ onSubmit, users }) => {
     const alert = useAlert();
@@ -42,19 +46,22 @@ const Registration = ({ onSubmit, users }) => {
                 handleSubmit,
                 dirty,
             }) => (
-                <div className="registration">
+                <div className="Registration container-registration">
                     {
                         users.find((el) => el.email === values.email) ? (
-                            <Redirect to="/logged" />
+                            <Redirect to={routingMap.get('login').path} />
                         ) : null
                     }
                     <Form onSubmit={handleSubmit}>
-                        <h3>Регистрация</h3>
+                        <h3 className="Login__title">Регистрация</h3>
+
                         <div>
                             <FormikControl
                                 touched={touched.name}
                                 errors={errors.name}
                                 label="Имя"
+                                labelStyle="label"
+                                className="Registration-field"
                                 placeholder="Введите имя"
                                 control="input"
                                 name="name"
@@ -63,6 +70,8 @@ const Registration = ({ onSubmit, users }) => {
                                 placeholder="Введите фамилию"
                                 control="input"
                                 label="Фамилия"
+                                labelStyle="label"
+                                className="Registration-field"
                                 touched={touched.secondName}
                                 errors={errors.secondName}
                                 name="secondName"
@@ -72,6 +81,8 @@ const Registration = ({ onSubmit, users }) => {
                                 control="input"
                                 name="email"
                                 label="E-mail"
+                                labelStyle="label"
+                                className="Registration-field"
                                 touched={touched.email}
                                 errors={errors.email}
                             />
@@ -80,6 +91,8 @@ const Registration = ({ onSubmit, users }) => {
                                 control="input"
                                 name="password"
                                 label="Пароль"
+                                labelStyle="label"
+                                className="Registration-field"
                                 touched={touched.password}
                                 errors={errors.password}
                             />
@@ -88,6 +101,8 @@ const Registration = ({ onSubmit, users }) => {
                                 control="input"
                                 name="confirmPassword"
                                 label="Подтвердите пароль"
+                                labelStyle="label"
+                                className="Registration-field"
                                 touched={touched.confirmPassword}
                                 errors={errors.confirmPassword}
                             />
@@ -101,7 +116,7 @@ const Registration = ({ onSubmit, users }) => {
                             />
                         </div>
                         <div className="return">
-                            <Link to="/logged">Вернуться</Link>
+                            <Link to={routingMap.get('login').path}>Вернуться</Link>
                         </div>
                     </Form>
                 </div>

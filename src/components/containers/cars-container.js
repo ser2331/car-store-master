@@ -10,6 +10,8 @@ import {
 import Table from '../table';
 // import { getAllCars, transformCarsData } from '../../services/services';
 
+import './table-container.scss';
+
 class CarsContainer extends Component {
     // componentDidMount() {
     //     const { dispatch, isFetch, cars } = this.props;
@@ -58,7 +60,7 @@ class CarsContainer extends Component {
         } = this.props;
         const visibleItems = this.sorting(cars, sortName);
         return (
-            <div>
+            <div className="TableContainer">
                 <Table
                     items={visibleItems}
                     pageSize={pageSize}

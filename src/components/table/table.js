@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './table.scss';
 import { useAlert } from 'react-alert';
 import * as PropTypes from 'prop-types';
+import Types from "../../services/types";
 import UseButton from '../use-button';
 import Pagination from '../pagination';
 import v1 from '../layers/vector1.png';
@@ -10,6 +10,10 @@ import v2 from '../layers/vector2.png';
 import Navbar from '../navbar';
 import backCar from '../layers/tachka.jpg';
 import backProp from '../layers/propCar.jpg';
+
+import './table.scss';
+
+const { routingMap } = Types;
 
 const Table = ({
     items, pageSize, currentPage,
@@ -68,7 +72,7 @@ const Table = ({
                     tableName === 'Перечень товаров' ? (
                         <Link
                             className="btn-add"
-                            to="/add-item"
+                            to={routingMap.get('addItem').path}
                         >
                             <UseButton nameBut="Добавить товар" />
                         </Link>

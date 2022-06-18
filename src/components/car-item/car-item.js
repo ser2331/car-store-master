@@ -6,6 +6,7 @@ import * as PropTypes from 'prop-types';
 import UseButton from '../use-button';
 import image from '../layers/unnamed.jpg';
 import { onReturn } from '../../actions/cars-actions';
+
 import './car-item.scss';
 
 const CarItem = ({
@@ -16,6 +17,7 @@ const CarItem = ({
     useEffect(() => () => {
         onExit();
     }, [onExit]);
+
     return (
         <div className="car-item">
             <div className="exit">

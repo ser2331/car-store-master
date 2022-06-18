@@ -1,6 +1,6 @@
 @import "../../assets/styles/mixins/mixins";
 
-.Registration {
+.Login {
   &__title {
     @include fontTitle1;
   }
@@ -10,7 +10,7 @@
     color: var(--ui-grey);
   }
 
-  .return, .btn-reg {
+  &__btn-login {
     margin: 20px 0;
   }
 }

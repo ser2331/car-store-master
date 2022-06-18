@@ -2,48 +2,52 @@ import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as PropTypes from 'prop-types';
-import Logged from '../logged';
+import Types from "../../services/types";
+import Login from '../login';
 import Registration from '../registration';
 import { CarTableContainer, PropertyContainer } from '../containers';
 import AuthRouter from '../auth-router';
 import AddProperty from '../add-property/add-property';
 import CarItem from '../car-item';
 import AddCarItem from '../add-car-item';
+
 import './app.scss';
 
-const App = ({ logged }) => (
-    <div className="app">
+const { routingMap } = Types;
+
+const App = ({ login }) => (
+    <div className="App">
         <Switch>
             <AuthRouter
-                logged={logged}
-                path="/add-property/"
+                logged={login}
+                path={routingMap.get('addProperty').path}
                 component={AddProperty}
             />
             <AuthRouter
-                logged={logged}
-                path="/cars/:id"
+                logged={login}
+                path={routingMap.get('cars').path}
                 component={CarItem}
             />
             <AuthRouter
-                logged={logged}
-                path="/add-item"
+                logged={login}
+                path={routingMap.get('addItem').path}
                 component={AddCarItem}
             />
             <Route
-                path="/logged"
-                component={Logged}
+                path={routingMap.get('login').path}
+                component={Login}
             />
             <Route
-                path="/registration"
+                path={routingMap.get('registration').path}
                 component={Registration}
             />
             <Route
-                path="/"
+                path={routingMap.get('location').path}
                 exact
                 component={CarTableContainer}
             />
             <Route
-                path="/details/"
+                path={routingMap.get('details').path}
                 exact
                 component={PropertyContainer}
             />
@@ -51,13 +55,13 @@ const App = ({ logged }) => (
     </div>
 );
 const mapStateToProps = ({ carsPage }) => ({
-    logged: carsPage.logged,
+    login: carsPage.login,
 });
 App.propTypes = {
-    logged: PropTypes.bool,
+    login: PropTypes.bool,
 };
 App.defaultProps = {
-    logged: false,
+    login: false,
 };
 const mapDispatchToProps = () => ({});
 export default connect(mapStateToProps, mapDispatchToProps)(App);

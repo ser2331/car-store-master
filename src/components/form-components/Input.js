@@ -4,10 +4,10 @@ import * as PropTypes from 'prop-types';
 import Condition from '../condition';
 
 const Input = ({
-    label, name, touched, errors, ...rest
+    label, name, touched, errors, labelStyle,...rest
 }) => (
     <div className="form-control">
-        <label htmlFor={name}>
+        <label htmlFor={name} className={labelStyle}>
             {label}
             {touched && errors ? (
                 <Condition

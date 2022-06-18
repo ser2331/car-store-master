@@ -8,6 +8,9 @@ import AlertTemplate from 'react-alert-template-basic';
 import App from './components/app';
 import store from './store';
 
+//styles
+import './assets/styles/index.scss';
+
 const options = {
     position: positions.BOTTOM_RIGHT,
     timeout: 1500,

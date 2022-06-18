@@ -6,7 +6,6 @@ import {
 } from 'formik';
 import * as yup from 'yup';
 import * as PropTypes from 'prop-types';
-import './add-car-item.scss';
 import { useAlert } from 'react-alert';
 import {
     carAddedToTable,
@@ -16,10 +15,14 @@ import {
 import FormikControl from '../form-components/FormikControl';
 import CaseInput from '../case-input/case-input';
 
+import './add-car-item.scss';
+
+
 const AddCarItem = ({
     onAddedToTable, car, onRedoProp, onBack, details, redirect, editCar,
 }) => {
     const alert = useAlert();
+
     useEffect(() => () => {
         onBack();
     }, [onBack]);
@@ -50,7 +53,7 @@ const AddCarItem = ({
     }
 
     return (
-        <div className="add-car-item">
+        <div className="AddCarItem">
             <Formik
                 initialValues={initialValues}
                 validateOnBlur

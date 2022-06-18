@@ -28,7 +28,7 @@ const initialState = {
         },
     ],
     nameUser: '',
-    logged: false,
+    login: false,
     pageSize: 5,
     currentPage: 1,
     editCar: false,
@@ -117,7 +117,7 @@ const CarsReducer = (state = initialState, action) => {
                 return {
                     ...state,
                     nameUser: element.email,
-                    logged: true,
+                    login: true,
                 };
             }
             return {
@@ -149,7 +149,7 @@ const CarsReducer = (state = initialState, action) => {
         case ON_OUTPUT:
             return {
                 ...state,
-                logged: false,
+                login: false,
             };
         case ON_SORT:
             return {
