@@ -1,16 +1,17 @@
 {
   "files": {
-    "main.css": "/car-store-master/static/css/main.988eaddf.chunk.css",
-    "main.js": "/car-store-master/static/js/main.1d6459dc.chunk.js",
-    "main.js.map": "/car-store-master/static/js/main.1d6459dc.chunk.js.map",
-    "runtime-main.js": "/car-store-master/static/js/runtime-main.a7ba2358.js",
-    "runtime-main.js.map": "/car-store-master/static/js/runtime-main.a7ba2358.js.map",
-    "static/js/2.773619bd.chunk.js": "/car-store-master/static/js/2.773619bd.chunk.js",
-    "static/js/2.773619bd.chunk.js.map": "/car-store-master/static/js/2.773619bd.chunk.js.map",
+    "main.css": "/car-store-master/static/css/main.fdd5e0d2.chunk.css",
+    "main.js": "/car-store-master/static/js/main.5af58c44.chunk.js",
+    "main.js.map": "/car-store-master/static/js/main.5af58c44.chunk.js.map",
+    "runtime-main.js": "/car-store-master/static/js/runtime-main.17c64660.js",
+    "runtime-main.js.map": "/car-store-master/static/js/runtime-main.17c64660.js.map",
+    "static/js/2.1dba7acc.chunk.js": "/car-store-master/static/js/2.1dba7acc.chunk.js",
+    "static/js/2.1dba7acc.chunk.js.map": "/car-store-master/static/js/2.1dba7acc.chunk.js.map",
     "index.html": "/car-store-master/index.html",
-    "static/css/main.988eaddf.chunk.css.map": "/car-store-master/static/css/main.988eaddf.chunk.css.map",
-    "static/js/2.773619bd.chunk.js.LICENSE.txt": "/car-store-master/static/js/2.773619bd.chunk.js.LICENSE.txt",
+    "static/css/main.fdd5e0d2.chunk.css.map": "/car-store-master/static/css/main.fdd5e0d2.chunk.css.map",
+    "static/js/2.1dba7acc.chunk.js.LICENSE.txt": "/car-store-master/static/js/2.1dba7acc.chunk.js.LICENSE.txt",
     "static/media/Maserati_GranTurismo.322570eb.jpg": "/car-store-master/static/media/Maserati_GranTurismo.322570eb.jpg",
+    "static/media/index.scss": "/car-store-master/static/media/Roboto-Regular.fc2b5060.ttf",
     "static/media/audi.c4a8c176.jpg": "/car-store-master/static/media/audi.c4a8c176.jpg",
     "static/media/cars-dodge-challenger.28b705f5.jpg": "/car-store-master/static/media/cars-dodge-challenger.28b705f5.jpg",
     "static/media/propCar.43d99c5a.jpg": "/car-store-master/static/media/propCar.43d99c5a.jpg",
@@ -19,9 +20,9 @@
     "static/media/unnamed.32721558.jpg": "/car-store-master/static/media/unnamed.32721558.jpg"
   },
   "entrypoints": [
-    "static/js/runtime-main.a7ba2358.js",
-    "static/js/2.773619bd.chunk.js",
-    "static/css/main.988eaddf.chunk.css",
-    "static/js/main.1d6459dc.chunk.js"
+    "static/js/runtime-main.17c64660.js",
+    "static/js/2.1dba7acc.chunk.js",
+    "static/css/main.fdd5e0d2.chunk.css",
+    "static/js/main.5af58c44.chunk.js"
   ]
 }
