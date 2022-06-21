@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/car-store-master/static/css/main.fdd5e0d2.chunk.css",
+    "main.css": "/car-store-master/static/css/main.92a970e3.chunk.css",
     "main.js": "/car-store-master/static/js/main.5af58c44.chunk.js",
     "main.js.map": "/car-store-master/static/js/main.5af58c44.chunk.js.map",
     "runtime-main.js": "/car-store-master/static/js/runtime-main.17c64660.js",
@@ -8,7 +8,7 @@
     "static/js/2.1dba7acc.chunk.js": "/car-store-master/static/js/2.1dba7acc.chunk.js",
     "static/js/2.1dba7acc.chunk.js.map": "/car-store-master/static/js/2.1dba7acc.chunk.js.map",
     "index.html": "/car-store-master/index.html",
-    "static/css/main.fdd5e0d2.chunk.css.map": "/car-store-master/static/css/main.fdd5e0d2.chunk.css.map",
+    "static/css/main.92a970e3.chunk.css.map": "/car-store-master/static/css/main.92a970e3.chunk.css.map",
     "static/js/2.1dba7acc.chunk.js.LICENSE.txt": "/car-store-master/static/js/2.1dba7acc.chunk.js.LICENSE.txt",
     "static/media/Maserati_GranTurismo.322570eb.jpg": "/car-store-master/static/media/Maserati_GranTurismo.322570eb.jpg",
     "static/media/index.scss": "/car-store-master/static/media/Roboto-Regular.fc2b5060.ttf",
@@ -22,7 +22,7 @@
   "entrypoints": [
     "static/js/runtime-main.17c64660.js",
     "static/js/2.1dba7acc.chunk.js",
-    "static/css/main.fdd5e0d2.chunk.css",
+    "static/css/main.92a970e3.chunk.css",
     "static/js/main.5af58c44.chunk.js"
   ]
 }
