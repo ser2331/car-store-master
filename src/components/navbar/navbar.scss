@@ -1,22 +1,55 @@
-.nav{
-    margin: -5px 8.22% 0 7.22%;
+@import "../../assets/styles/mixins/mixins";
+
+.Navbar{
     display: flex;
     justify-content: space-between;
     align-items: center;
 
-    .nav-left {
-        padding: 15px;
+    @include media($mobile) {
+        flex-direction: column-reverse;
+        padding: 18px 0 0;
+    }
+    @include media($desktop) {
+        flex-direction: row;
+        padding: 0;
+    }
 
+    .nav-left {
+        @include media($mobile) {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+        }
+        @include media($desktop) {
+            width: max-content;
+            display: flex;
+            justify-content: normal;
+        }
         .noPressed {
             text-decoration: none;
-            color: #000000;
+            color: var(--ui-dark);
             opacity: 0.6;
             font-size: 22px;
-            padding: 18px;
+
+            @include media($mobile) {
+                padding: 0;
+            }
+            @include media($desktop) {
+                padding: 18px;
+            }
         }
 
         .pressed {
             background: linear-gradient(180deg, #0258FF 0%, rgba(2, 88, 255, 0) 100%);
+        }
+    }
+
+    .nav-right {
+        @include media($mobile) {
+            margin-bottom: 12px;
+        }
+        @include media($desktop) {
+            margin-bottom: 0;
         }
     }
 }

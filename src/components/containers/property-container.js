@@ -23,7 +23,7 @@ class PropertyContainer extends Component {
         const {
             details, pageSize,
             currentPage, onDelete,
-            setPage, logged, sortName,
+            setPage, login, sortName,
             onSortElements, isFetching,
             isError,
         } = this.props;
@@ -40,7 +40,7 @@ class PropertyContainer extends Component {
                     tableName="Перечень проперти"
                     tablePrice="Тип"
                     sortName={sortName}
-                    logged={logged}
+                    logged={login}
                     onSortElements={onSortElements}
                     isFetching={isFetching}
                     isError={isError}
@@ -54,7 +54,7 @@ const mapStateToProps = ({ detailPage, carsPage }) => ({
     details: detailPage.details,
     pageSize: detailPage.pageSize,
     currentPage: detailPage.currentPage,
-    logged: carsPage.logged,
+    login: carsPage.login,
     sortName: carsPage.sortName,
     isError: carsPage.isError,
     isFetching: carsPage.isFetching,
@@ -70,7 +70,7 @@ PropertyContainer.propTypes = {
     currentPage: PropTypes.number,
     onDelete: PropTypes.func,
     setPage: PropTypes.func,
-    logged: PropTypes.bool,
+    login: PropTypes.bool,
     onSortElements: PropTypes.func,
     sortName: PropTypes.string,
     isError: PropTypes.bool.isRequired,
@@ -82,7 +82,7 @@ PropertyContainer.defaultProps = {
     currentPage: 1,
     onDelete: () => {},
     setPage: () => {},
-    logged: false,
+    login: false,
     onSortElements: () => {},
     sortName: '',
 };

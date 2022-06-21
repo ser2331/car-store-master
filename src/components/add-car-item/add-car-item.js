@@ -53,7 +53,7 @@ const AddCarItem = ({
     }
 
     return (
-        <div className="AddCarItem">
+        <div className="AddCarItem container">
             <Formik
                 initialValues={initialValues}
                 validateOnBlur

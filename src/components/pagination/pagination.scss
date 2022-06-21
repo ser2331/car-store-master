@@ -7,7 +7,7 @@
   }
 
   .pagination button {
-    color: black;
+    color: var(--ui-dark);
     float: left;
     border-radius: 50px;
     border: none;
@@ -16,16 +16,16 @@
   }
 
   .pagination button.active {
-    background-color: #FFB900;
+    background-color: var(--ui-orange);
     color: white;
   }
 
   .pagination button.hover {
-    background-color: #FFB900;
-    color: white;
+    background-color: var(--ui-orange);
+    color: var(--ui-white);
   }
 
   .pagination button:hover:not(.active) {
-    background-color: #ddd;
+    background-color: var(--ui-dark);
   }
 }

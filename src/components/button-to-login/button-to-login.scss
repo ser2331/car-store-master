@@ -1,19 +1,26 @@
+@import "../../assets/styles/mixins/mixins";
 .btn-container{
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  @include media($mobile) {
+    flex-direction: row;
+  }
+  @include media($desktop) {
+    flex-direction: column;
+  }
 }
 .btn-to-log {
-  width: 80px;
   border-radius: 4px;
   border: none;
-  background: #FFB800;
-  color: white;
+  background: var(--ui-orange);
+  color: var(--ui-white);
   cursor: pointer;
   box-shadow: 0 5px #999;
 }
 .btn-to-log:active {
-  background-color:  #FFB900;
+  background-color:  var(--ui-orange);
   box-shadow: 0 1px #666;
   transform: translateY(1px);
 }

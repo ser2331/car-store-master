@@ -19,7 +19,7 @@ const CarItem = ({
     }, [onExit]);
 
     return (
-        <div className="car-item">
+        <div className="car-item container">
             <div className="exit">
                 <NavLink to="/">
                     <span>Вернуться</span>

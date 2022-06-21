@@ -52,7 +52,7 @@ class CarsContainer extends Component {
             onDelete,
             setPage,
             onEditCart,
-            logged,
+            login,
             onSortElements,
             sortName,
             isFetching,
@@ -73,7 +73,7 @@ class CarsContainer extends Component {
                     tablePrice="Стоимость"
                     tableData="Дата изменения"
                     onSortElements={onSortElements}
-                    logged={logged}
+                    logged={login}
                     sortName={sortName}
                     isFetching={isFetching}
                     isError={isError}
@@ -87,7 +87,7 @@ const mapStateToProps = ({ carsPage }) => ({
     cars: carsPage.cars,
     pageSize: carsPage.pageSize,
     currentPage: carsPage.currentPage,
-    logged: carsPage.logged,
+    login: carsPage.login,
     sortName: carsPage.sortName,
     isError: carsPage.isError,
     isFetching: carsPage.isFetching,
@@ -109,7 +109,7 @@ CarsContainer.propTypes = {
     onDelete: PropTypes.func,
     setPage: PropTypes.func,
     onEditCart: PropTypes.func,
-    logged: PropTypes.bool,
+    login: PropTypes.bool,
     onSortElements: PropTypes.func,
     sortName: PropTypes.string,
     dispatch: PropTypes.func.isRequired,
@@ -125,7 +125,7 @@ CarsContainer.defaultProps = {
     onDelete: () => {},
     setPage: () => {},
     onEditCart: () => {},
-    logged: false,
+    login: false,
     onSortElements: () => {},
     sortName: '',
 };

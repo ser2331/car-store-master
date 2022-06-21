@@ -4,10 +4,14 @@ import * as yup from 'yup';
 import { NavLink, Redirect } from 'react-router-dom';
 import { Form, Formik } from 'formik';
 import { useAlert } from 'react-alert';
-import './add-property.scss';
 import * as PropTypes from 'prop-types';
+import Types from "../../services/types";
 import FormikControl from '../form-components/FormikControl';
 import { onAddedPropToTable, onReturn } from '../../actions/property-actions';
+
+import './add-property.scss';
+
+const { routingMap } = Types;
 
 const AddProperty = ({
     onAddedProp, details, redirect, onBack,
@@ -46,7 +50,7 @@ const AddProperty = ({
     }
 
     return (
-        <div className="add-prop-item">
+        <div className="AddProperty container">
             <Formik
                 initialValues={initialValues}
                 validationSchema={validationsSchemaLog}
@@ -62,7 +66,7 @@ const AddProperty = ({
                 }) => (
                     <Form>
                         <div className="btn-choice">
-                            <NavLink to="/details">
+                            <NavLink to={routingMap.get('details').path}>
                                 <button
                                     className="btn-back"
                                     type="button"

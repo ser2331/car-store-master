@@ -67,7 +67,7 @@ const Table = ({
     return (
         <div>
             <Navbar />
-            <div className="car-table">
+            <div className="car-table container">
                 {
                     tableName === 'Перечень товаров' ? (
                         <Link
@@ -112,40 +112,51 @@ const Table = ({
                             {isError ? (<div>Что-то пошло не так...</div>) : null}
                         </div>
                     ) : (
-                        <div>
+                        <div className="table-wrapper">
                             <table className="table">
                                 <thead>
                                     <tr className="vector-cont">
                                         <th onClick={sortName !== 'name' ? () => onSortElements('name') : () => onSortElements('name-reverse')}>
-                                            <img
-                                                alt="v"
-                                                className="vector"
-                                                src={sortName === 'name' ? v2 : v1}
-                                            />
-                                            {tableName}
+                                            <div className="table-column-name">
+                                                <img
+                                                    alt="v"
+                                                    className="vector"
+                                                    src={sortName === 'name' ? v2 : v1}
+                                                />
+                                                {tableName}
+                                            </div>
                                         </th>
                                         <th onClick={sortName !== 'price' ? () => onSortElements('price') : () => onSortElements('price-reverse')}>
-                                            <img
-                                                alt="v"
-                                                className="vector"
-                                                src={sortName === 'price' ? v2 : v1}
-                                            />
-                                            {tablePrice}
+                                            <div className="table-column-name">
+                                                <img
+                                                    alt="v"
+                                                    className="vector"
+                                                    src={sortName === 'price' ? v2 : v1}
+                                                />
+                                                {tablePrice}
+                                            </div>
                                         </th>
                                         {
                                             tableData
                                                 ? (
                                                     <th onClick={sortName !== 'data' ? () => onSortElements('data') : () => onSortElements('data-reverse')}>
-                                                        <img
-                                                            alt="v"
-                                                            className="vector"
-                                                            src={sortName === 'data' ? v2 : v1}
-                                                        />
-                                                        {tableData}
+                                                        <div className="table-column-name">
+                                                            <img
+                                                                alt="v"
+                                                                className="vector"
+                                                                src={sortName === 'data' ? v2 : v1}
+                                                            />
+                                                            {tableData}
+                                                        </div>
                                                     </th>
                                                 ) : null
                                         }
-                                        <th>Управление</th>
+                                        <th>
+                                            <div className="table-column-name">
+                                                <div />
+                                                Управление
+                                            </div>
+                                        </th>
                                     </tr>
                                 </thead>
                                 <tbody>

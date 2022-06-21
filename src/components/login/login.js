@@ -31,62 +31,64 @@ const Login = ({ login, onSubmit }) => {
     }, [login, history]);
 
     return (
-        <Formik
-            initialValues={{
-                email: '',
-                password: '',
-            }}
-            validateOnBlur
-            onSubmit={submit}
-            validationSchema={validationsSchemaLog}
-        >
-            {({
-                touched,
-                errors,
-                isValid,
-                handleSubmit,
-                dirty,
-            }) => (
-                <div className="Login container-registration">
-                    <Form onSubmit={handleSubmit}>
-                        <h3 className="Login__title">Вход</h3>
-                        <div>
-                            <FormikControl
-                                placeholder="Введите E-mail"
-                                control="input"
-                                name="email"
-                                label="Логин"
-                                labelStyle="label"
-                                className="Registration-field"
-                                touched={touched.email}
-                                errors={errors.email}
-                            />
-                            <FormikControl
-                                control="input"
-                                name="password"
-                                placeholder="Введите пароль"
-                                label="Пароль"
-                                labelStyle="label"
-                                className="Registration-field"
-                                touched={touched.password}
-                                errors={errors.password}
-                            />
-                        </div>
-                        <div className="Login__btn-login">
-                            <UseButton
-                                disabled={!isValid && !dirty}
-                                onClick={handleSubmit}
-                                nameBut="Войти"
-                                isSubmit
-                            />
-                        </div>
-                        <div className="Login__registration-link">
-                            <Link to={routingMap.get('registration').path}>Зарегистрироваться</Link>
-                        </div>
-                    </Form>
-                </div>
-            )}
-        </Formik>
+        <div className="Login-wrapper">
+            <Formik
+                initialValues={{
+                    email: '',
+                    password: '',
+                }}
+                validateOnBlur
+                onSubmit={submit}
+                validationSchema={validationsSchemaLog}
+            >
+                {({
+                      touched,
+                      errors,
+                      isValid,
+                      handleSubmit,
+                      dirty,
+                  }) => (
+                    <div className="Login container-registration">
+                        <Form onSubmit={handleSubmit}>
+                            <h3 className="Login__title">Вход</h3>
+                            <div>
+                                <FormikControl
+                                    placeholder="Введите E-mail"
+                                    control="input"
+                                    name="email"
+                                    label="Логин"
+                                    labelStyle="label"
+                                    className="Registration-field"
+                                    touched={touched.email}
+                                    errors={errors.email}
+                                />
+                                <FormikControl
+                                    control="input"
+                                    name="password"
+                                    placeholder="Введите пароль"
+                                    label="Пароль"
+                                    labelStyle="label"
+                                    className="Registration-field"
+                                    touched={touched.password}
+                                    errors={errors.password}
+                                />
+                            </div>
+                            <div className="Login__btn-login">
+                                <UseButton
+                                    disabled={!isValid && !dirty}
+                                    onClick={handleSubmit}
+                                    nameBut="Войти"
+                                    isSubmit
+                                />
+                            </div>
+                            <div className="Login__registration-link">
+                                <Link to={routingMap.get('registration').path}>Зарегистрироваться</Link>
+                            </div>
+                        </Form>
+                    </div>
+                )}
+            </Formik>
+        </div>
     );
 };
 const mapStateToProps = ({ carsPage }) => ({

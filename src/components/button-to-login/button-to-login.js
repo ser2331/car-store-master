@@ -1,10 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import './button-to-login.scss';
 import * as PropTypes from 'prop-types';
 import Types from "../../services/types";
 import { onOutput } from '../../actions/cars-actions';
+
+import './button-to-login.scss';
 
 const { routingMap } = Types;
 

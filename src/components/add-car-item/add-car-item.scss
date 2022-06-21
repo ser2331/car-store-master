@@ -95,14 +95,17 @@
     }
 
     button {
+      justify-content: center;
+      display: flex;
+      align-items: center;
       font-size: 24px;
       color: #0258FF;
       background: #FFFFFF;
       border: 1px solid #0258FF;
       border-radius: 50%;
-      box-sizing: border-box;
       margin: 0 20px;
-      width: 33px;
+      height: 32px;
+      width: 32px;
     }
 
     .added-prop {

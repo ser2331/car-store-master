@@ -14,7 +14,7 @@ const Navbar = () => {
     const location = useLocation();
     const classNames = 'noPressed';
     return (
-        <div className="nav">
+        <div className="Navbar">
             <div className="nav-left">
                 <Link
                     className={location.pathname === routingMap.get('location').path ? `${classNames} pressed` : classNames}
